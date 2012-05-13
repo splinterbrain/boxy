@@ -1,0 +1,120 @@
+<!doctype html>
+<head>
+	<!--STYLE SHEETS-->
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/main.css">
+	<!--FONTS-->
+	
+	<!--SCRIPTS-->
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript">
+
+	$(function(){
+		
+		/*Sets background color of card fronts based on card size*/
+		/*function randomRgb() {
+            // create the rgb string
+            var col =  "rgb("
+            + randomColor(255) + ","
+            + randomColor(50) + ","
+            + randomColor(0) + ")";
+
+            //change the text color with the new random color
+            ("div.front").style.backgroundColor = col;
+            /*document.getElementById("divone").style.color = col;*/
+        /*}
+        
+        function randomColor(num) {          
+            return Math.floor(Math.random() * num);
+        }
+        */
+		
+		/*Toggles show/hide of card front*/
+		$(".front").on("click", function(e){
+			$("div.front").show(); /*So that only one back shows at a time*/
+			$(this).hide(); /*Hides front the user clicked on*/
+			$("div.back").show();
+		})
+		
+		$(".back").on("click", function(e){
+			$("div.front").show(); /*Back has z-index lower than front => showing front hides back*/
+		})	
+	})
+
+</script>
+</head>
+
+<body>
+
+<div id="container">
+
+<div class="box short wide">
+	<div class="front">
+		<p>This is the front</p>
+	</div>
+	<div class="back">
+		This is the back
+	</div>
+</div>
+
+<div class="box tall narrow">
+	<div class="front">
+		<p>This is the front</p>
+	</div>
+	<div class="back">
+		This is the back
+	</div>
+</div>
+
+<div class="box short narrow">
+	<div class="front">
+		<p>This is the front</p>
+	</div>
+	<div class="back">
+		This is the back
+	</div>
+</div>
+
+
+<div class="box short narrow">
+	<div class="front">
+		<p>This is the front</p>
+	</div>
+	<div class="back">
+		This is the back
+	</div>
+</div>
+
+
+<div class="box tall wide">
+	<div class="front">
+		<p>This is the front</p>
+	</div>
+	<div class="back">
+		This is the back
+	</div>
+</div>
+
+
+<div class="box short wide">
+	<div class="front">
+		<p>This is the front</p>
+	</div>
+	<div class="back">
+		This is the back
+	</div>
+</div>
+
+
+<div class="box short narrow">
+	<div class="front">
+		<p>This is the front</p>
+	</div>
+	<div class="back">
+		This is the back
+	</div>
+</div>
+
+</div>
+</body>
+</html>

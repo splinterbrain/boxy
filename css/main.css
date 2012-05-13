@@ -1,0 +1,77 @@
+html{
+    
+    height:100%;
+    width:100%;
+}
+
+body{
+    height:100%;
+    width:100%;
+    font-family:"Arial Black", sans;
+    font-size:1em;
+    line-height:1em;
+}
+
+/*OUTLINE:
+ * 1. Static elements
+ * 2. Text, header and link formatting
+ * 3. Flip box formatting 
+ */
+
+/*1. STATIC ELEMENTS*/
+
+#container{
+    height:600px;
+    width:800px;
+    margin-left:auto;
+    margin-right:auto;
+    border:1px solid black;
+}
+
+/*2. TEXT, HEADER AND LINK FORMATTING*/
+
+/*3. FLIP BOX FORMATTING*/
+
+.box {
+    display:block;
+    float:left;
+    margin:10px;
+    -webkit-transform-style: preserve-3d;
+    -webkit-transition: -webkit-transform 1.5s;
+}
+
+.front{
+    height:100%;
+    width:100%;
+    background-color:red;
+    position:absolute;
+    z-index:1000;
+}
+.back{
+    height:100%;
+    width:100%;
+    position:absolute;
+    background-color:green;
+    z-index:999;
+    /*-webkit-transform: rotateY(180deg);*/
+}
+
+
+/*Various box sizes. A place holder until I write code that will allow
+ the user to drag and create a box of any size or aspect ratio*/
+
+.short{
+    height:100px;
+}
+
+.tall{
+    height:300px;
+}
+
+.narrow{
+    width:100px;
+}
+
+.wide{
+    width:300px;
+}
