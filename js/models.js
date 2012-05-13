@@ -1,11 +1,14 @@
 /* Boxy's Models.js file defines: BoxModel, BoxView, BoxCollection, BoxesView */
 
 $(function(){
+	
+	/*MODELS*/
 	var BoxModel = Backbone.Model.extend({
 		"defaults":{
 			"height": "short",
 			"width": "narrow",
-			"title": "Hello"
+			"icon": "Hello",
+			"details" : "Info goes here"
 		}
 	});
 	var BoxView = Backbone.View.extend({
@@ -32,15 +35,45 @@ $(function(){
  			this.$el.empty();
  			this.collection.forEach(this.onAddBox,this);
  		},
- 		"onAddBox" : function(box){
+ 		'onAddBox' : function(box){
  			var aBoxView = new BoxView({
  				"model" : box
  			});
  			var renderedBox = aBoxView.render();
- 			this.$e1.append(renderedBox.el);
+ 			this.$el.append(renderedBox.el);
+ 			
+ 			$("#container").masonry("reload");
+ 			
  		}
  	});	
- 
+ 	
+ 	/*INSTANCES*/
+ 	
+ 	var myBoxesCollection = new BoxCollection();
+ 	
+ 	var myBoxesView = new BoxesView({
+ 		'collection' : myBoxesCollection,
+ 		el : $("#container")
+ 	});
+ 	
+ 	myBoxesView.render();
+ 	
+ 	/*APPLICATION*/
+ 	
+ 	$("#addSmall").on("click", function(){
+		myBoxesCollection.add({height: "short", width:"narrow", icon : $("#specifyTitle").val()});
+	    });
+
+	$("#addTall").on("click", function(){
+		myBoxesCollection.add({height: "tall", width:"narrow", icon : $("#specifyTitle").val()});
+	    });
+
+	$("#addWide").on("click", function(){
+		myBoxesCollection.add({height: "short", width:"wide", icon : $("#specifyTitle").val()});
+	    });
+ 	
+ 	
+ 	
 })
 
 

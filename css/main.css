@@ -21,8 +21,8 @@ body{
 /*1. STATIC ELEMENTS*/
 
 #container{
-    height:600px;
-    width:800px;
+    height:100%;
+    width:100%;
     margin-left:auto;
     margin-right:auto;
     border:1px solid black;
@@ -35,25 +35,37 @@ body{
 .box {
     display:block;
     float:left;
-    margin:10px;
+    margin-top:5px;
+    margin-bottom:5px;
+    /*margin:10px;*/
     -webkit-transform-style: preserve-3d;
     -webkit-transition: -webkit-transform 1.5s;
+    border:1px solid black;
 }
 
+.box.flipped{
+    -webkit-transform-style: preserve-3d;
+    -webkit-transform: rotate3d(0, 1, 0,180deg);
+}
+
+
 .front{
+    -webkit-backface-visibility:hidden;
     height:100%;
     width:100%;
     background-color:red;
     position:absolute;
     z-index:1000;
 }
+
 .back{
+    -webkit-backface-visibility:hidden;
     height:100%;
     width:100%;
     position:absolute;
     background-color:green;
     z-index:999;
-    /*-webkit-transform: rotateY(180deg);*/
+    -webkit-transform: rotate3d(0, 1, 0,180deg);
 }
 
 
@@ -73,5 +85,5 @@ body{
 }
 
 .wide{
-    width:300px;
+    width:210px;
 }
