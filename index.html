@@ -2,59 +2,59 @@
 <head>
 	<title>Boxy</title>
 	<!--STYLE SHEETS-->
-	<link rel="stylesheet" href="css/reset.css">
-	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css"/>
+	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<!--FONTS-->
 	
 	<!--SCRIPTS-->
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-	<script type="text/javascript" src="js/jqueery.masonry.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="js/jquery.masonry.min.js"></script>
 	<script type="text/javascript" src="js/underscore-min.js"></script>
 	<script type="text/javascript" src="js/json3.min.js"></script>
 	<script type="text/javascript" src="js/backbone-min.js"></script>
-	<script type="text/javascript" src="js/models.js"></script> 
-	
-	<script type="text/javascript">
-		$(function(){
-			$("#container").on("click", ".box", function(e){
-				$(this).toggleClass("flipped");
-			})
-		});
-	</script>
-	
-	<script type="text/javascript">
-		$(function(){
-  			$('#container').masonry({
-    			itemSelector : '.box',
-    			animationOptions: {
-    				duration: 400
-  				},
-  				isAnimated: true,
-    			columnWidth : 100,
-    			gutterWidth: 10
-  			});
-		});
-	</script>
-	
-	
+	<script type="text/javascript" src="js/models.js"></script>
+	<script type="text/javascript" src="js/application.js"></script>
 </head>
 
 <body>
 
-<p>Boxy Version 1.0</p>
-<br />
+<div id="topBar">
+<!--TOOLBAR-->
 
-<input type="text" id="specifyTitle" placeholder="Name your box"/>
-<input type="button" id="addSmall" value="Add Small Box"/>
-<input type="button" id="addTall" value="Add Tall Box"/>
-<input type="button" id="addWide" value="Add Wide Box"/>
+	<div id="toolbar">
+		<p>Boxy Version 1.0</p><br />
+		<input type="text" id="specifyTitle" placeholder="Name your box"/>
+		<input type="button" id="addSmall" value="Add Small Box"/>
+		<input type="button" id="addTall" value="Add Tall Box"/>
+		<input type="button" id="addWide" value="Add Wide Box"/>
+	</div>
 
-
-<div id="container">
-
+<!--EDIT MOODLE-->
+	<div class="editMoodle">
+		<h1>Edit tile</h1>
+		<div class="ui-slider" id="widthSlider"></div>
+		<div class="ui-slider" id="heightSlider"></div>
+	</div>
 </div>
 
+<!--WHAT THE EDIT MOODLE SHOULD CONTAIN
+- x to close moodle
+- button to delete this box
+	- popup asks user to confirm
+	- or to cancel 
+- background color picker
+- icon picker
+- edit text on reverse
+-->
 
+<!--USER BOXES-->
+	<div id="container">
+		
+	</div>
+
+<!--TEMPLATES-->
 <script type="text/template" id="boxViewTemplate">
 		<div class="front">
 			<%= icon %>
