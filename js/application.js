@@ -25,6 +25,30 @@ $('#container').masonry({
   });
   		
 /*slider*/
-$( ".ui-slider" ).slider({step: 10}); //{ step: 110 } as argument in slider
+$("#widthSlider" ).slider({	
+	value:1,
+	min: 1,
+	max: 10,
+	step: 1,
+	slide: function( event, ui ) {
+		$( "#widthValue" ).val(ui.value );
+		}
+	});
+	
+$("#widthValue" ).val($( "#widthSlider" ).slider("value"));
 
+$("#heightSlider" ).slider({	
+	value:1,
+	min: 1,
+	max: 10,
+	step: 1,
+	slide: function( event, ui ) {
+		$( "#heightValue" ).val(ui.value );
+		}
+	});
+	
+$("#heightValue" ).val($( "#heightSlider" ).slider("value"));
+
+
+	 
 });
