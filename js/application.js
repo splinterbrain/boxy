@@ -1,6 +1,7 @@
 /*FUNCTIONS IN ALPHABETICAL ORDER
  * card flip  
  * masonry
+ * miniColors
  * slider 
  * */
 
@@ -23,7 +24,16 @@ $('#container').masonry({
     columnWidth : 100,
     gutterWidth: 10
   });
-  		
+  	
+/*miniColors*/
+$(".color-picker").miniColors({
+	letterCase: 'uppercase',
+	change: function(hex, rgb) {
+		//logData(hex, rgb);
+	}
+});
+
+	
 /*slider*/
 $("#widthSlider" ).slider({	
 	value:1,

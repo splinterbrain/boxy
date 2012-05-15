@@ -1,16 +1,23 @@
 <!doctype html>
+
+<!--ACKNOWLEDGEMENTS: 
+Boxy makes use of the JQuery Masonry plug in and JQuery miniColors plugin.
+-->
+
 <head>
 	<title>Boxy</title>
 	<!--STYLE SHEETS-->
-	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<link rel="stylesheet" type="text/css" href="css/reset.css" />
 	<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css"/>
-	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css"/>
+	<link rel="stylesheet" type="text/css" href="css/jquery.miniColors.css"/>
 	<!--FONTS-->
 	
 	<!--SCRIPTS-->
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="js/jquery.masonry.min.js"></script>
+	<script type="text/javascript" src="js/jquery.miniColors.js"></script>
 	<script type="text/javascript" src="js/underscore-min.js"></script>
 	<script type="text/javascript" src="js/json3.min.js"></script>
 	<script type="text/javascript" src="js/backbone-min.js"></script>
@@ -33,19 +40,26 @@
 
 <!--EDIT MOODLE-->
 	<div class="editMoodle">
-		<h1>Edit tile</h1>
+		<h1>Edit tile</h1><br />
 		
-		<p>
+		<p> <!--WIDTH/HEIGHT SLIDERS-->
 			<label for="amount">Width (in columns):</label>
-			<input type="text" id="widthValue"/>
+			<input type="hidden" id="widthValue"/>
 		</p>
 		<div class="ui-slider" id="widthSlider"></div>
 		
 		<p>
 			<label for="amount">Height (in columns):</label>
-			<input type="text" id="heightValue"/>
+			<input type="hidden" id="heightValue"/>
 		</p>
 		<div class="ui-slider" id="heightSlider"></div>
+		
+		<!--COLOR PICKER-->
+		<p>
+			Color:
+			<input type="hidden" class="color-picker" size="6" autocomplete="on" maxlength="10" />
+		</p>
+		
 	</div>
 </div>
 

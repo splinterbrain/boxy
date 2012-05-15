@@ -14,17 +14,18 @@ body{
 }
 
 /*OUTLINE:
- * 1. Static elements
- * 2. Text, header and link formatting
+ * 1. Containers
+ * 2. Text and link formatting
  * 3. Flip box formatting 
  * 4. Toolbar
  * 5. Editing panel
  */
 
-/*1. STATIC ELEMENTS*/
+/*1. CONTAINERS*/
 
 #container{
     width:100%;
+    padding:10px;
     display:block;
     float:left;
     border-top:1px solid black;
@@ -33,6 +34,7 @@ body{
 /*2. TEXT, HEADER AND LINK FORMATTING*/
 
 /*3. FLIP BOX FORMATTING*/
+
 
 .box {
     display:block;
@@ -115,14 +117,14 @@ body{
 }
 
 .ui-slider{
-    width:250px;
-    height:10px;
+    width:200px;
+    height:8px;
     margin:10px;
 }
 
 .ui-slider .ui-slider-handle{
-    width: 1em;
-    height: 1em;
+    width: 0.8em;
+    height: 0.8em;
 }
 
 #widthSlider{
