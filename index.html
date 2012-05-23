@@ -2,6 +2,7 @@
 
 <!--ACKNOWLEDGEMENTS: 
 Boxy makes use of the JQuery Masonry plug in and JQuery miniColors plugin.
+ColorPicker icon by Yusuke Kamiyamane. All rights reserved.
 -->
 
 <head>
@@ -12,7 +13,11 @@ Boxy makes use of the JQuery Masonry plug in and JQuery miniColors plugin.
 	<link rel="stylesheet" type="text/css" href="css/main.css"/>
 	<link rel="stylesheet" type="text/css" href="css/jquery.miniColors.css"/>
 	<!--FONTS-->
-	
+	<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700|Open+Sans'>
+	<link rel="stylesheet" type="text/css" href="fonts/AGaramondPro-Bold.otf"/>
+	<link rel="stylesheet" type="text/css" href="fonts/AGaramondPro-BoldItalic.otf"/>
+	<link rel="stylesheet" type="text/css" href="fonts/AGaramondPro-Italic.otf"/>
+	<link rel="stylesheet" type="text/css" href="fonts/AGaramondPro-Regular.otf"/>
 	<!--SCRIPTS-->
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
@@ -29,38 +34,41 @@ Boxy makes use of the JQuery Masonry plug in and JQuery miniColors plugin.
 
 <div id="topBar">
 <!--TOOLBAR-->
-
 	<div id="toolbar">
-		<p>Boxy Version 1.0</p><br />
-		<input type="text" id="specifyTitle" placeholder="Name your box"/>
-		<input type="button" id="addSmall" value="Add Small Box"/>
-		<input type="button" id="addTall" value="Add Tall Box"/>
-		<input type="button" id="addWide" value="Add Wide Box"/>
+		<h1>Boxy Version 1.0</h1><br />
+		<p style="color: #000">Minecraft taught me everything is better in block form.<br />
+			Boxy is a tileable portfolio builder. <br />
+			Add tiles, resize 'em and see what happens.</p><!--In line styling? I know.-->
+		</br>
+		<input type="button" id="addSmall" value="Add a tile"/>
 	</div>
 
 <!--EDIT MOODLE-->
-	<div class="editMoodle">
-		<h1>Edit tile</h1><br />
+	<section id="editMoodle">
+		<h2>Click Tile to Edit</h2><br />
+		<div id="labeler">
+			<input type="text" id="specifyTitle"placeholder="Name your box"/>
+			<br />
+		</div>
 		
-		<p> <!--WIDTH/HEIGHT SLIDERS-->
-			<label for="amount">Width (in columns):</label>
+		<div id="picker">
+			<label>color:</label>
+			<input type="text" class="color-picker" size="6" autocomplete="on" maxlength="10" />
+		</div><br />
+		
+		<div class="instructions">Height and width are measured in columns.</div><br />
+		<div class="slider">
+			<label for="amount">width:</label>
 			<input type="hidden" id="widthValue"/>
-		</p>
-		<div class="ui-slider" id="widthSlider"></div>
-		
-		<p>
-			<label for="amount">Height (in columns):</label>
+			<div class="ui-slider" id="widthSlider"></div>
+		</div>
+		<div>
+			<label for="amount">height:</label>
 			<input type="hidden" id="heightValue"/>
-		</p>
-		<div class="ui-slider" id="heightSlider"></div>
+			<div class="ui-slider" id="heightSlider"></div>
+		</div>
 		
-		<!--COLOR PICKER-->
-		<p>
-			Color:
-			<input type="hidden" class="color-picker" size="6" autocomplete="on" maxlength="10" />
-		</p>
-		
-	</div>
+	</section>
 </div>
 
 <!--WHAT THE EDIT MOODLE SHOULD CONTAIN
@@ -81,7 +89,7 @@ Boxy makes use of the JQuery Masonry plug in and JQuery miniColors plugin.
 <!--TEMPLATES-->
 <script type="text/template" id="boxViewTemplate">
 		<div class="front">
-			<%= icon %>
+			<%= title %>
 		</div>
 		<div class="back">
 			<%= details %>

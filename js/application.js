@@ -21,7 +21,7 @@ $('#container').masonry({
    		duration: 400
  	},
   	isAnimated: true,
-    columnWidth : 100,
+    columnWidth : 70,
     gutterWidth: 10
   });
   	
@@ -29,7 +29,7 @@ $('#container').masonry({
 $(".color-picker").miniColors({
 	letterCase: 'uppercase',
 	change: function(hex, rgb) {
-		//logData(hex, rgb);
+		$("input.color-picker").trigger("change");
 	}
 });
 
@@ -37,11 +37,12 @@ $(".color-picker").miniColors({
 /*slider*/
 $("#widthSlider" ).slider({	
 	value:1,
-	min: 1,
-	max: 10,
-	step: 1,
+	min: 70,
+	max: 710,
+	step: 80,
 	slide: function( event, ui ) {
-		$( "#widthValue" ).val(ui.value );
+		$( "#widthValue" ).val(ui.value);
+		//$(".box").width(ui.value);
 		}
 	});
 	
@@ -49,12 +50,13 @@ $("#widthValue" ).val($( "#widthSlider" ).slider("value"));
 
 $("#heightSlider" ).slider({	
 	value:1,
-	min: 1,
-	max: 10,
-	step: 1,
+	min: 70,
+	max: 710,
+	step: 80,
 	slide: function( event, ui ) {
-		$( "#heightValue" ).val(ui.value );
-		}
+		$( "#heightValue" ).val(ui.value);
+		//$(".box").height(ui.value);
+	}	
 	});
 	
 $("#heightValue" ).val($( "#heightSlider" ).slider("value"));

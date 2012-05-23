@@ -1,76 +1,130 @@
 /* Boxy's Models.js file defines: BoxModel, BoxView, BoxCollection, BoxesView */
 
+var BOXY = {};
+
 $(function(){
-	
 	/*MODELS*/
-	var BoxModel = Backbone.Model.extend({
+	
+	BOXY.BoxModel = Backbone.Model.extend({ //Stores data for individual boxes
 		"defaults":{
-			"height": "short",
-			"width": "narrow",
-			"icon": "Hello",
-			"details" : "Info goes here"
+			'height' : '70',
+			'width' : '70',
+			'title' : 'Hello',
+			'color': '#242C35', 
+			'details' : 'Info goes here'
 		}
 	});
-	var BoxView = Backbone.View.extend({
-		"tagName" : "div",
-		"className" : "box",
-		"template" : _.template($("#boxViewTemplate").html()),
-		"render" : function(){
+	
+	BOXY.BoxCollection = Backbone.Collection.extend({ //Stores boxes as a collection
+ 		"model" : BOXY.BoxModel
+ 	});
+	
+	/*VIEWS*/
+	
+	BOXY.BoxView = Backbone.View.extend({
+		'tagName' : 'div',
+		'className' : 'box',
+		'template' : _.template($("#boxViewTemplate").html()),
+		'initialize' : function(){
+			this.model.on("change", this.onChange, this);
+		},
+		'render' : function(){
 			this.$el.html(this.template(this.model.toJSON()));
-			this.$el.addClass(this.model.get("height"));
-			this.$el.addClass(this.model.get("width"));
+			this.$el.css({
+				'width' : this.model.get("width") + "px",
+				'height': this.model.get("height") + "px",
+				'background-color': this.model.get("color")
+			})			
 			return this;
+		},
+		'onChange' : function(){
+			this.$el.find(".front").html(this.model.get("title"));
+			this.$el.css({
+				'width': this.model.get("width") + "px",
+				'height': this.model.get("height") + "px",
+				'background-color': this.model.get("color") 
+			})
+			$("#container").masonry("reload");
 		}
- 	});
- 	var BoxCollection = Backbone.Collection.extend({
- 		"model" : BoxModel
- 	});
+		
+	});
  	
- 	var BoxesView = Backbone.View.extend({
- 		"initialize" : function(){
- 			var boxes = this.collection;
- 			boxes.on("add", this.onAddBox, this);
+ 	BOXY.BoxCollectionView = Backbone.View.extend({
+ 		'initialize' : function(){
+ 			this.collection.on("add", this.onAdd, this);
  		},
- 		"render" : function(){
- 			this.$el.empty();
- 			this.collection.forEach(this.onAddBox,this);
- 		},
- 		'onAddBox' : function(box){
- 			var aBoxView = new BoxView({
- 				"model" : box
+ 		
+ 		'onAdd' : function(addedModel){
+ 			var aBoxView = new BOXY.BoxView({
+ 				model:addedModel
  			});
- 			var renderedBox = aBoxView.render();
- 			this.$el.append(renderedBox.el);
+ 			aBoxView.render();
+ 			this.$el.append(aBoxView.el);
  			
  			$("#container").masonry("reload");
  			
+ 			aBoxView.$el.on("click", function(){
+ 				BOXY.aBoxEditor.model = addedModel;
+ 				BOXY.aBoxEditor.render();
+ 			});
  		}
- 	});	
+ 	});
  	
+ 	BOXY.BoxEditorView = Backbone.View.extend({
+ 		'initialize' : function(){
+ 			this.$el.find("#specifyTitle").on("change keyup",
+ 			$.proxy(this.onChange, this));
+ 			
+ 			this.$el.find("#widthSlider").on("slidechange",
+ 			$.proxy(this.onChange, this));
+ 			
+ 			this.$el.find("#heightSlider").on("slidechange",
+ 			$.proxy(this.onChange, this));
+ 			
+ 			this.$el.find(".color-picker").on("change",
+ 			$.proxy(this.onChange, this));
+ 			
+ 			//this.$el.find(".color-picker").miniColors("change");
+ 			
+ 			//$("INPUT.color-picker").miniColors('methodName', [value]);
+ 		},
+ 		'render' : function(){
+ 			this.$el.find("#specifyTitle").val(this.model.get("title"));
+ 			this.$el.find("#widthSlider").slider("value", this.model.get("width"));
+ 			this.$el.find("#heightSlider").slider("value", this.model.get("height"));
+ 			this.$el.find(".color-picker").miniColors("value", "#" + this.model.get("color"));
+ 		},
+ 		'onChange' : function(e){
+ 			if(e.type == "slidechange" && !e.originalEvent) return;
+ 			this.model.set({title : this.$el.find("#specifyTitle").val()});
+ 			this.model.set({width : this.$el.find("#widthSlider").slider("value")});
+ 			this.model.set({height : this.$el.find("#heightSlider").slider("value")});
+ 			this.model.set({color : this.$el.find(".color-picker").miniColors("value")});
+ 		}
+ 	});
+ 		 	
  	/*INSTANCES*/
  	
- 	var myBoxesCollection = new BoxCollection();
- 	
- 	var myBoxesView = new BoxesView({
- 		'collection' : myBoxesCollection,
+ 	BOXY.aCollection = new BOXY.BoxCollection();
+ 	BOXY.aCollectionView = new BOXY.BoxCollectionView({
+ 		'collection' : BOXY.aCollection,
  		el : $("#container")
  	});
  	
- 	myBoxesView.render();
+ 	BOXY.aBoxEditor = new BOXY.BoxEditorView({
+ 		el : $("#editMoodle")
+ 	});
+ 	
  	
  	/*APPLICATION*/
  	
- 	$("#addSmall").on("click", function(){
-		myBoxesCollection.add({height: "short", width:"narrow", icon : $("#specifyTitle").val()});
-	    });
-
-	$("#addTall").on("click", function(){
-		myBoxesCollection.add({height: "tall", width:"narrow", icon : $("#specifyTitle").val()});
-	    });
-
-	$("#addWide").on("click", function(){
-		myBoxesCollection.add({height: "short", width:"wide", icon : $("#specifyTitle").val()});
-	    });
+ 	$("#addSmall").on("click", function(e){
+ 		
+ 		console.log($("#heightSlider").val());
+ 		BOXY.aCollection.add({
+ 			title : $("#specifyTitle").val()
+ 			});
+ 	});
  	
  	
  	

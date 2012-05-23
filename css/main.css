@@ -7,7 +7,8 @@ html{
 body{
     height:100%;
     width:100%;
-    font-family:"Arial", sans;
+    color: #FFFFFF;
+    font-family:'AGaramondPro-Regular', serif;
     font-size:1em;
     line-height:1em;
     position:relative;
@@ -19,6 +20,7 @@ body{
  * 3. Flip box formatting 
  * 4. Toolbar
  * 5. Editing panel
+ * 6. Buttons and inputs
  */
 
 /*1. CONTAINERS*/
@@ -32,6 +34,30 @@ body{
 }
 
 /*2. TEXT, HEADER AND LINK FORMATTING*/
+h1 {/*Massive headings*/
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 2em;
+    line-height:1em;
+    color: #000;
+}
+
+h2 {/*The edit panel heading*/
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 1.25em;
+    line-height:1em;
+}
+
+h4 { /*Tile headings, ex. "Currently Reading"*/
+    font-family: 'AGaramondPro-BoldItalic', serif;
+}
+
+h5 {/*Section headings on tiles, ex. "How to throw a shrimp boil"*/
+    font-family: 'AGaramondPro-Bold', serif;
+}
+
+.instructions { /*Primarily used in the edit dialogue box*/
+    font-family: 'AGaramondPro-Italic', serif;
+}
 
 /*3. FLIP BOX FORMATTING*/
 
@@ -39,9 +65,7 @@ body{
 .box {
     display:block;
     float:left;
-    margin-top:5px;
-    margin-bottom:5px;
-    /*margin:10px;*/
+    margin-bottom:10px;
     -webkit-transform-style: preserve-3d;
     -webkit-transition: -webkit-transform 1.5s;
     border:1px solid black;
@@ -57,41 +81,40 @@ body{
     -webkit-backface-visibility:hidden;
     height:100%;
     width:100%;
-    background-color:red;
     position:absolute;
+    background-image:-webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.2));
     z-index:1000;
 }
+/* HELD IN CASE OVERLAY IS DESIRED
+.front:after{
+    position:absolute;
+    content:'';
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+}*/
 
 .back{
     -webkit-backface-visibility:hidden;
     height:100%;
     width:100%;
+    padding:10px;
     position:absolute;
-    background-color:green;
+    background-image:-webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.2));
     z-index:999;
     -webkit-transform: rotate3d(0, 1, 0,180deg);
 }
 
-
-/*Various box sizes. A place holder until I write code that will allow
- the user to drag and create a box of any size or aspect ratio*/
-
-.short{
-    height:100px;
-}
-
-.tall{
-    height:300px;
-}
-
-.narrow{
-    width:100px;
-}
-
-.wide{
-    width:210px;
-}
-
+/*HELD IN CASE OVERLAY IS DESIRED
+.back:after{
+    position:absolute;
+    content:'';
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+}*/
 
 /*4. TOOLBAR*/
 #topBar{
@@ -109,22 +132,33 @@ body{
 
 /*5. EDITING PANEL*/
 
-.editMoodle{
-    width:50%;
+#editMoodle{
+    width:310px;
     border:1px solid black;
+    padding:10px;
+    background-color: rgba(37,44,54,0.9);
+    display:block;
+    float:left;
+}
+
+.slider {
+    width:100%;
+    height:20px;
     display:block;
     float:left;
 }
 
 .ui-slider{
-    width:200px;
-    height:8px;
-    margin:10px;
+    width:230px;
+    height:4px;
+    margin-top:8px;
+    display:block;
+    float:right;
 }
 
 .ui-slider .ui-slider-handle{
-    width: 0.8em;
-    height: 0.8em;
+    width: 0.5em;
+    height: 0.5em;
 }
 
 #widthSlider{
@@ -133,6 +167,21 @@ body{
 
 #heightSlider{
     
+}
+
+
+/*BUTTONS AND INPUTS*/
+
+input[type="hidden"]{
+    display:block;
+    float:left;
+}
+
+label {
+    display:block;
+    float:left;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 0.9em;
 }
 
 
