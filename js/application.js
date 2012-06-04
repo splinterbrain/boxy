@@ -10,11 +10,10 @@ $(function(){
 
 /*accordion*/
 
-$('#editMoodle h3').click(function() {
-		$('.moodleSection').hide('40');
-		$(this).next().toggle('40');
-		return false;
-	}).next().hide();
+$('#editMoodle h3').click(function(){
+	$('.moodleSection').removeClass("visible"),
+	$(this).next().addClass("visible");
+})
 	
 /*card flip*/
 
