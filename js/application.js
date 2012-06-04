@@ -11,8 +11,8 @@ $(function(){
 /*accordion*/
 
 $('#editMoodle h3').click(function() {
-		$('.moodleSection').hide('slow');
-		$(this).next().toggle('slow');
+		$('.moodleSection').hide('40');
+		$(this).next().toggle('40');
 		return false;
 	}).next().hide();
 	
