@@ -8,8 +8,8 @@ body{
     height:100%;
     width:100%;
     color: #FFFFFF;
-    font-family:'Lora', serif;
-    font-size:0.75em;
+    font-family: Garamond, serif;
+    font-size:0.85em;
     line-height:1.25em;
     position:relative;
 }
@@ -39,14 +39,6 @@ h1 {/*Massive headings*/
     font-size: 2em;
     line-height:1em;
     color: #000;
-}
-
-h4 { /*Tile headings, ex. "Currently Reading"*/
-    font-family: 'Lora', serif;
-}
-
-h5 {/*Section headings on tiles, ex. "How to throw a shrimp boil"*/
-    font-family: 'Lora', serif;
 }
 
 /*3. FLIP BOX FORMATTING*/
