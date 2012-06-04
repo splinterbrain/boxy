@@ -3,6 +3,7 @@
  * card flip  
  * masonry
  * miniColors
+ * selected icon effect
  * slider 
  * */
 
@@ -40,6 +41,12 @@ $(".color-picker").miniColors({
 		$("input.color-picker").trigger("change");
 	}
 });
+
+/*selected icon effect*/
+$('.icon').click(function(){
+	$('.icon').removeClass("selectedIcon"),
+	$(this).addClass("selectedIcon");
+})
 
 	
 /*slider*/

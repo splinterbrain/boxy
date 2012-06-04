@@ -38,10 +38,10 @@ ColorPicker icon by Yusuke Kamiyamane. All rights reserved.
 		</br>
 		<input type="button" id="addSmall" value="Add a tile"/>
 	</div>
-
+</header>
 <!--EDIT MOODLE-->
 	<section id="editMoodle">
-			<h2>Edit your tile</h2>
+			<h2></h2>
 			<!--<div id="labeler">
 			<input type="text" id="specifyTitle"placeholder="Name your box"/>
 			<br />
@@ -49,6 +49,19 @@ ColorPicker icon by Yusuke Kamiyamane. All rights reserved.
 			
 			<h3><a href="#">Type</a></h3>
 			<div class="moodleSection">
+				<form>
+				<input type="radio" name="tileType" value="flipcard" /> <h4>flipcard (default): <br /><span class="instructions">Has a front and back. Use to keep your profile
+					clutter free by hiding lengthy text descriptions on the back.</span></h4> <br />
+				<input type="radio" name="tileType" value="static" /> <h4>static: <br /><span class="instructions">One sided so it doesn't flip. Great for
+					headings and creating badges.</span></h4> <br />
+				
+				<!--
+				<input type="radio" name="tileType" value="twitter" /> <h4>twitter: <span class="instructions">Shows users your recent tweets and makes following
+					you a snap.</span></h4> <br />
+				<input type="radio" name="tileType" value="flickr" /> <h4>flickr: <span class="instructions">Cycles through the ten most recent photos 
+					posted to your flickr account.</span></h4>
+				-->	
+				</form>
 				
 			</div>
 			<h3><a href="#">Appearance</a></h3>
@@ -73,22 +86,18 @@ ColorPicker icon by Yusuke Kamiyamane. All rights reserved.
 				<p class="instructions">
 					Leave icon blank to write on front of card.
 				</p>
-				<img class="icon" alt="no icon" />
-				<img class="icon" src='#' alt="icon" />
-				<img class="icon" src='#' alt="icon" />
-				<img class="icon" src='#' alt="icon" />
-				<img class="icon" src='#' alt="icon" />
-				<img class="icon" src='#' alt="icon" />
-				<img class="icon" src='#' alt="icon" />
-				<img class="icon" src='#' alt="icon" />
+				<img class="icon selectedIcon" src="images/icons/blank"/>
+				<img class="icon" alt="icon" src="images/icons/food"/>
+				<img class="icon" src='images/icons/grenade' alt="icon" />
+				<img class="icon" src='images/icons/plus.png' alt="icon" />
+				<img class="icon" src='images/icons/muscle' alt="icon" />
+				
 			</div>
 			<h3><a href="#">Content</a></h3>
 			<div class="moodleSection">
 				
 			</div>
 		</section>
-	
-</header>
 
 <!--USER BOXES-->
 	<div id="container">
