@@ -9,7 +9,7 @@ body{
     width:100%;
     color: #FFFFFF;
     font-family: Garamond, serif;
-    font-size:0.85em;
+    font-size:0.9em;
     line-height:1.25em;
     position:relative;
 }
@@ -33,7 +33,7 @@ body{
     border-top:1px solid black;
 }
 
-/*2. TEXT, HEADER AND LINK FORMATTING*/
+/*2. GENERAL TEXT, HEADER AND LINK FORMATTING*/
 h1 {/*Massive headings*/
     font-family: 'Open Sans Condensed', sans-serif;
     font-size: 2em;
@@ -42,7 +42,6 @@ h1 {/*Massive headings*/
 }
 
 /*3. FLIP BOX FORMATTING*/
-
 
 .box {
     display:block;
@@ -67,15 +66,6 @@ h1 {/*Massive headings*/
     background-image:-webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.2));
     z-index:1000;
 }
-/* HELD IN CASE OVERLAY IS DESIRED
-.front:after{
-    position:absolute;
-    content:'';
-    width:100%;
-    height:100%;
-    top:0;
-    left:0;
-}*/
 
 .back{
     -webkit-backface-visibility:hidden;
@@ -88,24 +78,15 @@ h1 {/*Massive headings*/
     -webkit-transform: rotate3d(0, 1, 0,180deg);
 }
 
-/*HELD IN CASE OVERLAY IS DESIRED
-.back:after{
-    position:absolute;
-    content:'';
-    width:100%;
-    height:100%;
-    top:0;
-    left:0;
-}*/
-
 /*4. TOOLBAR*/
+
 #topBar{
     width:100%;
     display:block;
     float:left;
 }
 
-#toolbar{
+#toolbar{ /*temporary*/
     width:50%;
     display:block;
     float:left;
@@ -116,24 +97,39 @@ h1 {/*Massive headings*/
 
 #editMoodle{
     width:275px;
+    height:400px;
     background-color: rgba(27,45,60,0.9);
     background-image:-webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.2));
     display:block;
     float:left;
 }
 
-#firstHeading{
-    font-size:1.4em;
+h2 {
+    width: 100%;
+    height: 24px;
+    padding-left: 10px;
+    background-color: rgba(17,35,50,1.0);
+    font-family: 'Josefin Sans', sans-serif;
+    font-size:1.3em;
+    line-height:1.5em;
 }
 
-.moodleHeading{
+h3 { /*Moodle headings*/
     width: 100%;
     height: 24px;
     padding-left: 10px;
     background-color: rgba(27,45,60,1.0);
-    font-family: 'Open Sans Condensed', sans-serif;
-    font-size: 1.2em;  
-    line-height:22px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size:1.2em;
+    line-height:1.6em;
+}
+
+h3 a{
+    color: #FFFFFF;
+}
+
+h3:hover{
+    background-color: rgba(17,35,50,1.0);
 }
 
 .moodleSection{
@@ -148,6 +144,13 @@ h1 {/*Massive headings*/
     padding-top:15px;
     clear:both;
 }
+
+.miniColors-trigger{
+    height:20px;
+    width:20px;
+    margin-top:-2px;
+}
+
 
 .slider {
     width:100%;
@@ -185,6 +188,9 @@ input[type="hidden"]{
     float:left;
 }
 
+input[type="text"]{
+    height:20px;
+}
 
 label {
     display:block;
@@ -194,8 +200,14 @@ label {
 }
 
 #picker > label {
-    padding-top:10px;
-    margin-right:25px;
+    padding-top:6px;
+    margin-right:20px;
 }
 
-
+.miniButton {
+    height:20px;
+    width:20px;
+    display:block;
+    float:right;
+    
+}

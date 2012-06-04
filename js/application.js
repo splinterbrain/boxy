@@ -1,4 +1,5 @@
 /*FUNCTIONS IN ALPHABETICAL ORDER
+ * accordion
  * card flip  
  * masonry
  * miniColors
@@ -6,6 +7,14 @@
  * */
 
 $(function(){
+
+/*accordion*/
+
+$('#editMoodle h3').click(function() {
+		$('.moodleSection').hide('slow');
+		$(this).next().toggle('slow');
+		return false;
+	}).next().hide();
 	
 /*card flip*/
 
