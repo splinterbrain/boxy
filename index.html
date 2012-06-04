@@ -13,11 +13,7 @@ ColorPicker icon by Yusuke Kamiyamane. All rights reserved.
 	<link rel="stylesheet" type="text/css" href="css/main.css"/>
 	<link rel="stylesheet" type="text/css" href="css/jquery.miniColors.css"/>
 	<!--FONTS-->
-	<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700|Open+Sans'>
-	<link rel="stylesheet" type="text/css" href="fonts/AGaramondPro-Bold.otf"/>
-	<link rel="stylesheet" type="text/css" href="fonts/AGaramondPro-BoldItalic.otf"/>
-	<link rel="stylesheet" type="text/css" href="fonts/AGaramondPro-Italic.otf"/>
-	<link rel="stylesheet" type="text/css" href="fonts/AGaramondPro-Regular.otf"/>
+	<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700|Open+Sans|Josefin+Sans:400,600,700,400italic'>
 	<!--SCRIPTS-->
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
@@ -45,41 +41,35 @@ ColorPicker icon by Yusuke Kamiyamane. All rights reserved.
 
 <!--EDIT MOODLE-->
 	<section id="editMoodle">
-		<h2>Click Tile to Edit</h2><br />
-		<div id="labeler">
+		<div class="moodleHeading" id="firstHeading">Click Tile to Edit</div>
+		
+		<!--<div id="labeler">
 			<input type="text" id="specifyTitle"placeholder="Name your box"/>
 			<br />
-		</div>
-		
+		</div> -->
+		<div class="moodleHeading">Appearance</div>
+		<div class="moodleSection">
 		<div id="picker">
 			<label>color:</label>
 			<input type="text" class="color-picker" size="6" autocomplete="on" maxlength="10" />
-		</div><br />
+		</div>
 		
-		<div class="instructions">Height and width are measured in columns.</div><br />
+		<p class="instructions">Height and width are measured in columns.</p>
 		<div class="slider">
 			<label for="amount">width:</label>
 			<input type="hidden" id="widthValue"/>
 			<div class="ui-slider" id="widthSlider"></div>
 		</div>
-		<div>
+		<div class="slider">
 			<label for="amount">height:</label>
 			<input type="hidden" id="heightValue"/>
 			<div class="ui-slider" id="heightSlider"></div>
 		</div>
+		<p class="instructions">Leave blank to write on front of card.</p>
+		</div>
 		
 	</section>
 </div>
-
-<!--WHAT THE EDIT MOODLE SHOULD CONTAIN
-- x to close moodle
-- button to delete this box
-	- popup asks user to confirm
-	- or to cancel 
-- background color picker
-- icon picker
-- edit text on reverse
--->
 
 <!--USER BOXES-->
 	<div id="container">

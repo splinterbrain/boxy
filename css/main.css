@@ -8,9 +8,9 @@ body{
     height:100%;
     width:100%;
     color: #FFFFFF;
-    font-family:'AGaramondPro-Regular', serif;
-    font-size:1em;
-    line-height:1em;
+    font-family:'Lora', serif;
+    font-size:0.75em;
+    line-height:1.25em;
     position:relative;
 }
 
@@ -41,22 +41,12 @@ h1 {/*Massive headings*/
     color: #000;
 }
 
-h2 {/*The edit panel heading*/
-    font-family: 'Open Sans Condensed', sans-serif;
-    font-size: 1.25em;
-    line-height:1em;
-}
-
 h4 { /*Tile headings, ex. "Currently Reading"*/
-    font-family: 'AGaramondPro-BoldItalic', serif;
+    font-family: 'Lora', serif;
 }
 
 h5 {/*Section headings on tiles, ex. "How to throw a shrimp boil"*/
-    font-family: 'AGaramondPro-Bold', serif;
-}
-
-.instructions { /*Primarily used in the edit dialogue box*/
-    font-family: 'AGaramondPro-Italic', serif;
+    font-family: 'Lora', serif;
 }
 
 /*3. FLIP BOX FORMATTING*/
@@ -133,12 +123,38 @@ h5 {/*Section headings on tiles, ex. "How to throw a shrimp boil"*/
 /*5. EDITING PANEL*/
 
 #editMoodle{
-    width:310px;
-    border:1px solid black;
-    padding:10px;
-    background-color: rgba(37,44,54,0.9);
+    width:275px;
+    background-color: rgba(27,45,60,0.9);
+    background-image:-webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.2));
     display:block;
     float:left;
+}
+
+#firstHeading{
+    font-size:1.4em;
+}
+
+.moodleHeading{
+    width: 100%;
+    height: 24px;
+    padding-left: 10px;
+    background-color: rgba(27,45,60,1.0);
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 1.2em;  
+    line-height:22px;
+}
+
+.moodleSection{
+    width: 100%;
+    padding:10px;
+}
+
+.instructions {
+    font-family: Garamond, serif;
+    font-style: italic;
+    margin-bottom:10px;
+    padding-top:15px;
+    clear:both;
 }
 
 .slider {
@@ -149,7 +165,7 @@ h5 {/*Section headings on tiles, ex. "How to throw a shrimp boil"*/
 }
 
 .ui-slider{
-    width:230px;
+    width:195px;
     height:4px;
     margin-top:8px;
     display:block;
@@ -157,8 +173,8 @@ h5 {/*Section headings on tiles, ex. "How to throw a shrimp boil"*/
 }
 
 .ui-slider .ui-slider-handle{
-    width: 0.5em;
-    height: 0.5em;
+    width: 0.75em;
+    height: 0.75em;
 }
 
 #widthSlider{
@@ -177,11 +193,17 @@ input[type="hidden"]{
     float:left;
 }
 
+
 label {
     display:block;
     float:left;
-    font-family: 'Open Sans Condensed', sans-serif;
-    font-size: 0.9em;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 1.1em;
+}
+
+#picker > label {
+    padding-top:10px;
+    margin-right:25px;
 }
 
 
