@@ -8,6 +8,8 @@ ColorPicker icon by Yusuke Kamiyamane. All rights reserved.
 	<link rel="stylesheet" type="text/css" href="css/reset.css" />
 	<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css"/>
 	<link rel="stylesheet" type="text/css" href="css/jquery.miniColors.css"/>
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.css"/>
+	<link rel="stylesheet" type="text/css" href="css/font-awesome-ie7.css"/>
 	<link rel="stylesheet" type="text/css" href="css/main.css"/>
 	<!--FONTS-->
 	<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700|Josefin+Sans:400,600'>
@@ -23,27 +25,16 @@ ColorPicker icon by Yusuke Kamiyamane. All rights reserved.
 	<script type="text/javascript" src="js/application.js"></script>
 </head>
 <body>
-	<header id="topBar">
-		<!--TOOLBAR-->
-		<div id="toolbar">
-			<h1>Boxy Version 1.0</h1>
-			<br />
-			<p style="color: #000">
-				Minecraft taught me everything is better in block form.
-				<br />
-				Boxy is a tileable portfolio builder.
-				<br />
-				Add tiles, resize 'em and see what happens.
-			</p><!--In line styling? I know.-->
-			</br>
-			<input type="button" id="addSmall" value="Add a tile"/>
-		</div>
+	<header>
+	<h1>Boxy Version 1.0</h1>
+	<input type="button" id="addSmall" value="Add a tile"/>
 	</header>
+	
 	<!--EDIT MOODLE-->
 	<section id="editMoodle">
 		<h2>
-		<button class="miniButton">x</button>
-		<button class="miniButton">t</button>	
+		<button class="miniButton"><i class="icon-remove-sign"></i></button>
+		<button class="miniButton"><i class="icon-trash"></i></button>
 		</h2>
 		
 		<!--<div id="labeler">

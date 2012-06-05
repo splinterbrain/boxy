@@ -9,9 +9,9 @@ $(function(){
 		"defaults":{
 			'height' : '70',
 			'width' : '70',
-			'title' : 'Hello',
+			'title' : '',
 			'color': '#242C35', 
-			'details' : 'Info goes here'
+			'details' : ''
 		}
 	});
 	

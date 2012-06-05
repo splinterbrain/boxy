@@ -14,108 +14,54 @@ body{
     position:relative;
 }
 
-/*OUTLINE:
- * 1. Containers
- * 2. Text and link formatting
- * 3. Flip box formatting 
- * 4. Toolbar
- * 5. Editing panel
- * 6. Buttons and inputs
+/*OUTLINE (alphabetized by theme)
+ * 
+ * BUTTONS
+ * EDIT MOODLE
+ * FLIP BOX FORMATTING
+ * INPUTS
+ * PLUGIN STYLING (ex. jquery slider, color picker)
+ * SPATIAL ELEMENTS
+ * TEXT FORMATTING
+ * 
  */
 
-/*1. CONTAINERS*/
-
-#container{
-    width:100%;
-    padding:10px;
+/*BUTTONS*/
+button{
     display:block;
-    float:left;
+    float:right;
+    border:none;
+    padding: 0px;
+    background-color: #394554;
+    background-image:-webkit-linear-gradient(top, rgba(255,255,255,0.1), rgba(0,0,0,0));
+    color: #FFFFFF;
+    z-index: 999;
 }
 
-/*2. GENERAL TEXT, HEADER AND LINK FORMATTING*/
-h1 {/*Massive headings*/
-    font-family: 'Open Sans Condensed', sans-serif;
-    font-size: 2em;
-    line-height:1em;
-    color: #000;
+button:hover{
+    background-color: #6c7d93;
 }
 
-/*h2 and h3 are used in the edit moodle, defined below.*/
-
-h4 {
-    font-family: 'Josefin Sans', sans-serif;
-    font-size:1.2em;
-}
-
-p {
-    display:inline-block;
-    clear:both;
-}
-
-/*3. FLIP BOX FORMATTING*/
-
-.box {
-    display:block;
-    float:left;
-    margin-bottom:10px;
-    -webkit-transform-style: preserve-3d;
-    -webkit-transition: -webkit-transform 1.5s;
-    border:1px solid black;
-}
-
-.box.flipped{
-    -webkit-transform-style: preserve-3d;
-    -webkit-transform: rotate3d(0, 1, 0,180deg);
+.miniButton {
+    height:20px;
+    width:20px;
+    margin: 5px;
+    margin-left:0px;
+    font-size: 0.85em;
+    line-height: 1.3em;
 }
 
 
-.front{
-    -webkit-backface-visibility:hidden;
-    height:100%;
-    width:100%;
-    position:absolute;
-    background-image:-webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.2));
-    z-index:1000;
-}
-
-.back{
-    -webkit-backface-visibility:hidden;
-    height:100%;
-    width:100%;
-    padding:10px;
-    position:absolute;
-    background-image:-webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.2));
-    z-index:999;
-    -webkit-transform: rotate3d(0, 1, 0,180deg);
-}
-
-/*4. TOOLBAR*/
-
-#topBar{
-    width:100%;
-    display:block;
-    float:left;
-}
-
-#toolbar{ /*temporary*/
-    width:50%;
-    display:block;
-    float:left;
-}
-
-
-/*5. EDITING PANEL*/
-
+/*EDIT MOODLE*/
 #editMoodle{
     width:270px;
     height:400px;
     background-color: rgba(27,45,60,0.95);
-    background-image:-webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.25));
-    position:absolute;
-    top:10px;
+    background-image:-webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.3));
+    position:fixed;
+    top:15px;
     right:10px;
     z-index:900;
-    
     
     box-shadow: 0 5px 12px rgba(0,0,0, 0.3); 
     -webkit-box-shadow: 0 5px 12px rgba(0,0,0, 0.3); 
@@ -125,12 +71,15 @@ p {
 
 h2 {
     width: 100%;
-    height: 25px;
+    height: 30px;
     padding-left: 10px;
     background-color: rgba(17,35,50,1.0);
     font-family: 'Josefin Sans', sans-serif;
     font-size:1.3em;
     line-height:1.6em;
+    border-top: 1px solid #132737;
+    border-bottom: 1px solid #10202e;
+ 
 }
 
 h3 { /*Moodle headings*/
@@ -141,6 +90,8 @@ h3 { /*Moodle headings*/
     font-family: 'Josefin Sans', sans-serif;
     font-size:1.2em;
     line-height:1.6em;
+    border-top: 1px solid #132737;
+    border-bottom: 1px solid #10202e;
 }
 
 h3 a{
@@ -148,7 +99,7 @@ h3 a{
 }
 
 h3:hover{
-    background-color: rgba(14,32,47,1.0);
+    background-color: rgba(12,30,45,1.0);
 }
 
 .moodleSection{
@@ -161,8 +112,10 @@ h3:hover{
 }
 
 .moodleSection.visible{
-    height:300px;
+    height:295px;
     padding:10px;  
+    border-top: 1px solid #132737;
+    border-bottom: 1px solid #10202e;
 }
 
 .instructions {
@@ -199,46 +152,53 @@ h3:hover{
     
 }
 
-/*PLUGINS*/
 
-.miniColors-trigger{
-    height:20px;
-    width:20px;
-    margin-top:-2px;
-}
+/*FLIP BOX FORMATTING*/
 
-.slider {
-    width:100%;
-    height:20px;
+.box {
     display:block;
     float:left;
+    margin-bottom:10px;
+    -webkit-transform-style: preserve-3d;
+    -webkit-transition: -webkit-transform 1.5s;
+    border:1px solid black;
 }
 
-.ui-slider{
-    width:190px;
-    height:4px;
-    margin-top:8px;
-    display:block;
-    float:right;
-}
-
-.ui-slider .ui-slider-handle{
-    width: 0.75em;
-    height: 0.75em;
+.box.flipped{
+    -webkit-transform-style: preserve-3d;
+    -webkit-transform: rotate3d(0, 1, 0,180deg);
 }
 
 
+.front{
+    -webkit-backface-visibility:hidden;
+    height:100%;
+    width:100%;
+    position:absolute;
+    background-image:-webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.2));
+    z-index:1000;
+}
 
-#widthSlider{
+.back{
+    -webkit-backface-visibility:hidden;
+    height:100%;
+    width:100%;
+    padding:10px;
+    position:absolute;
+    background-image:-webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.2));
+    z-index:999;
+    -webkit-transform: rotate3d(0, 1, 0,180deg);
+}
+
+/*INPUTS*/
+
+input[type="button"]{
+    z-index:999;
+    position:absolute;
+    top:3px;
+    left:175px;
     
 }
-
-#heightSlider{
-    
-}
-
-
-/*BUTTONS AND INPUTS*/
 
 input[type="hidden"]{
     display:block;
@@ -270,20 +230,93 @@ label {
     margin-right:20px;
 }
 
-.miniButton {
+/*PLUGIN STYLING*/
+
+.miniColors-trigger{
     height:20px;
     width:20px;
-    margin: 4px;
-    margin-left:0px;
-    background-color: #444c56;
-    color: #FFFFFF;
-    display:block;
-    float:right;
-    z-index: 999;
-    border:none;
+    margin-top:-2px;
 }
 
-.miniButton:hover{
-    background-color: #768292;
+.slider {
+    width:100%;
+    height:20px;
+    display:block;
+    float:left;
+}
+
+.ui-slider{
+    width:190px;
+    height:4px;
+    margin-top:8px;
+    display:block;
+    float:right;
+}
+
+.ui-slider .ui-slider-handle{
+    width: 0.75em;
+    height: 0.75em;
+}
+
+#widthSlider{
+}
+
+#heightSlider{
+}
+
+
+/*SPATIAL ELEMENTS*/
+
+#container{
+    width:100%;
+    padding:10px;
+    display:block;
+    float:left;
+}
+
+header{
+    height:25px;
+    width:100%;
+    display:block;
+    float:left;
+    background-color: rgba(14,32,47,1.0);
+    background-image:-webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.2));
+    color: #FFF;
+    
+}
+
+#topBar{
+    width:100%;
+    display:block;
+    float:left;
+}
+
+#toolbar{ /*temporary*/
+    width:50%;
+    display:block;
+    float:left;
+}
+
+/*TEXT FORMATTING*/
+
+h1 {/*Massive headings*/
+    font-family: 'Open Sans Condensed', sans-serif;
+    margin-left:5px;
+    font-size: 1.7em;
+    line-height:1em;
+    color: #FFF;
+    display:inline-block;
+}
+
+/*h2 and h3 are used in the edit moodle*/
+
+h4 {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size:1.2em;
+}
+
+p {
+    display:inline-block;
+    clear:both;
 }
 
