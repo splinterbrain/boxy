@@ -1,10 +1,7 @@
-<!doctype html>
-
-<!--ACKNOWLEDGEMENTS: 
+<!doctype html> <!--ACKNOWLEDGEMENTS:
 Boxy makes use of the JQuery Masonry plug in and JQuery miniColors plugin.
 ColorPicker icon by Yusuke Kamiyamane. All rights reserved.
 -->
-
 <head>
 	<title>Boxy</title>
 	<!--STYLE SHEETS-->
@@ -25,94 +22,106 @@ ColorPicker icon by Yusuke Kamiyamane. All rights reserved.
 	<script type="text/javascript" src="js/models.js"></script>
 	<script type="text/javascript" src="js/application.js"></script>
 </head>
-
 <body>
-
-<header id="topBar">
-<!--TOOLBAR-->
-	<div id="toolbar">
-		<h1>Boxy Version 1.0</h1><br />
-		<p style="color: #000">Minecraft taught me everything is better in block form.<br />
-			Boxy is a tileable portfolio builder. <br />
-			Add tiles, resize 'em and see what happens.</p><!--In line styling? I know.-->
-		</br>
-		<input type="button" id="addSmall" value="Add a tile"/>
-	</div>
-</header>
-<!--EDIT MOODLE-->
-	<section id="editMoodle">
-			<h2></h2>
-			<!--<div id="labeler">
-			<input type="text" id="specifyTitle"placeholder="Name your box"/>
+	<header id="topBar">
+		<!--TOOLBAR-->
+		<div id="toolbar">
+			<h1>Boxy Version 1.0</h1>
 			<br />
-			</div> -->
-			
-			<h3><a href="#">Type</a></h3>
-			<div class="moodleSection">
-				<form>
-				<input type="radio" name="tileType" value="flipcard" /> <h4>flipcard (default): <br /><span class="instructions">Has a front and back. Use to keep your profile
-					clutter free by hiding lengthy text descriptions on the back.</span></h4> <br />
-				<input type="radio" name="tileType" value="static" /> <h4>static: <br /><span class="instructions">One sided so it doesn't flip. Great for
-					headings and creating badges.</span></h4> <br />
-				
-				<!--
-				<input type="radio" name="tileType" value="twitter" /> <h4>twitter: <span class="instructions">Shows users your recent tweets and makes following
-					you a snap.</span></h4> <br />
-				<input type="radio" name="tileType" value="flickr" /> <h4>flickr: <span class="instructions">Cycles through the ten most recent photos 
-					posted to your flickr account.</span></h4>
-				-->	
-				</form>
-				
-			</div>
-			<h3><a href="#">Appearance</a></h3>
-			<div class="moodleSection visible">
-				<div id="picker">
-					<label>color:</label>
-					<input type="text" class="color-picker" size="6" autocomplete="on" maxlength="10" />
-				</div>
-				<p class="instructions">
-					Height and width are measured in columns.
-				</p>
-				<div class="slider">
-					<label for="amount">width:</label>
-					<input type="hidden" id="widthValue"/>
-					<div class="ui-slider" id="widthSlider"></div>
-				</div>
-				<div class="slider">
-					<label for="amount">height:</label>
-					<input type="hidden" id="heightValue"/>
-					<div class="ui-slider" id="heightSlider"></div>
-				</div>
-				<p class="instructions">
-					Leave icon blank to write on front of card.
-				</p>
-				<img class="icon selectedIcon" src="images/icons/blank"/>
-				<img class="icon" alt="icon" src="images/icons/food"/>
-				<img class="icon" src='images/icons/grenade' alt="icon" />
-				<img class="icon" src='images/icons/plus.png' alt="icon" />
-				<img class="icon" src='images/icons/muscle' alt="icon" />
-				
-			</div>
-			<h3><a href="#">Content</a></h3>
-			<div class="moodleSection">
-				
-			</div>
-		</section>
-
-<!--USER BOXES-->
-	<div id="container">
+			<p style="color: #000">
+				Minecraft taught me everything is better in block form.
+				<br />
+				Boxy is a tileable portfolio builder.
+				<br />
+				Add tiles, resize 'em and see what happens.
+			</p><!--In line styling? I know.-->
+			</br>
+			<input type="button" id="addSmall" value="Add a tile"/>
+		</div>
+	</header>
+	<!--EDIT MOODLE-->
+	<section id="editMoodle">
+		<h2>
+		<button class="miniButton">x</button>
+		<button class="miniButton">t</button>	
+		</h2>
 		
-	</div>
-
-<!--TEMPLATES-->
-<script type="text/template" id="boxViewTemplate">
+		<!--<div id="labeler">
+		<input type="text" id="specifyTitle"placeholder="Name your box"/>
+		<br />
+		</div> -->
+		
+		<!--PICK THE TYPE OF YOUR TILE-->
+		<h3><a href="#">Type</a></h3>
+		<div class="moodleSection">
+			
+			<h4>basic tiles</h4>
+			<input type="radio" name="tileType" id="flipcard" checked/>
+			<div class="radioIndent">
+				<label for="flipcard">flipcard (default):</label>
+				<span class="instructions">Pick an icon for the front and tell
+					the story on the back to keep your profile clutter free.</span>
+			</div>
+			<input type="radio" name="tileType" value="static" />
+			<div class="radioIndent">
+				<label for="static">static: </label>
+				<span class="instructions">One sided so it doesn't flip. Great for headings and
+					mini badges.</span>
+			</div>
+			<h4 class="withSpacing">social tiles</h4>
+			<input type="radio" name="tileType" value="twitter" onclick="this.checked=false;
+			alert('Sorry, the Twitter tile is not quite ready.')"/>
+			<div class="radioIndent">
+				<label for="twitter">twitter: </label>
+				<span class="instructions">Shows users your recent tweets and makes following you
+					a snap.</span>
+			</div>
+		</div>
+		<!--PICK TILE SIZE, COLOR, AND ICON-->
+		<h3><a href="#">Appearance</a></h3>
+		<div class="moodleSection visible">
+			<p class="instructions">
+				Pick a color for your tile.
+			</p>
+			<div id="picker">
+				<label>color:</label>
+				<input type="text" class="color-picker" size="6" autocomplete="on" maxlength="10" />
+			</div>
+			<p class="instructions withSpacing">
+				Pick the width and height of your tile.
+			</p>
+			<div class="slider">
+				<label for="amount">width:</label>
+				<input type="hidden" id="widthValue"/>
+				<div class="ui-slider" id="widthSlider"></div>
+			</div>
+			<div class="slider">
+				<label for="amount">height:</label>
+				<input type="hidden" id="heightValue"/>
+				<div class="ui-slider" id="heightSlider"></div>
+			</div>
+			<p class="instructions withSpacing">
+				Leave icon blank to write on front of card.
+			</p>
+			<img class="icon selectedIcon" src="images/icons/blank"/>
+			<img class="icon" alt="icon" src="images/icons/food"/>
+			<img class="icon" src='images/icons/plus.png' alt="icon" />
+			<img class="icon" src='images/icons/muscle' alt="icon" />
+		</div>
+		<!--WRITE ON THE TILE-->
+		<h3><a href="#">Content</a></h3>
+		<div class="moodleSection"></div>
+	</section>
+	<!--USER BOXES-->
+	<div id="container"></div>
+	<!--TEMPLATES-->
+	<script type="text/template" id="boxViewTemplate">
 		<div class="front">
-			<%= title %>
+		<%= title %>
 		</div>
 		<div class="back">
-			<%= details %>
+		<%= details %>
 		</div>
-</script>
-
+	</script>
 </body>
 </html>

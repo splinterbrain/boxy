@@ -40,9 +40,16 @@ h1 {/*Massive headings*/
     color: #000;
 }
 
+/*h2 and h3 are used in the edit moodle, defined below.*/
+
 h4 {
-    display:inline-block;
     font-family: 'Josefin Sans', sans-serif;
+    font-size:1.2em;
+}
+
+p {
+    display:inline-block;
+    clear:both;
 }
 
 /*3. FLIP BOX FORMATTING*/
@@ -110,10 +117,10 @@ h4 {
     z-index:900;
     
     
-    box-shadow: 0 5px 12px rgba(0,0,0, 0.5); 
-    -webkit-box-shadow: 0 5px 12px rgba(0,0,0, 0.5); 
-    -moz-box-shadow: 0 5px 12px rgba(0,0,0, 0.5); 
-    -khtml-box-shadow: 0 5px 12px rgba(0,0,0, 0.5);
+    box-shadow: 0 5px 12px rgba(0,0,0, 0.3); 
+    -webkit-box-shadow: 0 5px 12px rgba(0,0,0, 0.3); 
+    -moz-box-shadow: 0 5px 12px rgba(0,0,0, 0.3); 
+    -khtml-box-shadow: 0 5px 12px rgba(0,0,0, 0.3);
 }
 
 h2 {
@@ -150,7 +157,7 @@ h3:hover{
     overflow: hidden;
     padding:0px 10px 0px 10px;
     font-family: Josefin Sans, sans-serif;
-    -webkit-transition:height 0.5s ease;
+    -webkit-transition:height 0.5s ease, padding 0.5s ease;
 }
 
 .moodleSection.visible{
@@ -161,10 +168,12 @@ h3:hover{
 .instructions {
     font-family: Garamond, serif;
     font-style: italic;
-    margin-bottom:10px;
-    padding-top:20px;
-    clear:both;
     color: #cbe2e8;
+}
+
+.withSpacing {
+    margin-bottom:5px;
+    padding-top:20px;
 }
 
 .icon {
@@ -173,20 +182,20 @@ h3:hover{
     margin:6px;
     padding:5px;
     font-family: 'Josefin Sans', sans-serif;
-    background-color: rgba(17,35,50,1.0);
+    background-color: rgba(14,32,47,1.0);
     display:block;
     float:left;
 }
 
 .icon:hover{
-    background-color: rgba(17,35,50,1.0);
+    background-color: rgba(10,28,43,1.0);
 }
 
 .selectedIcon{
-    background-color: rgba(17,35,50,1.0);
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
-    -webkit-box-shadow: 0 0 5px rgba(255, 255, 255, 0.5); 
-    -moz-box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    background-color: rgba(10,28,43,1.0);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.25);
+    -webkit-box-shadow: 0 0 8px rgba(255, 255, 255, 0.25); 
+    -moz-box-shadow: 0 0 8px rgba(255, 255, 255, 0.25);
     
 }
 
@@ -244,9 +253,14 @@ input[type="radio"]{
     margin-top:10px;
 }
 
+.radioIndent { 
+    display:inline-block;
+    margin-left: 20px; 
+    margin-top: -20px;
+}
+
 label {
-    display:block;
-    float:left;
+    display:inline-block;
     font-family: 'Josefin Sans', sans-serif;
     font-size: 1.1em;
 }
@@ -259,7 +273,17 @@ label {
 .miniButton {
     height:20px;
     width:20px;
+    margin: 4px;
+    margin-left:0px;
+    background-color: #444c56;
+    color: #FFFFFF;
     display:block;
     float:right;
-    
+    z-index: 999;
+    border:none;
 }
+
+.miniButton:hover{
+    background-color: #768292;
+}
+
