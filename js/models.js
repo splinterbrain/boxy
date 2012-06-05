@@ -81,25 +81,22 @@ $(function(){
  			this.$el.find("#heightSlider").on("slidechange",
  			$.proxy(this.onChange, this));
  			
- 			this.$el.find(".color-picker").on("change",
+ 			this.$el.find("#boxColorPicker").on("change",
  			$.proxy(this.onChange, this));
  			
- 			//this.$el.find(".color-picker").miniColors("change");
- 			
- 			//$("INPUT.color-picker").miniColors('methodName', [value]);
  		},
  		'render' : function(){
  			this.$el.find("#specifyTitle").val(this.model.get("title"));
  			this.$el.find("#widthSlider").slider("value", this.model.get("width"));
  			this.$el.find("#heightSlider").slider("value", this.model.get("height"));
- 			this.$el.find(".color-picker").miniColors("value", "#" + this.model.get("color"));
+ 			this.$el.find("#boxColorPicker").miniColors("value", "#" + this.model.get("color"));
  		},
  		'onChange' : function(e){
  			if(e.type == "slidechange" && !e.originalEvent) return;
  			this.model.set({title : this.$el.find("#specifyTitle").val()});
  			this.model.set({width : this.$el.find("#widthSlider").slider("value")});
  			this.model.set({height : this.$el.find("#heightSlider").slider("value")});
- 			this.model.set({color : this.$el.find(".color-picker").miniColors("value")});
+ 			this.model.set({color : this.$el.find("#boxColorPicker").miniColors("value")});
  		}
  	});
  		 	
@@ -118,7 +115,7 @@ $(function(){
  	
  	/*APPLICATION*/
  	
- 	$("#addSmall").on("click", function(e){
+ 	$("#addBox").on("click", function(e){
  		
  		console.log($("#heightSlider").val());
  		BOXY.aCollection.add({

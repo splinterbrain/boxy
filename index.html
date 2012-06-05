@@ -26,15 +26,16 @@ ColorPicker icon by Yusuke Kamiyamane. All rights reserved.
 </head>
 <body>
 	<header>
+	<button class="miniButton floatLeft" id="addBox"><i class="icon-plus icon-large"></i></button>
+	<input type="hidden" class="color-picker" id="groutColorPicker" size="6" autocomplete="on" maxlength="10" />	
 	<h1>Boxy Version 1.0</h1>
-	<input type="button" id="addSmall" value="Add a tile"/>
 	</header>
 	
 	<!--EDIT MOODLE-->
 	<section id="editMoodle">
 		<h2>
-		<button class="miniButton"><i class="icon-remove-sign"></i></button>
-		<button class="miniButton"><i class="icon-trash"></i></button>
+		<button class="miniButton floatRight"><i class="icon-remove-sign"></i></button>
+		<button class="miniButton floatRight"><i class="icon-trash"></i></button>
 		</h2>
 		
 		<!--<div id="labeler">
@@ -76,7 +77,7 @@ ColorPicker icon by Yusuke Kamiyamane. All rights reserved.
 			</p>
 			<div id="picker">
 				<label>color:</label>
-				<input type="text" class="color-picker" size="6" autocomplete="on" maxlength="10" />
+				<input type="text" class="color-picker" id="boxColorPicker" size="6" autocomplete="on" maxlength="10" />
 			</div>
 			<p class="instructions withSpacing">
 				Pick the width and height of your tile.

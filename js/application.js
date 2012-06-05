@@ -1,5 +1,6 @@
 /*FUNCTIONS IN ALPHABETICAL ORDER
- * accordion
+ * accordion effect
+ * background color
  * card flip  
  * masonry
  * miniColors
@@ -16,6 +17,8 @@ $('#editMoodle h3').click(function(){
 	$(this).next().addClass("visible");
 })
 	
+/*background color*/
+
 /*card flip*/
 
 $("#container").on("click", ".box", function(e){
