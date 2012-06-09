@@ -12,7 +12,7 @@ $(function() {
 			'color' : '#242C35',
 			'icon' : '',
 			'title' : '',
-			'details': ''
+			'details' : ''
 		}
 	});
 
@@ -35,7 +35,16 @@ $(function() {
 				'width' : this.model.get("width") + "px",
 				'height' : this.model.get("height") + "px",
 				'background-color' : this.model.get("color")
-			})
+			});
+			this.$el.on("click", $.proxy(function(e) {
+				this.$el.toggleClass("flipped");
+			}, this));
+			this.$el.find(".editButton").on("click", $.proxy(function(e) {
+				e.stopPropagation();
+				BOXY.aBoxEditor.$el.css("display", "block");
+				BOXY.aBoxEditor.model = this.model;
+				BOXY.aBoxEditor.render();
+			}, this));			
 			return this;
 		},
 		'onChange' : function() {
@@ -64,24 +73,16 @@ $(function() {
 
 			$("#container").masonry("reload");
 
-			aBoxView.$el.on("click", function() {
-				BOXY.aBoxEditor.model = addedModel;
-				BOXY.aBoxEditor.render();
-			});
 		}
 	});
 
 	BOXY.BoxEditorView = Backbone.View.extend({
 		'initialize' : function() {
-			this.$el.find("#textOnFront").on("change keyup",
-			$.proxy(this.onChange, this));
-			
-			this.$el.find("#textOnBack").on("change keyup",
-			$.proxy(this.onChange, this));
+			this.$el.find("#textOnFront").on("change keyup", $.proxy(this.onChange, this));
 
-			this.$el.find(".icon").on("click", $.proxy(function(e) {
-				$('.icon').removeClass("selectedIcon"),
-				$(e.currentTarget).addClass("selectedIcon");
+			this.$el.find("#textOnBack").on("change keyup", $.proxy(this.onChange, this));
+
+			this.$el.find(".icon").on("click", $.proxy(function(e) {$('.icon').removeClass("selectedIcon"), $(e.currentTarget).addClass("selectedIcon");
 
 				this.onChange(e);
 			}, this));
@@ -101,13 +102,20 @@ $(function() {
 			this.$el.find("#widthSlider").slider("value", this.model.get("width"));
 			this.$el.find("#heightSlider").slider("value", this.model.get("height"));
 			this.$el.find("#boxColorPicker").miniColors("value", "#" + this.model.get("color"));
+			this.$el.find(".closeMoodle").on("click", $.proxy(function() {
+				this.$el.css("display", "none")
+			}, this));
 		},
 		'onChange' : function(e) {
 			if(e.type == "slidechange" && !e.originalEvent)
 				return;
-			this.model.set({title : this.$el.find("#textOnFront").val()});
-			this.model.set({details : this.$el.find("#textOnBack").val()});
-			
+			this.model.set({
+				title : this.$el.find("#textOnFront").val()
+			});
+			this.model.set({
+				details : this.$el.find("#textOnBack").val()
+			});
+
 			this.model.set({
 				icon : this.$el.find(".selectedIcon").text()
 			});
@@ -138,8 +146,6 @@ $(function() {
 	/*APPLICATION*/
 
 	$("#addBox").on("click", function(e) {
-
-		console.log($("#heightSlider").val());
 		BOXY.aCollection.add({
 		});
 	});

@@ -36,6 +36,7 @@ button{
     background-color: #394554;
     border:1px solid #3f4d5d;
     background-image:-webkit-linear-gradient(top, rgba(255,255,255,0.1), rgba(0,0,0,0));
+    -webkit-transition: background-color 0.1s ease, border 0.1s ease;
     color: #FFFFFF;
     z-index: 999;
 }
@@ -54,9 +55,19 @@ button:hover{
     padding-top:1px;
 }
 
+.editButton{
+    opacity:0;
+    -webkit-transition: opacity 0.2s ease;
+}
+
+.front:hover > .editButton{
+    opacity:1; 
+}
+
 
 /*EDIT MOODLE*/
 #editMoodle{
+    display:none;
     width:270px;
     height:400px;
     background-color: rgba(27,45,60,0.95);
@@ -178,8 +189,8 @@ h3:hover{
     -webkit-backface-visibility:hidden;
     height:100%;
     width:100%;
-    padding:10px;
     position:absolute;
+    
     background-image:-webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.2));
     z-index:1000;
     /*box-shadow: 0 5px 12px rgba(0,0,0, 0.2); 
@@ -194,6 +205,7 @@ h3:hover{
     width:100%;
     padding:10px;
     position:absolute;
+    
     background-image:-webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.2));
     z-index:999;
     -webkit-transform: rotate3d(0, 1, 0,180deg);

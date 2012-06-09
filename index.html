@@ -34,8 +34,8 @@ ColorPicker icon by Yusuke Kamiyamane. All rights reserved.
 	<!--EDIT MOODLE-->
 	<section id="editMoodle">
 		<h2>
-		<button class="miniButton floatRight"><i class="icon-remove-sign"></i></button>
-		<button class="miniButton floatRight"><i class="icon-trash"></i></button>
+		<button class="miniButton floatRight closeMoodle"><i class="icon-remove-sign"></i></button>
+		<button class="miniButton floatRight removeButton"><i class="icon-trash"></i></button>
 		</h2>
 		
 		<!--<div id="labeler">
@@ -132,6 +132,7 @@ ColorPicker icon by Yusuke Kamiyamane. All rights reserved.
 	<!--TEMPLATES-->
 	<script type="text/template" id="boxViewTemplate">
 		<div class="front">
+			<button class="miniButton floatRight editButton"><i class="icon-wrench"></i></button>
 			<div class="title"><%= title %></div>
 			<div class="tileIcon"><%= icon %></div>
 		</div>

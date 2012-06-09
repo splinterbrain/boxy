@@ -1,7 +1,6 @@
 /*FUNCTIONS IN ALPHABETICAL ORDER
  * accordion effect
- * background color
- * card flip  
+ * background color  
  * masonry
  * miniColors
  * slider 
@@ -23,14 +22,6 @@ $("body").css("background-color", BOXY.backgroundColor);
 $('#groutColorPicker').on("change", function(){
 	$("body").css("background-color", $("#groutColorPicker").miniColors("value"));
 });
-
-
-/*card flip*/
-
-$("#container").on("click", ".box", function(e){
-	$(this).toggleClass("flipped");
-})
-
 	
 /*masonry*/
 $('#container').masonry({
