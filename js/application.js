@@ -4,7 +4,6 @@
  * card flip  
  * masonry
  * miniColors
- * selected icon effect
  * slider 
  * */
 
@@ -18,6 +17,13 @@ $('#editMoodle h3').click(function(){
 })
 	
 /*background color*/
+BOXY.backgroundColor = "#FFF";
+$("body").css("background-color", BOXY.backgroundColor);
+
+$('#groutColorPicker').on("change", function(){
+	$("body").css("background-color", $("#groutColorPicker").miniColors("value"));
+});
+
 
 /*card flip*/
 
@@ -45,11 +51,6 @@ $(".color-picker").miniColors({
 	}
 });
 
-/*selected icon effect*/
-$('.icon').click(function(){
-	$('.icon').removeClass("selectedIcon"),
-	$(this).addClass("selectedIcon");
-})
 
 	
 /*slider*/
