@@ -64,6 +64,13 @@ button:hover{
     opacity:1; 
 }
 
+.front.beingEdited > .editButton{
+    opacity:1;
+    background-color: #6c7d93;
+    border:1px solid #74879e;
+    text-shadow: 1px 1px 2px #000;
+}
+
 
 /*EDIT MOODLE*/
 #editMoodle{
@@ -184,6 +191,8 @@ h3:hover{
     -webkit-transform: rotate3d(0, 1, 0,180deg);
 }
 
+.beingEdited{
+}
 
 .front{
     -webkit-backface-visibility:hidden;
@@ -218,7 +227,6 @@ h3:hover{
 .title{
     font-family: 'Josefin Sans', sans-serif;
     font-size: 2em;
-    font-weight:600;    
     display:block;
     width:100%;
     text-align:center;
@@ -314,7 +322,12 @@ textarea {
 .miniColors-trigger{
     height:20px;
     width:20px;
-    margin-top:-3px;
+    top:-1px;
+}
+
+#groutColorPicker ~ .miniColors-trigger{
+    /*Another dev forced me at gunpoint to use this sibling selector*/ 
+    top:1px;    
 }
 
 header .miniColors-trigger{
