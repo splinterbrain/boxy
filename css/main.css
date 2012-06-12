@@ -35,10 +35,21 @@ button{
     padding: 0px;
     background-color: #394554;
     border:1px solid #3f4d5d;
-    background-image:-webkit-linear-gradient(top, rgba(255,255,255,0.1), rgba(0,0,0,0));
-    -webkit-transition: background-color 0.1s ease, border 0.1s ease;
     color: #FFFFFF;
     z-index: 999;
+    
+    -webkit-transition: background-color 0.1s ease, border 0.1s ease;
+    -moz-transition: background-color 0.1s ease, border 0.1s ease;
+    
+    /*Gradient overlay from white at .1 opacity to transparent.*/
+    background-image: -moz-linear-gradient(top,  rgba(255,255,255,0.1) 0%, rgba(0,0,0,0) 100%); /* FF3.6+ */
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0.1)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
+    background-image: -webkit-linear-gradient(top,  rgba(255,255,255,0.1) 0%,rgba(0,0,0,0) 100%); /* Chrome10+,Safari5.1+ */
+    background-image: -o-linear-gradient(top,  rgba(255,255,255,0.1) 0%,rgba(0,0,0,0) 100%); /* Opera 11.10+ */
+    background-image: -ms-linear-gradient(top,  rgba(255,255,255,0.1) 0%,rgba(0,0,0,0) 100%); /* IE10+ */
+    background-image: linear-gradient(top,  rgba(255,255,255,0.1) 0%,rgba(0,0,0,0) 100%); /* W3C */
+    /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1affffff', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
+
 }
 
 button:hover{
@@ -62,6 +73,7 @@ button:hover{
 .editButton{
     opacity:0;
     -webkit-transition: opacity 0.2s ease;
+    -moz-transition: opacity 0.2s ease;
 }
 
 .front:hover > .editButton{
@@ -82,7 +94,22 @@ button:hover{
     width:270px;
     height:415px;
     background-color: rgba(27,45,60,0.95);
-    background-image:-webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.3));
+    /*gradient overlay from transparent to black at 0.25 opacity*/
+    background-image: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.25) 100%); /*FF*/
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.25))); /* Chrome,Safari4+ */
+    background-image: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.25) 100%); /* Chrome10+,Safari5.1+ */
+    background-image: -o-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.25) 100%); /* Opera 11.10+ */
+    background-image: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.25) 100%); /* IE10+ */
+    background-image: linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.25) 100%); /* W3C */
+    /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#40000000',GradientType=0 ); /* IE6-9 */
+
+    
+    
+    
+    
+    
+    
+    
     position:fixed;
     top:15px;
     right:10px;
@@ -134,6 +161,7 @@ h3:hover{
     padding:0px 10px 0px 10px;
     font-family: Josefin Sans, sans-serif;
     -webkit-transition:height 0.5s ease, padding 0.5s ease;
+    -moz-transition:height 0.5s ease, padding 0.5s ease;
 }
 
 .moodleSection.visible{
@@ -186,11 +214,16 @@ h3:hover{
     overflow:hidden;
     -webkit-transform-style: preserve-3d;
     -webkit-transition: -webkit-transform 1.5s;
+    -moz-transform-style: preserve-3d;
+    -moz-transition: -webkit-transform 1.5s;
 }
 
 .box.flipped{
     -webkit-transform-style: preserve-3d;
     -webkit-transform: rotate3d(0, 1, 0,180deg);
+    
+    -moz-transform: rotateY(180deg);
+    -ms-transform: rotateY(180deg);
 }
 
 .beingEdited{
@@ -198,12 +231,20 @@ h3:hover{
 
 .front{
     -webkit-backface-visibility:hidden;
+    -moz-backface-visibility:hidden;
     height:100%;
     width:100%;
     position:absolute;
-    
-    background-image:-webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.2));
     z-index:1000;
+    
+    /*gradient overlay from transparent to black at 0.25 opacity*/
+    background-image: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.25) 100%); /*FF*/
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.25))); /* Chrome,Safari4+ */
+    background-image: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.25) 100%); /* Chrome10+,Safari5.1+ */
+    background-image: -o-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.25) 100%); /* Opera 11.10+ */
+    background-image: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.25) 100%); /* IE10+ */
+    background-image: linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.25) 100%); /* W3C */
+    
     /*box-shadow: 0 5px 12px rgba(0,0,0, 0.2); 
     -webkit-box-shadow: 0 5px 12px rgba(0,0,0, 0.2); 
     -moz-box-shadow: 0 5px 12px rgba(0,0,0, 0.2); 
@@ -212,14 +253,22 @@ h3:hover{
 
 .back{
     -webkit-backface-visibility:hidden;
+    -moz-backface-visibility:hidden; 
+    -webkit-transform: rotate3d(0, 1, 0,180deg);
+    -moz-transform: rotate3d(0, 1, 0,180deg);
     height:100%;
     width:100%;
     padding:10px;
     position:absolute;
-    
-    background-image:-webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.2));
     z-index:999;
-    -webkit-transform: rotate3d(0, 1, 0,180deg);
+    
+    /*gradient overlay from transparent to black at 0.25 opacity*/
+    background-image: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.25) 100%); /*FF*/
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.25))); /* Chrome,Safari4+ */
+    background-image: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.25) 100%); /* Chrome10+,Safari5.1+ */
+    background-image: -o-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.25) 100%); /* Opera 11.10+ */
+    background-image: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.25) 100%); /* IE10+ */
+    background-image: linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.25) 100%); /* W3C */
     /*box-shadow: 0 5px 12px rgba(0,0,0, 0.2); 
     -webkit-box-shadow: 0 5px 12px rgba(0,0,0, 0.2); 
     -moz-box-shadow: 0 5px 12px rgba(0,0,0, 0.2); 
@@ -384,8 +433,15 @@ header{
     display:block;
     float:left;
     background-color: rgba(14,32,47,1.0);
-    background-image:-webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.2));
     color: #FFF;
+    
+    /*gradient overlay from transparent to black at 0.25 opacity*/
+    background-image: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.25) 100%); /*FF*/
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.25))); /* Chrome,Safari4+ */
+    background-image: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.25) 100%); /* Chrome10+,Safari5.1+ */
+    background-image: -o-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.25) 100%); /* Opera 11.10+ */
+    background-image: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.25) 100%); /* IE10+ */
+    background-image: linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.25) 100%); /* W3C */
     
 }
 
