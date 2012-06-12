@@ -61,7 +61,24 @@ $(function() {
 		'onChange' : function() { //So view changes with model in real time. 
 			this.$el.find(".title").html(this.model.get("title"));
 			this.$el.find(".details").html(this.model.get("details"));
-			this.$el.find(".link > a").attr("href", this.model.get("link"));
+			
+			if(this.model.get("link") !== ''){
+				this.$el.find(".link > a").attr("href", this.model.get("link"));
+				this.$el.find(".link > a").html(" <button class='miniButton floatRight externalLink'><i class='icon-external-link'></i></button> ");
+			}
+			
+			/* CODE INTENDED TO CHECK FOR HTTP:// AT FRONT OF LINK STRING. BUGGY.
+			if(this.model.get("link") !== ''){
+				if(this.model.get("link").contains("http://")){
+					}else{
+						this.model.set({
+							link: "http://" + this.model.get("link");
+						});
+					}
+				this.$el.find(".link > a").attr("href", this.model.get("link"));
+				this.$el.find(".link > a").html(" <button class='miniButton floatRight externalLink'><i class='icon-external-link'></i></button> ");
+			};*/
+			
 			this.$el.find(".tileIcon").text(this.model.get("icon"));
 			this.$el.css({
 				'width' : this.model.get("width") + "px",
@@ -96,7 +113,7 @@ $(function() {
 		'initialize' : function() { 
 			this.$el.find("#textOnFront").on("change keyup", $.proxy(this.onChange, this));
 			this.$el.find("#textOnBack").on("change keyup", $.proxy(this.onChange, this));
-			this.$el.find("#linkOnBack").on("change keyup", $.proxy(this.onChange, this)); //NEW
+			this.$el.find("#linkOnBack").on("change keyup", $.proxy(this.onChange, this)); 
 
 			this.$el.find(".icon").on("click", $.proxy(function(e) {
 				$('.icon').removeClass("selectedIcon"), 
@@ -112,7 +129,7 @@ $(function() {
 		'render' : function() { //Edit moodle displays properties of whichever box is its target.
 			this.$el.find("#textOnFront").val(this.model.get("title"));
 			this.$el.find("#textOnBack").val(this.model.get("details"));
-			this.$el.find("#linkOnBack").val(this.model.get("link")); //NEW
+			this.$el.find("#linkOnBack").val(this.model.get("link")); 
 			$('.icon').removeClass("selectedIcon"); //removes highlight from all icons 
 			$('.icon[data-icon=' + this.model.get("icon") + ']').addClass("selectedIcon");//highlights target's icon
 			this.$el.find("#widthSlider").slider("value", this.model.get("width"));
@@ -138,7 +155,7 @@ $(function() {
 			});
 			
 			this.model.set({
-				link : this.$el.find("#linkOnBack").val() //NEW
+				link : this.$el.find("#linkOnBack").val() 
 			});
 
 			this.model.set({

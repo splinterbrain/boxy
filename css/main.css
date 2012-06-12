@@ -55,6 +55,10 @@ button:hover{
     padding-top:1px;
 }
 
+.externalLink{
+    margin:-5px;
+}
+
 .editButton{
     opacity:0;
     -webkit-transition: opacity 0.2s ease;
@@ -367,7 +371,7 @@ header .miniColors-trigger{
 /*SPATIAL ELEMENTS*/
 
 #container{
-    width:100%;
+    width:95%;
     display:block;
     float:left;
     margin:10px;
