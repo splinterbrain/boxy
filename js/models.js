@@ -7,12 +7,13 @@ $(function() {
 
 	BOXY.BoxModel = Backbone.Model.extend({//Stores data for individual boxes
 		"defaults" : {
-			'height' : '70',
-			'width' : '70',
+			'height' : '150',
+			'width' : '150',
 			'color' : '#242C35',
 			'icon' : '',
 			'title' : '',
-			'details' : ''
+			'details' : '',
+			'link' : 'http://www.jcrew.com'
 		}
 	});
 
@@ -39,8 +40,13 @@ $(function() {
 			});
 			
 			this.$el.on("click", $.proxy(function(e) {
+				if($(e.currentTarget).hasClass("flipped")){
+					this.$el.removeClass("flipped");
+					return;
+				}else{
+				$(".box").removeClass("flipped");
 				this.$el.toggleClass("flipped");
-			}, this));
+				}}, this));
 			
 			this.$el.find(".editButton").on("click", $.proxy(function(e) {
 				e.stopPropagation();
@@ -68,6 +74,7 @@ $(function() {
 	BOXY.BoxCollectionView = Backbone.View.extend({
 		'initialize' : function() {
 			this.collection.on("add", this.onAdd, this);
+			this.collection.on("remove", this.onRemove, this);
 		},
 		'onAdd' : function(addedModel) {
 			var aBoxView = new BOXY.BoxView({
@@ -76,6 +83,10 @@ $(function() {
 			aBoxView.render();
 			this.$el.append(aBoxView.el);
 
+			$("#container").masonry("reload");
+		},
+		'onRemove' : function(removedModel){
+			removedModel.view.$el.detach();
 			$("#container").masonry("reload");
 		}
 	});
@@ -105,9 +116,13 @@ $(function() {
 			this.$el.find("#heightSlider").slider("value", this.model.get("height"));
 			this.$el.find("#boxColorPicker").miniColors("value", "#" + this.model.get("color"));
 			this.$el.find(".closeMoodle").on("click", $.proxy(function() {
-				this.$el.css("display", "none")
+				this.$el.css("display", "none");
 				$(".front").removeClass("beingEdited");
 			}, this));
+			this.$el.find(".removeButton").on("click", $.proxy(function(){
+				BOXY.aCollection.remove(this.model);
+			}, this));
+			$('#editMoodle').draggable({handle: "#handle"});
 		},
 		'onChange' : function(e) {
 			if(e.type == "slidechange" && !e.originalEvent)
@@ -132,6 +147,7 @@ $(function() {
 				color : this.$el.find("#boxColorPicker").miniColors("value")
 			});
 		}
+		
 	});
 
 	/*INSTANCES*/

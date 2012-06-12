@@ -33,10 +33,10 @@ ColorPicker icon by Yusuke Kamiyamane. All rights reserved.
 	
 	<!--EDIT MOODLE-->
 	<section id="editMoodle">
-		<h2>
+		<div id="handle">
 		<button class="miniButton floatRight closeMoodle"><i class="icon-remove-sign"></i></button>
 		<button class="miniButton floatRight removeButton"><i class="icon-trash"></i></button>
-		</h2>
+		</div>
 		
 		<!--<div id="labeler">
 		<input type="text" id="specifyTitle"placeholder="Name your box"/>
@@ -107,22 +107,27 @@ ColorPicker icon by Yusuke Kamiyamane. All rights reserved.
 				Leave icon blank to write on front of card.
 			</p>
 			<div class="icon selectedIcon" data-icon=""></div>
-			<div class="icon" data-icon="&#0065;"><div class="tileIcon">&#0065;</div></div>
+			<div class="icon" data-icon="&#0065;" ><div class="tileIcon">&#0065;</div></div>
 			<div class="icon" data-icon="&#0066;" ><div class="tileIcon">&#0066;</div></div>
 			<div class="icon" data-icon="&#0067;" ><div class="tileIcon">&#0067;</div></div>
+			<div class="icon" data-icon="&#0068;" ><div class="tileIcon">&#0068;</div></div>
+			<div class="icon" data-icon="&#0069;" ><div class="tileIcon">&#0069;</div></div>
+			<div class="icon" data-icon="&#0070;" ><div class="tileIcon">&#0070;</div></div>
+			<div class="icon" data-icon="&#0071;" ><div class="tileIcon">&#0071;</div></div>
 		</div>
 		<!--WRITE ON THE TILE-->
 		<h3><a href="#">Content</a></h3>
 		<div class="moodleSection">
 			
-			
 			<span class="instructions withSpacing">Pick a title if you're using no icon.</span>
-			<input type="text" id="textOnFront"placeholder="Title"/>
-			<br />
+			<input type="text" id="textOnFront"placeholder="title"/>
 			<br />
 			
-			<span class="instructions withSpacing">Write on the back of your tile.</span>
+			<span class="instructions withSpacing">Write on the back of your tile.</span><br />
 			<textarea id="textOnBack">  </textarea>
+			
+			<span class="instructions withSpacing">Include a link (optional).</span>
+			<input type="text" id="linkOnBack"placeholder="web address"/>
 			
 			
 		</div>
@@ -138,6 +143,9 @@ ColorPicker icon by Yusuke Kamiyamane. All rights reserved.
 		</div>
 		<div class="back">
 			<div class="details"><%= details %></div>
+			<div class="myLink">
+				<a href="http://www.jcrew.com"> See more.</a>
+			</div>
 		</div>
 	</script>
 </body>

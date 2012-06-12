@@ -30,7 +30,7 @@ $('#container').masonry({
    		duration: 400
  	},
   	isAnimated: true,
-    columnWidth : 70,
+    columnWidth : 0,
     gutterWidth: 10
   });
   	

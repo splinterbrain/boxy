@@ -76,7 +76,7 @@ button:hover{
 #editMoodle{
     display:none;
     width:270px;
-    height:400px;
+    height:415px;
     background-color: rgba(27,45,60,0.95);
     background-image:-webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.3));
     position:fixed;
@@ -90,7 +90,7 @@ button:hover{
     -khtml-box-shadow: 0 5px 12px rgba(0,0,0, 0.3);
 }
 
-h2 {
+#handle { /*top of the edit moodle, used for click and drag*/
     width: 100%;
     height: 30px;
     padding-left: 10px;
@@ -133,7 +133,7 @@ h3:hover{
 }
 
 .moodleSection.visible{
-    height:295px;
+    height:310px;
     padding:10px;  
     border-top: 1px solid #132737;
     border-bottom: 1px solid #10202e;
@@ -147,15 +147,13 @@ h3:hover{
 }
 
 .withSpacing {
-    margin-bottom:5px;
-    padding-top:20px;
+    padding-top:18px;
 }
 
 .icon {
     height:50px;
     width:50px;
     margin:6px;
-    margin-top:0px;
     font-family: 'Josefin Sans', sans-serif;
     background-color: rgba(14,32,47,1.0);
     display:block;
@@ -273,6 +271,11 @@ input[type="hidden"]{
 input[type="text"]{
     height:20px;
     margin-top:5px;
+    margin-bottom:10px;
+}
+
+#linkOnBack{
+    width:100%;
 }
 
 input[type="radio"]{
@@ -297,12 +300,11 @@ label {
 }
 
 textarea {
-    width:250px;
-    height:180px;
-    position:absolute;
-    left:10px;
-    bottom:10px;
-    margin-right:10px;
+    width:100%;
+    height:150px;
+    margin-bottom:5px;
+    margin-top:5px;
+    resize:none;
 }
 
 /*MISCELLANEOUS*/
@@ -369,6 +371,7 @@ header .miniColors-trigger{
     display:block;
     float:left;
     margin:10px;
+    z-index:0;
 }
 
 header{
