@@ -213,25 +213,24 @@ h3:hover{
     margin-bottom:10px;
     overflow:hidden;
     -webkit-transform-style: preserve-3d;
-    -webkit-transition: -webkit-transform 1.5s;
+    -webkit-transition: -webkit-transform 1.5s ease;
     -moz-transform-style: preserve-3d;
-    -moz-transition: -webkit-transform 1.5s;
+    -moz-transition: -moz-transform 1.5s ease;
 }
 
 .box.flipped{
     -webkit-transform-style: preserve-3d;
-    -webkit-transform: rotate3d(0, 1, 0,180deg);
-    
-    -moz-transform: rotateY(180deg);
-    -ms-transform: rotateY(180deg);
+     -webkit-transform: rotate3d(0, 1, 0,180deg);
+    -moz-transform-style: preserve-3d;
+     -moz-transform: rotate3d(0, 1, 0,180deg);
 }
 
 .beingEdited{
 }
 
 .front{
-    -webkit-backface-visibility:hidden;
-    -moz-backface-visibility:hidden;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
     height:100%;
     width:100%;
     position:absolute;
@@ -252,8 +251,8 @@ h3:hover{
 }
 
 .back{
-    -webkit-backface-visibility:hidden;
-    -moz-backface-visibility:hidden; 
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
     -webkit-transform: rotate3d(0, 1, 0,180deg);
     -moz-transform: rotate3d(0, 1, 0,180deg);
     height:100%;
