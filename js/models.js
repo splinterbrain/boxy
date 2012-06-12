@@ -13,7 +13,7 @@ $(function() {
 			'icon' : '',
 			'title' : '',
 			'details' : '',
-			'link' : 'http://www.jcrew.com'
+			'link' : ''
 		}
 	});
 
@@ -29,17 +29,17 @@ $(function() {
 		'template' : _.template($("#boxViewTemplate").html()),
 		'initialize' : function() {
 			this.model.on("change", this.onChange, this);
-			this.model.view=this;
+			this.model.view=this; //So view can be grabbed later with model.view
 		},
 		'render' : function() {
-			this.$el.html(this.template(this.model.toJSON()));
+			this.$el.html(this.template(this.model.toJSON())); 
 			this.$el.css({
 				'width' : this.model.get("width") + "px",
 				'height' : this.model.get("height") + "px",
 				'background-color' : this.model.get("color")
 			});
 			
-			this.$el.on("click", $.proxy(function(e) {
+			this.$el.on("click", $.proxy(function(e) { //Governs 3d transform aka card flipping
 				if($(e.currentTarget).hasClass("flipped")){
 					this.$el.removeClass("flipped");
 					return;
@@ -49,18 +49,19 @@ $(function() {
 				}}, this));
 			
 			this.$el.find(".editButton").on("click", $.proxy(function(e) {
-				e.stopPropagation();
+				e.stopPropagation(); //So card doesn't flip when edit button is clicked
 				$(".front").removeClass("beingEdited");//Remove highlighting from whichever box was edited previously
 				this.$el.find(".front").addClass("beingEdited");//Highlight the box currently targetted by the edit moodle
-				BOXY.aBoxEditor.$el.css("display", "block");
-				BOXY.aBoxEditor.model = this.model;
-				BOXY.aBoxEditor.render();
+				BOXY.aBoxEditor.$el.css("display", "block"); //Unhides edit moodle
+				BOXY.aBoxEditor.model = this.model; //Makes this box the target of the edit moodle
+				BOXY.aBoxEditor.render(); //Updates edit moodle to reflect this box's parameters
 			}, this));			
 			return this;
 		},
-		'onChange' : function() { //Real time display of changes made in edit panel.
+		'onChange' : function() { //So view changes with model in real time. 
 			this.$el.find(".title").html(this.model.get("title"));
 			this.$el.find(".details").html(this.model.get("details"));
+			this.$el.find(".link > a").attr("href", this.model.get("link"));
 			this.$el.find(".tileIcon").text(this.model.get("icon"));
 			this.$el.css({
 				'width' : this.model.get("width") + "px",
@@ -73,8 +74,8 @@ $(function() {
 
 	BOXY.BoxCollectionView = Backbone.View.extend({
 		'initialize' : function() {
-			this.collection.on("add", this.onAdd, this);
-			this.collection.on("remove", this.onRemove, this);
+			this.collection.on("add", this.onAdd, this); //What happens when a box is added
+			this.collection.on("remove", this.onRemove, this); //What happens when a box is removed
 		},
 		'onAdd' : function(addedModel) {
 			var aBoxView = new BOXY.BoxView({
@@ -91,10 +92,11 @@ $(function() {
 		}
 	});
 
-	BOXY.BoxEditorView = Backbone.View.extend({
-		'initialize' : function() {
+	BOXY.BoxEditorView = Backbone.View.extend({ //The edit moodle
+		'initialize' : function() { 
 			this.$el.find("#textOnFront").on("change keyup", $.proxy(this.onChange, this));
 			this.$el.find("#textOnBack").on("change keyup", $.proxy(this.onChange, this));
+			this.$el.find("#linkOnBack").on("change keyup", $.proxy(this.onChange, this)); //NEW
 
 			this.$el.find(".icon").on("click", $.proxy(function(e) {
 				$('.icon').removeClass("selectedIcon"), 
@@ -107,31 +109,36 @@ $(function() {
 			this.$el.find("#boxColorPicker").on("change", $.proxy(this.onChange, this));
 		},
 		
-		'render' : function() {
+		'render' : function() { //Edit moodle displays properties of whichever box is its target.
 			this.$el.find("#textOnFront").val(this.model.get("title"));
 			this.$el.find("#textOnBack").val(this.model.get("details"));
-			$('.icon').removeClass("selectedIcon"); //removes highlight from all icons in preparation for...
-			$('.icon[data-icon=' + this.model.get("icon") + ']').addClass("selectedIcon");//highlights active icon
+			this.$el.find("#linkOnBack").val(this.model.get("link")); //NEW
+			$('.icon').removeClass("selectedIcon"); //removes highlight from all icons 
+			$('.icon[data-icon=' + this.model.get("icon") + ']').addClass("selectedIcon");//highlights target's icon
 			this.$el.find("#widthSlider").slider("value", this.model.get("width"));
 			this.$el.find("#heightSlider").slider("value", this.model.get("height"));
 			this.$el.find("#boxColorPicker").miniColors("value", "#" + this.model.get("color"));
-			this.$el.find(".closeMoodle").on("click", $.proxy(function() {
+			this.$el.find(".closeMoodle").on("click", $.proxy(function() { //Closes (hides) the moodle.
 				this.$el.css("display", "none");
 				$(".front").removeClass("beingEdited");
 			}, this));
-			this.$el.find(".removeButton").on("click", $.proxy(function(){
+			this.$el.find(".removeButton").on("click", $.proxy(function(){ //Deletes a box model.
 				BOXY.aCollection.remove(this.model);
 			}, this));
 			$('#editMoodle').draggable({handle: "#handle"});
 		},
-		'onChange' : function(e) {
-			if(e.type == "slidechange" && !e.originalEvent)
+		'onChange' : function(e) {//Confers changes made in the editor to the model. 
+			if(e.type == "slidechange" && !e.originalEvent) //Necessary because the slider was causing problems.
 				return;
 			this.model.set({
 				title : this.$el.find("#textOnFront").val()
 			});
 			this.model.set({
 				details : this.$el.find("#textOnBack").val()
+			});
+			
+			this.model.set({
+				link : this.$el.find("#linkOnBack").val() //NEW
 			});
 
 			this.model.set({
@@ -164,7 +171,8 @@ $(function() {
 
 	/*APPLICATION*/
 
-	$("#addBox").on("click", function(e) {
+	$("#addBox").on("click", function(e) { 
+	//When a boxes is added, it becomes the target of the edit moodle automatically.
 		BOXY.aCollection.add({
 		});
 		$(".front").removeClass("beingEdited");//Remove highlighting from whichever box was edited previously

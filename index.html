@@ -1,7 +1,8 @@
 <!doctype html> <!--ACKNOWLEDGEMENTS:
-Boxy makes use of the JQuery Masonry plug in and JQuery miniColors plugin.
-ColorPicker icon by Yusuke Kamiyamane. All rights reserved.
+Boxy makes use of the the following plugins: JQuery Masonry, miniColors, dragable, and slider.
+ColorPicker icon by Yusuke Kamiyamane (all rights reserved). Mentorship provided by Seth Samuel.  
 -->
+
 <head>
 	<title>Boxy</title>
 	<!--STYLE SHEETS-->
@@ -127,7 +128,7 @@ ColorPicker icon by Yusuke Kamiyamane. All rights reserved.
 			<textarea id="textOnBack">  </textarea>
 			
 			<span class="instructions withSpacing">Include a link (optional).</span>
-			<input type="text" id="linkOnBack"placeholder="web address"/>
+			<input type="text" id="linkOnBack"placeholder="http://www.yoursite.com"/>
 			
 			
 		</div>
@@ -143,8 +144,8 @@ ColorPicker icon by Yusuke Kamiyamane. All rights reserved.
 		</div>
 		<div class="back">
 			<div class="details"><%= details %></div>
-			<div class="myLink">
-				<a href="http://www.jcrew.com"> See more.</a>
+			<div class="link">
+				<a href= "<%= link %>" > See more.</a>
 			</div>
 		</div>
 	</script>
