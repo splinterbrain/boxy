@@ -30,7 +30,51 @@ ColorPicker icon by Yusuke Kamiyamane (all rights reserved). Mentorship provided
 	<button class="miniButton floatLeft" id="addBox"><i class="icon-plus"></i></button>
 	<input type="hidden" class="color-picker" id="groutColorPicker" size="6" autocomplete="on" maxlength="10" />	
 	<h1>Boxy Version 1.0</h1>
+	<button class="longTextButton floatRight" id="logInSignUpButton">log in | sign up</button>
 	</header>
+	
+	<!--POPUP TO LOG IN OR SIGN UP-->
+	<section class="popup" id="logInSignUp">
+		<div class="halfWidthColumn">
+			<div class="fancyBlock">
+				new user
+			</div>
+			<input type="text" id="newUsername">
+			<label for="newUsername">username: </label>
+			<br />
+			<input type="text" id="email">
+			<label for="email">email: </label>
+			<br />
+			<input type="text" id="reEmail">
+			<label for="reEmail">re-enter email: </label>
+			<br />
+			<input type="password" id="newPassword">
+			<label for="newPassword">password: </label>
+			<br />
+			<input type="password" id="rePassword">
+			<label for="rePassword">re-enter password: </label>
+			<br />
+			<button class="shortTextButton floatRight" id="signUp">sign up</button>
+		</div>
+		<div class="halfWidthColumn">
+			<div class="fancyBlock">
+				old user
+			</div>
+			<input type="text" id="existingUsername">
+			<label for="existingUsername">username: </label>
+			<br />
+			<input type="password" id="existingPassword">
+			<label for="existingPassword">password: </label>
+			<br />	
+			
+			<button class="shortTextButton floatRight" id="logIn">log in</button>
+		</div>
+	</section>
+
+	
+	
+	
+	
 	
 	<!--EDIT MOODLE-->
 	<section id="editMoodle">

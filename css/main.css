@@ -23,6 +23,7 @@ body{
  * INPUTS
  * MISCELLANEOUS
  * PLUGIN STYLING (ex. jquery slider, color picker)
+ * POPUPS
  * SPATIAL ELEMENTS
  * TEXT FORMATTING
  * 
@@ -53,11 +54,23 @@ button{
 }
 
 button:hover{
-    background-color: #6c7d93;
+    background-color: #6c7d93; /*THIS COLOR NEEDS WORK*/
     border:1px solid #74879e;
     text-shadow: 1px 1px 2px #000;
-    -webkit-transition: background-color 0.1s ease, border 0.1s ease;
-    -moz-transition: background-color 0.1s ease, border 0.1s ease;
+}
+
+.longTextButton{
+    height:20px;
+    width:120px;
+    margin:5px;
+}
+
+.shortTextButton{
+    height:25px;
+    width:80px;
+    position:absolute;
+    bottom:20px;
+    right:20px;
 }
 
 .miniButton {
@@ -65,12 +78,18 @@ button:hover{
     width:20px;
     margin: 5px;
     font-size: 0.86em;
-    padding-top:1px;
+}
+
+.link{
+    position:absolute;
+    bottom:5px;
+    right:5px;
 }
 
 .editButton{
     opacity:0;
-    
+    -webkit-transition: opacity 0.2s ease;
+    -moz-transition: opacity 0.2s ease;
 }
 
 .front:hover > .editButton{
@@ -101,7 +120,7 @@ button:hover{
     /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#40000000',GradientType=0 ); /* IE6-9 */
 
     position:fixed;
-    top:15px;
+    top:40px;
     right:10px;
     z-index:900;
     
@@ -191,7 +210,6 @@ h3:hover{
     box-shadow: 0 0 8px rgba(255, 255, 255, 0.25);
     -webkit-box-shadow: 0 0 8px rgba(255, 255, 255, 0.25); 
     -moz-box-shadow: 0 0 8px rgba(255, 255, 255, 0.25);
-    
 }
 
 
@@ -201,6 +219,7 @@ h3:hover{
     display:block;
     float:left;
     margin-bottom:10px;
+    overflow:hidden;
     -webkit-transform-style: preserve-3d;
     -webkit-transition: -webkit-transform 1.5s ease;
     -moz-transform-style: preserve-3d;
@@ -224,7 +243,6 @@ h3:hover{
     width:100%;
     position:absolute;
     z-index:1000;
-    -moz-transform: translateZ(1px);/*translateZ because FF wasn't registering z-index properly; caused flickering*/
     
     /*gradient overlay from transparent to black at 0.25 opacity*/
     background-image: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.25) 100%); /*FF*/
@@ -244,13 +262,12 @@ h3:hover{
     -webkit-backface-visibility: hidden;
     -moz-backface-visibility: hidden;
     -webkit-transform: rotate3d(0, 1, 0,180deg);
-    -moz-transform: translateZ(-1px) rotate3d(0, 1, 0,180deg); /*translateZ because FF wasn't registering z-index properly; caused flickering*/
+    -moz-transform: rotate3d(0, 1, 0,180deg);
     height:100%;
     width:100%;
     padding:10px;
     position:absolute;
     z-index:999;
-    overflow:hidden; /*3d transform fails in FF if overflow:hidden is applied on .box*/
     
     /*gradient overlay from transparent to black at 0.25 opacity*/
     background-image: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.25) 100%); /*FF*/
@@ -281,12 +298,6 @@ h3:hover{
     
 }
 
-.link{
-    position:absolute;
-    right:0px;
-    bottom:0px;
-}
-
 /*FORMATTING OF BOX CONTENTS*/
 
 .tileIcon{
@@ -315,6 +326,20 @@ input[type="text"]{
     margin-bottom:10px;
 }
 
+.halfWidthColumn > input[type="text"]{
+    float:right;
+    width:150px;
+    margin-top:0px;
+    margin-bottom:5px;
+}
+
+input[type="password"]{
+    float:right;
+    width:150px;
+    margin-top:0px;
+    margin-bottom:5px;
+}
+
 #linkOnBack{
     width:100%;
 }
@@ -333,6 +358,12 @@ label {
     display:inline-block;
     font-family: 'Josefin Sans', sans-serif;
     font-size: 1.1em;
+}
+
+.halfWidthColumn > label{
+    float:right;
+    margin-right:5px;
+    font-size:0.95em;
 }
 
 #picker > label {
@@ -404,6 +435,58 @@ header .miniColors-trigger{
 #heightSlider{
 }
 
+/*POPUPS*/
+
+.popup{
+    background-color: rgba(27,45,60,1.0);
+    /*gradient overlay from transparent to black at 0.25 opacity*/
+    background-image: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.25) 100%); /*FF*/
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.25))); /* Chrome,Safari4+ */
+    background-image: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.25) 100%); /* Chrome10+,Safari5.1+ */
+    background-image: -o-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.25) 100%); /* Opera 11.10+ */
+    background-image: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.25) 100%); /* IE10+ */
+    background-image: linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.25) 100%); /* W3C */
+    /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#40000000',GradientType=0 ); /* IE6-9 */
+    
+    box-shadow: 0 5px 12px rgba(0,0,0, 0.3); 
+    -webkit-box-shadow: 0 5px 12px rgba(0,0,0, 0.3); 
+    -moz-box-shadow: 0 5px 12px rgba(0,0,0, 0.3); 
+    -khtml-box-shadow: 0 5px 12px rgba(0,0,0, 0.3);
+}
+
+#logInSignUp{
+    display:none;
+    position:absolute;
+    top:50px;
+    right:20px;
+    height:265px;
+    width:660px;
+    z-index:1000;
+}
+
+.halfWidthColumn{
+    width:50%;
+    height:100%;
+    display:block;
+    float:left;
+    padding:20px;
+    border-left: 1px solid #152a3b;
+    border-right: 1px solid #132737;
+}
+
+.fancyBlock{
+    height:2.75em; 
+    width:3.5em; 
+    padding:12px;
+    margin-top:-20px;
+    margin-left:-20px;
+    margin-bottom:15px;
+    /*border-right:1px dashed white;
+    border-bottom:1px dashed white;*/
+    font-size:1.5em;
+    line-height:1em;
+    text-transform:uppercase;
+}
 
 /*SPATIAL ELEMENTS*/
 

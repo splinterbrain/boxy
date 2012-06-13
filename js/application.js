@@ -1,6 +1,7 @@
 /*FUNCTIONS IN ALPHABETICAL ORDER
  * accordion effect
  * background color  
+ * login popup
  * masonry
  * miniColors
  * slider 
@@ -23,6 +24,21 @@ $('#groutColorPicker').on("change", function(){
 	$("body").css("background-color", $("#groutColorPicker").miniColors("value"));
 });
 	
+/*login popup*/
+$("#logInSignUpButton").on("click", function(){
+	$("#editMoodle").css("display", "none"); //hides edit moodle when login popup is displayed
+	$(".front").removeClass("beingEdited"); //removes edit highlight from moodle's target since moodle is closed
+	$("#logInSignUp").css("display", "block");
+});
+
+$("#logIn").on("click", function(){
+	$("#logInSignUp").css("display", "none");
+});
+
+$("#signUp").on("click", function(){
+	$("#logInSignUp").css("display", "none");
+});
+
 /*masonry*/
 $('#container').masonry({
    	itemSelector : '.box',
