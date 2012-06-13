@@ -459,14 +459,45 @@ header .miniColors-trigger{
     position:absolute;
     top:50px;
     right:20px;
-    height:265px;
+    height:295px;
     width:660px;
     z-index:1000;
 }
 
+.stripes {
+        height: 5%;
+        width: 100%;
+        display:block;
+        float: left;
+        -webkit-background-size: 50px 50px;
+        -moz-background-size: 50px 50px;
+        background-size: 50px 50px; /* Controls the size of the stripes */
+        background-color: #1b2d3c;
+        background-image: -webkit-gradient(linear, 0 100%, 100% 0,
+        color-stop(.25, rgba(255, 255, 255, .2)), color-stop(.25, transparent),
+        color-stop(.5, transparent), color-stop(.5, rgba(255, 255, 255, .2)),
+        color-stop(.75, rgba(255, 255, 255, .2)), color-stop(.75, transparent),
+        to(transparent));
+        background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, .2) 25%, transparent 25%,
+        transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%,
+        transparent 75%, transparent);
+        background-image: -moz-linear-gradient(45deg, rgba(255, 255, 255, .2) 25%, transparent 25%,
+        transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%,
+        transparent 75%, transparent);
+        background-image: -ms-linear-gradient(45deg, rgba(255, 255, 255, .2) 25%, transparent 25%,
+        transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%,
+        transparent 75%, transparent);
+        background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, .2) 25%, transparent 25%,
+        transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%,
+        transparent 75%, transparent);
+        background-image: linear-gradient(45deg, rgba(255, 255, 255, .2) 25%, transparent 25%,
+        transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%,
+        transparent 75%, transparent);
+}
+
 .halfWidthColumn{
     width:50%;
-    height:100%;
+    height:92%;
     display:block;
     float:left;
     padding:20px;
