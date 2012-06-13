@@ -56,6 +56,8 @@ button:hover{
     background-color: #6c7d93;
     border:1px solid #74879e;
     text-shadow: 1px 1px 2px #000;
+    -webkit-transition: background-color 0.1s ease, border 0.1s ease;
+    -moz-transition: background-color 0.1s ease, border 0.1s ease;
 }
 
 .miniButton {
@@ -66,14 +68,9 @@ button:hover{
     padding-top:1px;
 }
 
-.externalLink{
-    margin:-5px;
-}
-
 .editButton{
     opacity:0;
-    -webkit-transition: opacity 0.2s ease;
-    -moz-transition: opacity 0.2s ease;
+    
 }
 
 .front:hover > .editButton{
@@ -103,13 +100,6 @@ button:hover{
     background-image: linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.25) 100%); /* W3C */
     /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#40000000',GradientType=0 ); /* IE6-9 */
 
-    
-    
-    
-    
-    
-    
-    
     position:fixed;
     top:15px;
     right:10px;
@@ -211,7 +201,6 @@ h3:hover{
     display:block;
     float:left;
     margin-bottom:10px;
-    overflow:hidden;
     -webkit-transform-style: preserve-3d;
     -webkit-transition: -webkit-transform 1.5s ease;
     -moz-transform-style: preserve-3d;
@@ -235,6 +224,7 @@ h3:hover{
     width:100%;
     position:absolute;
     z-index:1000;
+    -moz-transform: translateZ(1px);/*translateZ because FF wasn't registering z-index properly; caused flickering*/
     
     /*gradient overlay from transparent to black at 0.25 opacity*/
     background-image: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.25) 100%); /*FF*/
@@ -254,12 +244,13 @@ h3:hover{
     -webkit-backface-visibility: hidden;
     -moz-backface-visibility: hidden;
     -webkit-transform: rotate3d(0, 1, 0,180deg);
-    -moz-transform: rotate3d(0, 1, 0,180deg);
+    -moz-transform: translateZ(-1px) rotate3d(0, 1, 0,180deg); /*translateZ because FF wasn't registering z-index properly; caused flickering*/
     height:100%;
     width:100%;
     padding:10px;
     position:absolute;
     z-index:999;
+    overflow:hidden; /*3d transform fails in FF if overflow:hidden is applied on .box*/
     
     /*gradient overlay from transparent to black at 0.25 opacity*/
     background-image: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.25) 100%); /*FF*/
@@ -290,6 +281,12 @@ h3:hover{
     
 }
 
+.link{
+    position:absolute;
+    right:0px;
+    bottom:0px;
+}
+
 /*FORMATTING OF BOX CONTENTS*/
 
 .tileIcon{
@@ -306,14 +303,6 @@ h3:hover{
 }
 
 /*INPUTS*/
-
-input[type="button"]{
-    z-index:999;
-    position:absolute;
-    top:3px;
-    left:175px;
-    
-}
 
 input[type="hidden"]{
     display:block;

@@ -64,7 +64,7 @@ $(function() {
 			
 			if(this.model.get("link") !== ''){
 				this.$el.find(".link > a").attr("href", this.model.get("link"));
-				this.$el.find(".link > a").html(" <button class='miniButton floatRight externalLink'><i class='icon-external-link'></i></button> ");
+				this.$el.find(".link > a").html(" <button class='miniButton'><i class='icon-external-link'></i></button> ");
 			}
 			
 			/* CODE INTENDED TO CHECK FOR HTTP:// AT FRONT OF LINK STRING. BUGGY.
