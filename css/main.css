@@ -54,9 +54,9 @@ button{
 }
 
 button:hover{
-    background-color: #6c7d93; /*THIS COLOR NEEDS WORK*/
-    border:1px solid #74879e;
-    text-shadow: 1px 1px 2px #000;
+    background-color: #445468; /* 6c7d93 CHANGED TO BE SUBTLER*/
+    border:1px solid #4a5c72; /* #74879e CHANGED TO BE SUBTLER*/
+    /*text-shadow: 1px 1px 2px #000;*/
 }
 
 .longTextButton{
@@ -100,7 +100,7 @@ button:hover{
     opacity:1;
     background-color: #6c7d93;
     border:1px solid #74879e;
-    text-shadow: 1px 1px 2px #000;
+    /*text-shadow: 1px 1px 2px #000;*/
 }
 
 
