@@ -219,7 +219,6 @@ h3:hover{
     display:block;
     float:left;
     margin-bottom:10px;
-    overflow:hidden;
     -webkit-transform-style: preserve-3d;
     -webkit-transition: -webkit-transform 1.5s ease;
     -moz-transform-style: preserve-3d;
@@ -228,9 +227,9 @@ h3:hover{
 
 .box.flipped{
     -webkit-transform-style: preserve-3d;
-     -webkit-transform: rotate3d(0, 1, 0,180deg);
+    -webkit-transform: rotate3d(0, 1, 0,180deg);
     -moz-transform-style: preserve-3d;
-     -moz-transform: rotate3d(0, 1, 0,180deg);
+    -moz-transform: rotate3d(0, 1, 0,180deg);
 }
 
 .beingEdited{
@@ -239,6 +238,7 @@ h3:hover{
 .front{
     -webkit-backface-visibility: hidden;
     -moz-backface-visibility: hidden;
+    -moz-transform: translateZ(1px);
     height:100%;
     width:100%;
     position:absolute;
@@ -262,12 +262,13 @@ h3:hover{
     -webkit-backface-visibility: hidden;
     -moz-backface-visibility: hidden;
     -webkit-transform: rotate3d(0, 1, 0,180deg);
-    -moz-transform: rotate3d(0, 1, 0,180deg);
+    -moz-transform: translateZ(-1px) rotate3d(0, 1, 0,180deg);
     height:100%;
     width:100%;
     padding:10px;
     position:absolute;
     z-index:999;
+    overflow:hidden;
     
     /*gradient overlay from transparent to black at 0.25 opacity*/
     background-image: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.25) 100%); /*FF*/
