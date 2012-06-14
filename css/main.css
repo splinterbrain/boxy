@@ -437,6 +437,18 @@ header .miniColors-trigger{
 
 /*POPUPS*/
 
+#pageDimmer{
+    z-index:999;
+    position:absolute;
+    top:0px;
+    left:0px;
+    height:100%;
+    width:100%;
+    background-color: #000;
+    opacity:0.3;
+    display:none;
+}
+
 .popup{
     background-color: rgba(27,45,60,1.0);
     /*gradient overlay from transparent to black at 0.25 opacity*/
@@ -459,7 +471,7 @@ header .miniColors-trigger{
     position:absolute;
     top:50px;
     right:20px;
-    height:295px;
+    height:275px;
     width:660px;
     z-index:1000;
 }
@@ -491,7 +503,7 @@ header .miniColors-trigger{
 /*SPATIAL ELEMENTS*/
 
 #container{
-    width:95%;
+    width:100%;
     display:block;
     float:left;
     margin:10px;

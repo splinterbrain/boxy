@@ -28,15 +28,24 @@ $('#groutColorPicker').on("change", function(){
 $("#logInSignUpButton").on("click", function(){
 	$("#editMoodle").css("display", "none"); //hides edit moodle when login popup is displayed
 	$(".front").removeClass("beingEdited"); //removes edit highlight from moodle's target since moodle is closed
+	$("#pageDimmer").css("display", "block");
 	$("#logInSignUp").css("display", "block");
+});
+
+$("#pageDimmer").on("click", function(){
+	$("#logInSignUp").css("display", "none");
+	$("#pageDimmer").css("display", "none");
 });
 
 $("#logIn").on("click", function(){
 	$("#logInSignUp").css("display", "none");
+	$("#pageDimmer").css("display", "none");
 });
+
 
 $("#signUp").on("click", function(){
 	$("#logInSignUp").css("display", "none");
+	$("#pageDimmer").css("display", "none");
 });
 
 /*masonry*/
