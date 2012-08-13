@@ -4,6 +4,7 @@
 
 var express = require('express'), cons = require('consolidate'), app = express(), connect = require('connect'), path = require('path'), json = require('JSON'), mongodb = require('mongodb'), gzip = require('connect-gzip');
 
+
 var webroot = path.join(__dirname, 'public');
 var HTTP_PORT, DB_USER, DB_PASS, DB_HOST, DB_PORT, DB_NAME;
 
@@ -34,50 +35,75 @@ if (process.env.NODEJS_ENV == "production") {
     DB_NAME = "boxy";
 }
 
-//Connect to mongod
-//Thanks again to ibid for help connecting when using native mongod
-console.info("Connecting to mongodb", [DB_HOST, DB_PORT]);
-//mongodb.Server apparently requirest a port of type number
-var db = new mongodb.Db(DB_NAME, new mongodb.Server(DB_HOST, parseInt(DB_PORT), {
-    auto_reconnect:true
-}, {}));
-db.open(function (openError, openData) {
-    if (openData) {
-        if (DB_USER && DB_PASS) {
-            //Not sure if this authentication sticks in an auto_reconnect
-            openData.authenticate(DB_USER, DB_PASS, function (authError, authData) {
-                if (authError) {
-                    console.error(authError);
-                } else {
-                    console.info("Authenticated to mongo successfuly");
-                    mongoTest();
-                }
-            });
-        } else {
-            console.info("Connected to mongo successfully");
-            mongoTest();
-        }
-    } else {
-        console.error(openError);
-    }
+var mongoose = require("mongoose"), Schema = mongoose.Schema;
+mongoose.connection.on("open", function () {
+    console.info("Connected to mongo");
 });
-//In addition to a test insertion we may want to use this point to ensure indices
-function mongoTest() {
-    db.collection('test_collection', function (err, collection) {
-        collection.insert({
-            timestamp:new mongodb.Timestamp()
-        }, function (err, docs) {
-            collection.count(function (err, count) {
-                console.info("Test docs count", count);
-            });
-            collection.find().sort({
-                timestamp:-1
-            }).limit(1).nextObject(function (err, doc) {
-                    console.info("Most recent test doc", doc);
-                });
-        });
+mongoose.connect("mongodb://localhost:27017/boxy");
+
+
+var passport = require('passport');
+var bcrypt = require("bcrypt");
+
+var UserSchema = new Schema({
+    username:{type:String, required:true, unique:true},
+    email:{type:String, required:true, unique:true},
+    password_hash:{type:String, required:true, unique:true}
+});
+
+UserSchema.virtual("password").set(function (password) {
+    this.password_hash = bcrypt.hashSync(password, bcrypt.genSaltSync());
+});
+
+UserSchema.method("verifyPassword", function(password, cb){
+    console.lg("Veryifying password");
+   bcrypt.compare(password, this.password_hash, cb);
+});
+
+UserSchema.static("authenticate", function (username, password, cb) {
+    console.log("Authenticating");
+    this.findOne({username:username}, function (err, user) {
+        if (err) {
+            console.error("Error finding one user");
+            return cb(err, false);
+        }
+        if (!user) {
+            console.error("No such user found");
+            return cb(null, false)
+        }
+        var validPassword = bcrypt.compareSync(password, user.password_hash);
+        console.log("Password is valid", validPassword);
+        if (!validPassword) return cb(null, false);
+        return cb(null, user);
     });
-}
+});
+
+var User = mongoose.model("User", UserSchema);
+
+//Eventually move these to modules
+
+//Passport for authentication
+
+var LocalStrategy = require('passport-local').Strategy;
+passport.use(new LocalStrategy({
+        usernameField:"username"
+    }, function (username, password, done) {
+        User.authenticate(username, password, function (err, user) {
+            console.log("Authentication returned", user);
+            return done(err, user);
+        });
+    }
+));
+
+passport.serializeUser(function (user, done) {
+    done(null, user.id);
+});
+
+passport.deserializeUser(function (id, done) {
+    User.findById(id, function (err, user) {
+        done(err, user);
+    });
+});
 
 //Evetually we'll want to use templates to generate static versions of html files
 //For now we just serve the mockups
@@ -86,9 +112,52 @@ app.use(connect.favicon());
 app.use(connect.logger('tiny', {stream:{write:function (str) {
     console.info(str);
 }}}));
+app.use(express.cookieParser());
+app.use(express.bodyParser());
+app.use(express.session({secret:"secreterthansecret"}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(function(req, res, next){
+    console.info(req.user);
+    next();
+});
 app.use(gzip.staticGzip(webroot));
 
-//app.use(express.static("public"));
+// /app.use(express.static("public"));
+
+//Routes
+//TODO: Move into routes file(s)
+
+app.post("/join", function (req, res, next) {
+    console.log(req.body);
+    //Create record
+
+    var user = new User({
+        username:req.body.username,
+        email:req.body.email,
+        password:req.body.password
+    });
+    user.save(function (err) {
+        if (err) return null;
+        //TODO: Log the user in
+        passport.authenticate("local", {successRedirect:"/", failureRedirect:"/"})(req, res, next);
+//        res.redirect("/login");
+    });
+
+});
+
+//TODO: Redirect to user's page
+app.post("/login", passport.authenticate("local", {successRedirect:"/", failureRedirect:"/"}), function (req, res) {
+    console.log(req.body);
+//    res.redirect("/");
+});
+
+app.get("/logout", function (req, res) {
+    console.log(req.body);
+    req.logout();
+    res.redirect("/");
+});
+
 
 //If we get here then we haven't found a match and it's a 404
 app.use(function (req, res, next) {
@@ -98,10 +167,10 @@ app.use(function (req, res, next) {
 //If we get here then there's an error and its a 500
 app.use(function (err, req, res, next) {
     console.error(err);
-    if(err.status == 404){
+    if (err.status == 404) {
         //Fallback to plain 404
         res.send(404, "Not found");
-    }else{
+    } else {
         res.send(500, "Server error");
     }
 
