@@ -13,7 +13,6 @@ app.set("view engine", "jade")
 app.set("views", path.join(__dirname, "app/views"));
 
 
-
 //app.use(flatiron.plugins.log, {});
 
 //Set connection variables for production or development environments
@@ -58,9 +57,9 @@ UserSchema.virtual("password").set(function (password) {
     this.password_hash = bcrypt.hashSync(password, bcrypt.genSaltSync());
 });
 
-UserSchema.method("verifyPassword", function(password, cb){
+UserSchema.method("verifyPassword", function (password, cb) {
     console.lg("Veryifying password");
-   bcrypt.compare(password, this.password_hash, cb);
+    bcrypt.compare(password, this.password_hash, cb);
 });
 
 UserSchema.static("authenticate", function (username, password, cb) {
@@ -120,7 +119,7 @@ app.use(express.bodyParser());
 app.use(express.session({secret:"secreterthansecret"}));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(function(req, res, next){
+app.use(function (req, res, next) {
     console.info(req.user);
     next();
 });
@@ -131,8 +130,21 @@ app.use(gzip.staticGzip(webroot));
 //Routes
 //TODO: Move into routes file(s)
 
-app.get("/", function(req, res, next){
-   res.render("index.jade");
+app.get("/", function (req, res, next) {
+    res.render("index", {req:req});
+});
+
+app.get("/:username", function (req, res, next) {
+    console.log(req.params.username);
+    User.findOne({username:req.params.username}, function (err, user) {
+        if (err) {
+            next();
+        } else if (!user) {
+            next();
+        } else {
+            res.render("users/show", {user:user});
+        }
+    });
 });
 
 app.post("/join", function (req, res, next) {
@@ -168,7 +180,7 @@ app.get("/logout", function (req, res) {
 
 //If we get here then we haven't found a match and it's a 404
 app.use(function (req, res, next) {
-    res.status(404).sendfile("404.html");
+    res.render(404, "views/404");
 });
 
 //If we get here then there's an error and its a 500

@@ -1,38 +1,38 @@
 <!doctype html> <!--ACKNOWLEDGEMENTS:
 Boxy makes use of the the following plugins: JQuery Masonry, miniColors, dragable, and slider.
-ColorPicker icon by Yusuke Kamiyamane (all rights reserved). Mentorship provided by Seth Samuel.  
+ColorPicker icon by Yusuke Kamiyamane (all rights reserved). Mentorship provided by Seth Samuel.
 -->
 
 <head>
 	<title>Boxy</title>
 	<!--STYLE SHEETS-->
-	<link rel="stylesheet" type="text/css" href="public/css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="css/reset.css" />
 	<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css"/>
-	<link rel="stylesheet" type="text/css" href="public/css/jquery.miniColors.css"/>
-	<link rel="stylesheet" type="text/css" href="public/css/font-awesome.css"/>
-	<link rel="stylesheet" type="text/css" href="public/css/font-awesome-ie7.css"/>
-	<link rel="stylesheet" type="text/css" href="public/css/main.css"/>
+	<link rel="stylesheet" type="text/css" href="css/jquery.miniColors.css"/>
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.css"/>
+	<link rel="stylesheet" type="text/css" href="css/font-awesome-ie7.css"/>
+	<link rel="stylesheet" type="text/css" href="css/main.css"/>
 	<!--FONTS-->
 	<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700|Josefin+Sans:400,600'>
 	<!--SCRIPTS-->
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="public/js/jquery.masonry.min.js"></script>
-	<script type="text/javascript" src="public/js/jquery.miniColors.js"></script>
-	<script type="text/javascript" src="public/js/underscore-min.js"></script>
-	<script type="text/javascript" src="public/js/json3.min.js"></script>
-	<script type="text/javascript" src="public/js/backbone-min.js"></script>
-	<script type="text/javascript" src="public/js/models.js"></script>
-	<script type="text/javascript" src="public/js/application.js"></script>
+	<script type="text/javascript" src="js/jquery.masonry.min.js"></script>
+	<script type="text/javascript" src="js/jquery.miniColors.js"></script>
+	<script type="text/javascript" src="js/underscore-min.js"></script>
+	<script type="text/javascript" src="js/json3.min.js"></script>
+	<script type="text/javascript" src="js/backbone-min.js"></script>
+	<script type="text/javascript" src="js/models.js"></script>
+	<script type="text/javascript" src="js/application.js"></script>
 </head>
 <body>
 	<header>
 	<button class="miniButton floatLeft" id="addBox"><i class="icon-plus"></i></button>
-	<input type="hidden" class="color-picker" id="groutColorPicker" size="6" autocomplete="on" maxlength="10" />	
+	<input type="hidden" class="color-picker" id="groutColorPicker" size="6" autocomplete="on" maxlength="10" />
 	<h1>Boxy Version 1.0</h1>
 	<button class="longTextButton floatRight" id="logInSignUpButton">log in | sign up</button>
 	</header>
-	
+
 	<!--POPUP TO LOG IN OR SIGN UP-->
 	<div id="pageDimmer"></div>
 	<section class="popup" id="logInSignUp">
@@ -70,31 +70,31 @@ ColorPicker icon by Yusuke Kamiyamane (all rights reserved). Mentorship provided
 			<br />
 			<input type="password" id="existingPassword">
 			<label for="existingPassword">password: </label>
-			<br />	
-			
+			<br />
+
 			<button class="shortTextButton floatRight" id="logIn">log in</button>
 		</div>
 	</section>
 
-	
-	
-	
+
+
+
 	<!--EDIT MOODLE-->
 	<section id="editMoodle">
 		<div id="handle">
 		<button class="miniButton floatRight closeMoodle"><i class="icon-remove-sign"></i></button>
 		<button class="miniButton floatRight removeButton"><i class="icon-trash"></i></button>
 		</div>
-		
+
 		<!--<div id="labeler">
 		<input type="text" id="specifyTitle"placeholder="Name your box"/>
 		<br />
 		</div> -->
-		
+
 		<!--PICK THE TYPE OF YOUR TILE-->
 		<h3><a href="#">Type</a></h3>
 		<div class="moodleSection">
-			
+
 			<h4>basic tiles</h4>
 			<input type="radio" name="tileType" id="flipcard" checked/>
 			<div class="radioIndent">
@@ -118,7 +118,7 @@ ColorPicker icon by Yusuke Kamiyamane (all rights reserved). Mentorship provided
 				<span class="instructions">Shows users your recent tweets and makes following you
 					a snap.</span>
 			</div>
-			
+
 			<input type="radio" name="tileType" value="pictures" onclick="this.checked=false;
 			alert('Sorry, social tiles are not quite ready.')"/>
 			<div class="radioIndent">
@@ -126,7 +126,7 @@ ColorPicker icon by Yusuke Kamiyamane (all rights reserved). Mentorship provided
 				<span class="instructions">Cycles through the five most resent uploads to your
 					flickr or instagram.</span>
 			</div>
-			
+
 		</div>
 		<!--PICK TILE SIZE, COLOR, AND ICON-->
 		<h3><a href="#">Appearance</a></h3>
@@ -166,18 +166,18 @@ ColorPicker icon by Yusuke Kamiyamane (all rights reserved). Mentorship provided
 		<!--WRITE ON THE TILE-->
 		<h3><a href="#">Content</a></h3>
 		<div class="moodleSection">
-			
+
 			<span class="instructions withSpacing">Pick a title if you're using no icon.</span>
 			<input type="text" id="textOnFront"placeholder="title"/>
 			<br />
-			
+
 			<span class="instructions withSpacing">Write on the back of your tile.</span><br />
 			<textarea id="textOnBack">  </textarea>
-			
+
 			<span class="instructions withSpacing">Include a link (optional).</span>
 			<input type="text" id="linkOnBack"placeholder="http://www.yoursite.com"/>
-			
-			
+
+
 		</div>
 	</section>
 	<!--USER BOXES-->
@@ -197,5 +197,3 @@ ColorPicker icon by Yusuke Kamiyamane (all rights reserved). Mentorship provided
 			</div>
 		</div>
 	</script>
-</body>
-</html>

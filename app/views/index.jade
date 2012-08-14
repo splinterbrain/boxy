@@ -1,4 +1,7 @@
 extends layouts/default
 
 block content
-    h1 Hello
+    if req.user
+        h1 Hello #{req.user}, welcome back
+    else
+        a#login(href="#") Login
