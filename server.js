@@ -8,7 +8,10 @@ var express = require('express'), cons = require('consolidate'), app = express()
 var webroot = path.join(__dirname, 'public');
 var HTTP_PORT, DB_USER, DB_PASS, DB_HOST, DB_PORT, DB_NAME;
 
-app.engine("html", cons.jade);
+app.engine("jade", cons.jade);
+app.set("view engine", "jade")
+app.set("views", path.join(__dirname, "app/views"));
+
 
 
 //app.use(flatiron.plugins.log, {});
@@ -127,6 +130,10 @@ app.use(gzip.staticGzip(webroot));
 
 //Routes
 //TODO: Move into routes file(s)
+
+app.get("/", function(req, res, next){
+   res.render("index.jade");
+});
 
 app.post("/join", function (req, res, next) {
     console.log(req.body);
