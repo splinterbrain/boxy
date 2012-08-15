@@ -2,7 +2,7 @@
 //    stdout : false
 //});
 
-var express = require('express'), cons = require('consolidate'), app = express(), connect = require('connect'), path = require('path'), json = require('JSON'), mongodb = require('mongodb'), gzip = require('connect-gzip');
+var express = require('express'), cons = require('consolidate'), app = express(), connect = require('connect'), path = require('path'), json = require('JSON'), mongodb = require('mongodb'), gzip = require('connect-gzip'), sprintf = require("sprintf").sprintf;
 
 
 var webroot = path.join(__dirname, 'public');
@@ -48,10 +48,16 @@ mongoose.connect("mongodb://localhost:27017/boxy");
 var passport = require('passport');
 var bcrypt = require("bcrypt");
 
+var TileSchema = new Schema({
+    icon:{ type:String },
+    content:{ type:String }
+});
+
 var UserSchema = new Schema({
     username:{type:String, required:true, unique:true},
     email:{type:String, required:true, unique:true},
-    password_hash:{type:String, required:true, unique:true}
+    password_hash:{type:String, required:true, unique:true},
+    tiles:[TileSchema]
 });
 
 UserSchema.virtual("password").set(function (password) {
@@ -115,6 +121,11 @@ app.use(connect.favicon());
 app.use(connect.logger('tiny', {stream:{write:function (str) {
     console.info(str);
 }}}));
+app.use(function (req, res, next) {
+    //We create an objParams object to hold parsed params
+    req.objParams = req.objParams || {};
+    next();
+})
 app.use(express.cookieParser());
 app.use(express.bodyParser());
 app.use(express.session({secret:"secreterthansecret"}));
@@ -135,16 +146,62 @@ app.get("/", function (req, res, next) {
     res.render("index", {title:"Home", req:req});
 });
 
-app.get("/:username", function (req, res, next) {
+app.param("username", function (req, res, next, username) {
     console.log(req.params.username);
     User.findOne({username:req.params.username}, function (err, user) {
         if (err) {
-            next();
+            next(err);
         } else if (!user) {
-            next();
+            next(); //This should filter down to the 404 eventually
         } else {
-            res.render("users/show", {req: req, title:user.username, user:user});
+            req.objParams.user = user;
+            next();
         }
+    });
+});
+
+app.get("/:username", function (req, res, next) {
+    res.render("users/show", {req:req, title:req.objParams.user.username, user:req.objParams.user});
+});
+
+
+//Tiles API
+app.get("/:username/tiles", function (req, res) {
+    res.send(200, JSON.stringify(req.objParams.user.tiles));
+});
+
+app.post("/:username/tiles", function (req, res) {
+    if (!req.user || !req.user.equals(req.objParams.user)) {
+        if(req.user){
+            console.log(sprintf("Attempt to post to %s by %s", req.objParams.user._id, req.user._id));
+        }
+        var error = new Error("Forbidden");
+        error.status = 403;
+        throw error;
+    }
+    req.objParams.user.tiles.push(req.body);
+    req.objParams.user.save(function (err) {
+        if (err) throw err;
+        res.send(201, JSON.stringify(req.objParams.user.tiles[req.objParams.user.tiles.length-1]));
+    });
+});
+
+app.put("/:username/tiles/:id", function (req, res) {
+    if (!req.user || !req.user.equals(req.objParams.user)) {
+        if(req.user){
+            console.log(sprintf("Attempt to post to %s by %s", req.objParams.user._id, req.user._id));
+        }
+        var error = new Error("Forbidden");
+        error.status = 403;
+        throw error;
+    }
+    var tile = req.objParams.user.tiles.id(req.params.id);
+    if (!tile) next(); // Proceed to 404
+    tile.icon = req.body.icon;
+    tile.content = req.body.content;
+    req.objParams.user.save(function (err) {
+        if (err) throw err;
+        res.send(200);
     });
 });
 
@@ -181,7 +238,7 @@ app.get("/logout", function (req, res) {
 
 //If we get here then we haven't found a match and it's a 404
 app.use(function (req, res, next) {
-    res.status(404).render("404", {req: req});
+    res.status(404).render("404", {req:req});
 });
 
 //If we get here then there's an error and its a 500
@@ -191,9 +248,12 @@ app.use(function (err, req, res, next) {
     if (err.status == 404) {
         //Fallback to plain 404
         res.send(404, "Not found");
+    } else if (err.status) {
+        res.send(err.status, err.message);
     } else {
         res.send(500, "Server error");
     }
+
 
 });
 

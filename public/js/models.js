@@ -14,11 +14,14 @@ $(function() {
 			'title' : '',
 			'details' : '',
 			'link' : ''
-		}
+		},
+        
+        "idAttribute" : "_id"
 	});
 
 	BOXY.BoxCollection = Backbone.Collection.extend({//Stores boxes as a collection
-		"model" : BOXY.BoxModel
+		"model" : BOXY.BoxModel,
+        "url" : location.href + "/tiles" //Collection is relative to current user
 	});
 
 	/*VIEWS*/
@@ -102,6 +105,9 @@ $(function() {
 			this.$el.append(aBoxView.el);
 
 			$("#container").masonry("reload");
+
+//            addedModel.save();
+            
 		},
 		'onRemove' : function(removedModel){
 			removedModel.view.$el.detach();
@@ -170,6 +176,8 @@ $(function() {
 			this.model.set({
 				color : this.$el.find("#boxColorPicker").miniColors("value")
 			});
+            
+            this.model.save();
 		}
 		
 	});
