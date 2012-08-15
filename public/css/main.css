@@ -539,6 +539,16 @@ header{
     float:left;
 }
 
+#welcomeUser{
+    position:absolute;
+    right:5px;
+    top:5px;
+}
+
+#welcomeUser > a {
+    color:white;
+}
+
 /*TEXT FORMATTING*/
 
 h1 {/*Massive headings*/

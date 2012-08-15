@@ -10,10 +10,12 @@ html
             input#groutColorPicker.color-picker(type="hidden", size="6", autocomplete="on", maxlength="10")
             h1 Boxy Version 1.0
             if req.user
-                Welcome back
+                #welcomeUser
+                    | Welcome back 
                     a(href="/" + req.user.username) #{req.user.username}
-                    !
-                a(href="/logout") (logout)
+                    | ! (
+                    a(href="/logout") logout
+                    | )
             else
                 button#logInSignUpButton.longTextButton.floatRight log in | sign up
         //POPUP TO LOG IN OR SIGN UP
