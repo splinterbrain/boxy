@@ -68,9 +68,7 @@ button:hover{
 .shortTextButton{
     height:25px;
     width:80px;
-    position:absolute;
-    bottom:20px;
-    right:20px;
+    clear: both;
 }
 
 .miniButton {
@@ -327,7 +325,7 @@ input[type="text"]{
     margin-bottom:10px;
 }
 
-.halfWidthColumn > input[type="text"]{
+.halfWidthColumn > form > input[type="text"]{
     float:right;
     width:150px;
     margin-top:0px;

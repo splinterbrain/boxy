@@ -1,5 +1,52 @@
 doctype 5
 html
     head
+        block head
+            include ../includes/head
     body
+        header
+            button#addBox.miniButton.floatLeft
+                i.icon-plus
+            input#groutColorPicker.color-picker(type="hidden", size="6", autocomplete="on", maxlength="10")
+            h1 Boxy Version 1.0
+            if req.user
+                Welcome back
+                    a(href="/" + req.user.username) #{req.user.username}
+                    !
+                a(href="/logout") (logout)
+            else
+                button#logInSignUpButton.longTextButton.floatRight log in | sign up
+        //POPUP TO LOG IN OR SIGN UP
+        #pageDimmer
+        section#logInSignUp.popup
+            .halfWidthColumn
+                .fancyBlock new user
+                form#joinForm(action="join", method="post")
+                    input#newUsername(type="text")
+                    label(for="newUsername") username:
+                    br
+                    input#email(type="text")
+                    label(for="email") email:
+                    br
+                    input#reEmail(type="text")
+                    label(for="reEmail") re-enter email:
+                    br
+                    input#newPassword(type="password")
+                    label(for="newPassword") password:
+                    br
+                    input#rePassword(type="password")
+                    label(for="rePassword") re-enter password:
+                    br
+                    button#signUp.shortTextButton.floatRight sign up
+            .halfWidthColumn
+                .fancyBlock old user
+                .instructions Welcome back, you old dog.
+                br
+                form#loginForm(action="login", method="post")
+                    input#existingUsername(type="text", name="username")
+                    label(for="existingUsername") username:
+                    br
+                    input#existingPassword(type="password", name="password")
+                    label(for="existingPassword") password:
+                    button#logIn.shortTextButton.floatRight log in
         block content

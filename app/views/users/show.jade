@@ -1,80 +1,8 @@
-<!doctype html> <!--ACKNOWLEDGEMENTS:
-Boxy makes use of the the following plugins: JQuery Masonry, miniColors, dragable, and slider.
-ColorPicker icon by Yusuke Kamiyamane (all rights reserved). Mentorship provided by Seth Samuel.
--->
+append javascript
+    script(type="text/javascript", src="js/models.js")
 
-<head>
-	<title>Boxy</title>
-	<!--STYLE SHEETS-->
-	<link rel="stylesheet" type="text/css" href="css/reset.css" />
-	<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css"/>
-	<link rel="stylesheet" type="text/css" href="css/jquery.miniColors.css"/>
-	<link rel="stylesheet" type="text/css" href="css/font-awesome.css"/>
-	<link rel="stylesheet" type="text/css" href="css/font-awesome-ie7.css"/>
-	<link rel="stylesheet" type="text/css" href="css/main.css"/>
-	<!--FONTS-->
-	<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700|Josefin+Sans:400,600'>
-	<!--SCRIPTS-->
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="js/jquery.masonry.min.js"></script>
-	<script type="text/javascript" src="js/jquery.miniColors.js"></script>
-	<script type="text/javascript" src="js/underscore-min.js"></script>
-	<script type="text/javascript" src="js/json3.min.js"></script>
-	<script type="text/javascript" src="js/backbone-min.js"></script>
-	<script type="text/javascript" src="js/models.js"></script>
-	<script type="text/javascript" src="js/application.js"></script>
-</head>
-<body>
-	<header>
-	<button class="miniButton floatLeft" id="addBox"><i class="icon-plus"></i></button>
-	<input type="hidden" class="color-picker" id="groutColorPicker" size="6" autocomplete="on" maxlength="10" />
-	<h1>Boxy Version 1.0</h1>
-	<button class="longTextButton floatRight" id="logInSignUpButton">log in | sign up</button>
-	</header>
 
-	<!--POPUP TO LOG IN OR SIGN UP-->
-	<div id="pageDimmer"></div>
-	<section class="popup" id="logInSignUp">
-		<div class="halfWidthColumn">
-			<div class="fancyBlock">
-				new user
-			</div>
-			<input type="text" id="newUsername">
-			<label for="newUsername">username: </label>
-			<br />
-			<input type="text" id="email">
-			<label for="email">email: </label>
-			<br />
-			<input type="text" id="reEmail">
-			<label for="reEmail">re-enter email: </label>
-			<br />
-			<input type="password" id="newPassword">
-			<label for="newPassword">password: </label>
-			<br />
-			<input type="password" id="rePassword">
-			<label for="rePassword">re-enter password: </label>
-			<br />
-			<button class="shortTextButton floatRight" id="signUp">sign up</button>
-		</div>
-		<div class="halfWidthColumn">
-			<div class="fancyBlock">
-				old user
-			</div>
-			<div class="instructions">
-				Welcome back, you old dog.
-			</div>
-			<br />
-			<input type="text" id="existingUsername">
-			<label for="existingUsername">username: </label>
-			<br />
-			<input type="password" id="existingPassword">
-			<label for="existingPassword">password: </label>
-			<br />
 
-			<button class="shortTextButton floatRight" id="logIn">log in</button>
-		</div>
-	</section>
 
 
 

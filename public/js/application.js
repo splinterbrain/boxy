@@ -7,6 +7,8 @@
  * slider 
  * */
 
+window.BOXY = window.BOXY || {};
+
 $(function(){
 
 /*accordion*/
@@ -40,6 +42,7 @@ $("#pageDimmer").on("click", function(){
 $("#logIn").on("click", function(){
 	$("#logInSignUp").css("display", "none");
 	$("#pageDimmer").css("display", "none");
+    $("#loginForm").submit();
 });
 
 

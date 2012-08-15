@@ -10,6 +10,7 @@ var HTTP_PORT, DB_USER, DB_PASS, DB_HOST, DB_PORT, DB_NAME;
 
 app.engine("jade", cons.jade);
 app.set("view engine", "jade")
+app.locals.pretty = true;
 app.set("views", path.join(__dirname, "app/views"));
 
 
@@ -131,7 +132,7 @@ app.use(gzip.staticGzip(webroot));
 //TODO: Move into routes file(s)
 
 app.get("/", function (req, res, next) {
-    res.render("index", {req:req});
+    res.render("index", {title:"Home", req:req});
 });
 
 app.get("/:username", function (req, res, next) {
@@ -142,7 +143,7 @@ app.get("/:username", function (req, res, next) {
         } else if (!user) {
             next();
         } else {
-            res.render("users/show", {user:user});
+            res.render("users/show", {title:user.username, user:user});
         }
     });
 });
