@@ -1,127 +1,89 @@
-append javascript
-    script(type="text/javascript", src="js/models.js")
+extends ../layouts/default
 
+append js
+    script(type="text/javascript", src="/js/models.js")
 
+block content
+    
+    //Edit panel
+    section#editMoodle
+        #handle
+        button.miniButton.floatRight.closeMoodle
+            i.icon-remove-sign
+        button.miniButton.floatRight.removeButton
+            i.icon-trash
 
+        //PICK THE TYPE OF YOUR TILE
+        h3        
+            a(href="#") Type
+        .moodleSection
+            h4 basic tiles
+            input#flipcard(type="radio", name="tileType", checked)
+            .radioIndent
+                label(for="flipcard") flipcard (default):
+                span.instructions Pick an icon for the front and tell the story on the back to keep your profile clutter free.
+            h4.withSpacing social tiles
+            input(type="radio", name="tileType", value="twitter", onclick="this.checked=false;alert('Sorry, social tiles are not quite ready.')")
+            .radioIndent
+                label(for="twitter") twitter:
+                span.instructions Shows users your recent tweets and makes following you a snap.
 
+            input(type="radio", name="tileType", value="pictures", onclick="this.checked=false;alert('Sorry, social tiles are not quite ready.')")
+            .radioIndent
+                label(for="pictures") photo viewer :
+                span.instructionsCycles through the five most resent uploads to your flickr or instagram.
 
+        //PICK TILE SIZE, COLOR, AND ICON
+        h3
+            a(href="#") Appearance
+        .moodleSection.visible
+            p.instructions Pick a color for your tile.
+            #picker
+                label color:
+                input#boxColorPicker.color-picker(type="text", size="6", autocomplete="on", maxlength="10")
+            p.instructions.withSpacing Pick the width and height of your tile.
+            .slider
+                label(for="amount") width:
+                input#widthValue(type="hidden")
+                #widthSlider.ui-slider
+            .slider
+                label(for="amount") height:
+                input#heightValue(type="hidden")
+                #heightSlider.ui-slider
+            p.instructions.withSpacing Leave icon blank to write on front of card.
+            .icon.selectedIcon(data-icon="")
+            //TODO: generate these dynamically in the controller
+            - var icons = ["&#0065;", "&#0066;", "&#0067;", "&#0068;", "&#0069;", "&#0070;", "&#0071;"]
+            each icon in icons
+                .icon(data-icon=icon)
+                    .tileIcon #{icon}
+        
+        //WRITE ON THE TILE
+        h3
+            a(href="#") Content
+        .moodleSection
+            span.instructions.withSpacing Pick a title if you're using no icon.
+            input#textOnFront(type="text", placeholder="title")
+            br
+            span.instructions.withSpacing Write on the back of your tile.
+            br
+            textarea#textOnBack
+            span.instructions.withSpacing Include a link (optional).
+            input#linkOnBack(type="text", placeholder="http://www.yoursite.com")
 
+    //USER BOXES
+    #container
 
-	<!--EDIT MOODLE-->
-	<section id="editMoodle">
-		<div id="handle">
-		<button class="miniButton floatRight closeMoodle"><i class="icon-remove-sign"></i></button>
-		<button class="miniButton floatRight removeButton"><i class="icon-trash"></i></button>
-		</div>
-
-		<!--<div id="labeler">
-		<input type="text" id="specifyTitle"placeholder="Name your box"/>
-		<br />
-		</div> -->
-
-		<!--PICK THE TYPE OF YOUR TILE-->
-		<h3><a href="#">Type</a></h3>
-		<div class="moodleSection">
-
-			<h4>basic tiles</h4>
-			<input type="radio" name="tileType" id="flipcard" checked/>
-			<div class="radioIndent">
-				<label for="flipcard">flipcard (default):</label>
-				<span class="instructions">Pick an icon for the front and tell
-					the story on the back to keep your profile clutter free.</span>
-			</div>
-			<!--
-			<input type="radio" name="tileType" value="static" />
-			<div class="radioIndent">
-				<label for="static">static: </label>
-				<span class="instructions">One sided so it doesn't flip. Great for quotations and
-					mini badges.</span>
-			</div>
-			-->
-			<h4 class="withSpacing">social tiles</h4>
-			<input type="radio" name="tileType" value="twitter" onclick="this.checked=false;
-			alert('Sorry, social tiles are not quite ready.')"/>
-			<div class="radioIndent">
-				<label for="twitter">twitter: </label>
-				<span class="instructions">Shows users your recent tweets and makes following you
-					a snap.</span>
-			</div>
-
-			<input type="radio" name="tileType" value="pictures" onclick="this.checked=false;
-			alert('Sorry, social tiles are not quite ready.')"/>
-			<div class="radioIndent">
-				<label for="pictures">photo viewer : </label>
-				<span class="instructions">Cycles through the five most resent uploads to your
-					flickr or instagram.</span>
-			</div>
-
-		</div>
-		<!--PICK TILE SIZE, COLOR, AND ICON-->
-		<h3><a href="#">Appearance</a></h3>
-		<div class="moodleSection visible">
-			<p class="instructions">
-				Pick a color for your tile.
-			</p>
-			<div id="picker">
-				<label>color:</label>
-				<input type="text" class="color-picker" id="boxColorPicker" size="6" autocomplete="on" maxlength="10" />
-			</div>
-			<p class="instructions withSpacing">
-				Pick the width and height of your tile.
-			</p>
-			<div class="slider">
-				<label for="amount">width:</label>
-				<input type="hidden" id="widthValue"/>
-				<div class="ui-slider" id="widthSlider"></div>
-			</div>
-			<div class="slider">
-				<label for="amount">height:</label>
-				<input type="hidden" id="heightValue"/>
-				<div class="ui-slider" id="heightSlider"></div>
-			</div>
-			<p class="instructions withSpacing">
-				Leave icon blank to write on front of card.
-			</p>
-			<div class="icon selectedIcon" data-icon=""></div>
-			<div class="icon" data-icon="&#0065;" ><div class="tileIcon">&#0065;</div></div>
-			<div class="icon" data-icon="&#0066;" ><div class="tileIcon">&#0066;</div></div>
-			<div class="icon" data-icon="&#0067;" ><div class="tileIcon">&#0067;</div></div>
-			<div class="icon" data-icon="&#0068;" ><div class="tileIcon">&#0068;</div></div>
-			<div class="icon" data-icon="&#0069;" ><div class="tileIcon">&#0069;</div></div>
-			<div class="icon" data-icon="&#0070;" ><div class="tileIcon">&#0070;</div></div>
-			<div class="icon" data-icon="&#0071;" ><div class="tileIcon">&#0071;</div></div>
-		</div>
-		<!--WRITE ON THE TILE-->
-		<h3><a href="#">Content</a></h3>
-		<div class="moodleSection">
-
-			<span class="instructions withSpacing">Pick a title if you're using no icon.</span>
-			<input type="text" id="textOnFront"placeholder="title"/>
-			<br />
-
-			<span class="instructions withSpacing">Write on the back of your tile.</span><br />
-			<textarea id="textOnBack">  </textarea>
-
-			<span class="instructions withSpacing">Include a link (optional).</span>
-			<input type="text" id="linkOnBack"placeholder="http://www.yoursite.com"/>
-
-
-		</div>
-	</section>
-	<!--USER BOXES-->
-	<div id="container">
-	</div>
-	<!--TEMPLATES-->
-	<script type="text/template" id="boxViewTemplate">
-		<div class="front">
-			<button class="miniButton editButton floatRight"><i class="icon-wrench"></i></button>
-			<div class="title"><%= title %></div>
-			<div class="tileIcon"><%= icon %></div>
-		</div>
-		<div class="back">
-			<div class="details"><%= details %></div>
-			<div class="link">
-				<a href= ""></a>
-			</div>
-		</div>
-	</script>
+    //TEMPLATES
+    script#boxViewTemplate(type="text/template")
+        | <div class="front">
+        |     <button class="miniButton editButton floatRight"><i class="icon-wrench"></i></button>
+        |     <div class="title"><%= title %></div>
+        |     <div class="tileIcon"><%= icon %></div>
+        | </div>
+        | <div class="back">
+        |     <div class="details"><%= details %></div>
+        |     <div class="link">
+        |         <a href= ""></a>
+        |     </div>
+        | </div>
