@@ -13,7 +13,8 @@ $(function(){
 
 /*accordion*/
 
-$('#editMoodle h3').click(function(){
+$('#editMoodle h3').click(function(e){
+    e.preventDefault();
 	$('.moodleSection').removeClass("visible"),
 	$(this).next().addClass("visible");
 })

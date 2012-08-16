@@ -12,6 +12,13 @@ block css
     link(rel="stylesheet", type="text/css", href="//fonts.googleapis.com/css?family=Open+Sans+Condensed:700|Josefin+Sans:400,600")
 block js
     //Javascript
+    if jsvars
+        //This is a bit kludgey but seems to be the only way to pass variables to the client
+        | !{"<script type='text/javascript'>"}
+        | window.BOXY = window.BOXY || {};
+        - for (var key in jsvars)
+            | BOXY['!{key}'] = !{JSON.stringify(jsvars[key])};  
+        | !{"</script>"}
     script(type="text/javascript", src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js")
     script(type="text/javascript", src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js")
     script(type="text/javascript", src="/js/jquery.masonry.min.js")

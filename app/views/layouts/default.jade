@@ -4,11 +4,10 @@ html
         block head
             include ../includes/head
     body
-        header
-            button#addBox.miniButton.floatLeft
-                i.icon-plus
-            input#groutColorPicker.color-picker(type="hidden", size="6", autocomplete="on", maxlength="10")
-            h1 Boxy Version 1.0
+    header
+        block header
+            a(href="/")
+                h1 Boxy Version 1.0
             if req.user
                 #welcomeUser
                     | Welcome back 

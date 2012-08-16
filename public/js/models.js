@@ -1,6 +1,6 @@
 /* Boxy's Models.js file defines: BoxModel, BoxView, BoxCollection, BoxesView */
 
-var BOXY = {};
+window.BOXY = window.BOXY || {};
 
 $(function() {
 	/*MODELS*/
@@ -51,14 +51,18 @@ $(function() {
 				this.$el.toggleClass("flipped");
 				}}, this));
 			
-			this.$el.find(".editButton").on("click", $.proxy(function(e) {
-				e.stopPropagation(); //So card doesn't flip when edit button is clicked
-				$(".front").removeClass("beingEdited");//Remove highlighting from whichever box was edited previously
-				this.$el.find(".front").addClass("beingEdited");//Highlight the box currently targetted by the edit moodle
-				BOXY.aBoxEditor.$el.css("display", "block"); //Unhides edit moodle
-				BOXY.aBoxEditor.model = this.model; //Makes this box the target of the edit moodle
-				BOXY.aBoxEditor.render(); //Updates edit moodle to reflect this box's parameters
-			}, this));			
+            if(BOXY.isOwner){
+                this.$el.find(".editButton").on("click", $.proxy(function(e) {
+                    e.stopPropagation(); //So card doesn't flip when edit button is clicked
+                    $(".front").removeClass("beingEdited");//Remove highlighting from whichever box was edited previously
+                    this.$el.find(".front").addClass("beingEdited");//Highlight the box currently targetted by the edit moodle
+                    BOXY.aBoxEditor.$el.css("display", "block"); //Unhides edit moodle
+                    BOXY.aBoxEditor.model = this.model; //Makes this box the target of the edit moodle
+                    BOXY.aBoxEditor.render(); //Updates edit moodle to reflect this box's parameters
+                }, this));
+            }else{
+                this.$el.find(".editButton").hide();                
+            }
 			return this;
 		},
 		'onChange' : function() { //So view changes with model in real time. 
@@ -189,6 +193,8 @@ $(function() {
 		'collection' : BOXY.aCollection,
 		el : $("#container")
 	});
+    
+    BOXY.aCollection.fetch({silent : false});
 
 	BOXY.aBoxEditor = new BOXY.BoxEditorView({
 		el : $("#editMoodle")

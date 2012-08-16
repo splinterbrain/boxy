@@ -125,16 +125,19 @@ app.use(function (req, res, next) {
     //We create an objParams object to hold parsed params
     req.objParams = req.objParams || {};
     next();
-})
+});
 app.use(express.cookieParser());
 app.use(express.bodyParser());
-app.use(express.session({secret:"secreterthansecret"}));
+
+var RedisStore = require('connect-redis')(express);
+app.use(express.session({store:new RedisStore(), secret:"secreterthansecret"}));
+
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(function (req, res, next) {
-    console.info(req.user);
-    next();
-});
+//app.use(function (req, res, next) {
+//    console.info(req.user);
+//    next();
+//});
 app.use(gzip.staticGzip(webroot));
 
 // /app.use(express.static("public"));
@@ -147,7 +150,6 @@ app.get("/", function (req, res, next) {
 });
 
 app.param("username", function (req, res, next, username) {
-    console.log(req.params.username);
     User.findOne({username:req.params.username}, function (err, user) {
         if (err) {
             next(err);
@@ -160,50 +162,6 @@ app.param("username", function (req, res, next, username) {
     });
 });
 
-app.get("/:username", function (req, res, next) {
-    res.render("users/show", {req:req, title:req.objParams.user.username, user:req.objParams.user});
-});
-
-
-//Tiles API
-app.get("/:username/tiles", function (req, res) {
-    res.send(200, JSON.stringify(req.objParams.user.tiles));
-});
-
-app.post("/:username/tiles", function (req, res) {
-    if (!req.user || !req.user.equals(req.objParams.user)) {
-        if(req.user){
-            console.log(sprintf("Attempt to post to %s by %s", req.objParams.user._id, req.user._id));
-        }
-        var error = new Error("Forbidden");
-        error.status = 403;
-        throw error;
-    }
-    req.objParams.user.tiles.push(req.body);
-    req.objParams.user.save(function (err) {
-        if (err) throw err;
-        res.send(201, JSON.stringify(req.objParams.user.tiles[req.objParams.user.tiles.length-1]));
-    });
-});
-
-app.put("/:username/tiles/:id", function (req, res) {
-    if (!req.user || !req.user.equals(req.objParams.user)) {
-        if(req.user){
-            console.log(sprintf("Attempt to post to %s by %s", req.objParams.user._id, req.user._id));
-        }
-        var error = new Error("Forbidden");
-        error.status = 403;
-        throw error;
-    }
-    var tile = req.objParams.user.tiles.id(req.params.id);
-    if (!tile) next(); // Proceed to 404
-    tile.icon = req.body.icon;
-    tile.content = req.body.content;
-    req.objParams.user.save(function (err) {
-        if (err) throw err;
-        res.send(200);
-    });
-});
 
 app.post("/join", function (req, res, next) {
     console.log(req.body);
@@ -233,6 +191,55 @@ app.get("/logout", function (req, res) {
     console.log(req.body);
     req.logout();
     res.redirect("/");
+});
+
+
+app.get("/:username", function (req, res, next) {
+    var isOwner = !!(req.user && req.objParams.user.equals(req.user));
+    var jsvars = {};
+    jsvars.isOwner = isOwner;
+    res.render("users/show", {req:req, title:req.objParams.user.username, user:req.objParams.user, isOwner:isOwner, jsvars : jsvars});
+});
+
+
+//Tiles API
+app.get("/:username/tiles", function (req, res) {
+    res.send(200, JSON.stringify(req.objParams.user.tiles));
+});
+
+app.post("/:username/tiles", function (req, res) {
+    if (!req.user || !req.user.equals(req.objParams.user)) {
+        if (req.user) {
+            console.log(sprintf("Attempt to post to %s by %s", req.objParams.user._id, req.user._id));
+        }
+        var error = new Error("Forbidden");
+        error.status = 403;
+        throw error;
+    }
+    req.objParams.user.tiles.push(req.body);
+    req.objParams.user.save(function (err) {
+        if (err) throw err;
+        res.send(201, JSON.stringify(req.objParams.user.tiles[req.objParams.user.tiles.length - 1]));
+    });
+});
+
+app.put("/:username/tiles/:id", function (req, res) {
+    if (!req.user || !req.user.equals(req.objParams.user)) {
+        if (req.user) {
+            console.log(sprintf("Attempt to post to %s by %s", req.objParams.user._id, req.user._id));
+        }
+        var error = new Error("Forbidden");
+        error.status = 403;
+        throw error;
+    }
+    var tile = req.objParams.user.tiles.id(req.params.id);
+    if (!tile) next(); // Proceed to 404
+    tile.icon = req.body.icon;
+    tile.details = req.body.details;
+    req.objParams.user.save(function (err) {
+        if (err) throw err;
+        res.send(200);
+    });
 });
 
 
