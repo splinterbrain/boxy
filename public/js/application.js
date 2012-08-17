@@ -20,7 +20,7 @@ $(function () {
     })
 
     /*background color*/
-    BOXY.backgroundColor = "#FFF";
+    BOXY.backgroundColor = "#4c5764";
 //    $("body").css("background-color", BOXY.backgroundColor);
 
     $('#groutColorPicker').on("change", function () {
@@ -132,8 +132,9 @@ $(function () {
     });
 
     /*miniColors*/
+    $("#groutColorPicker").val(BOXY.backgroundColor);
     $(".color-picker").miniColors({
-        letterCase:'uppercase',
+        letterCase:'uppercase',        
         change:function (hex, rgb) {
             $("input.color-picker").trigger("change");
         }

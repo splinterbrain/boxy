@@ -86,7 +86,7 @@ $(function() {
 				this.$el.find(".link > a").html(" <button class='miniButton floatRight externalLink'><i class='icon-external-link'></i></button> ");
 			};*/
 			
-			this.$el.find(".tileIcon").text(this.model.get("icon"));
+			this.$el.find(".tileIcon").html(this.model.get("icon") != "" ? "&#x" + this.model.get("icon") + ";" : "");
 			this.$el.css({
 				'width' : this.model.get("width") + "px",
 				'height' : this.model.get("height") + "px",
@@ -169,7 +169,7 @@ $(function() {
 			});
 
 			this.model.set({
-				icon : this.$el.find(".selectedIcon").text()
+				icon : this.$el.find(".selectedIcon").data("icon")
 			});
 			this.model.set({
 				width : this.$el.find("#widthSlider").slider("value")

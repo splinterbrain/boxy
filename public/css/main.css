@@ -175,6 +175,10 @@ button:hover, input[type=submit]:hover {
 
 }
 
+#handle:hover{
+    cursor: move;
+}
+
 h3 {
     /*Moodle headings*/
     width: 100%;
@@ -224,11 +228,16 @@ h3:hover {
     padding-top: 18px;
 }
 
+#iconScroll{
+    height:120px;
+    overflow-y:auto;
+}
+
 .icon {
-    height: 50px;
-    width: 50px;
+    height: 45px;
+    width: 45px;
     margin: 6px;
-    font-family: 'Josefin Sans', sans-serif;
+    font-family: 'FontAwesome';
     background-color: rgba(14, 32, 47, 1.0);
     display: block;
     float: left;
@@ -343,6 +352,7 @@ h3:hover {
     font-size: 50px;
     line-height: 10px;
     color: white;
+    font-family: 'FontAwesome';
     /*text-shadow:3px 3px 0px rgba(0,0,0,0.2);*/
 }
 
@@ -587,11 +597,15 @@ header .miniColors-trigger {
 
 /*SPATIAL ELEMENTS*/
 
+#container_wrapper{
+    padding: 10px;
+
+}
+
 #container {
     width: 100%;
     display: block;
     float: left;
-    margin: 10px;
     z-index: 0;
 }
 
