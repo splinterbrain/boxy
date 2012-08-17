@@ -50,7 +50,7 @@ var bcrypt = require("bcrypt");
 
 var TileSchema = new Schema({
     icon:{ type:String },
-    content:{ type:String }
+    details:{ type:String }
 });
 
 var UserSchema = new Schema({
@@ -116,7 +116,7 @@ passport.deserializeUser(function (id, done) {
 
 //Evetually we'll want to use templates to generate static versions of html files
 //For now we just serve the mockups
-app.use(connect.favicon());
+app.use(connect.favicon("public/favicon.ico"));
 //app.use(connect.static("public"));
 app.use(connect.logger('tiny', {stream:{write:function (str) {
     console.info(str);
@@ -173,18 +173,64 @@ app.post("/join", function (req, res, next) {
         password:req.body.password
     });
     user.save(function (err) {
-        if (err) return null;
-        //TODO: Log the user in
-        passport.authenticate("local", {successRedirect:"/", failureRedirect:"/"})(req, res, next);
-//        res.redirect("/login");
+        if (err){
+            if(err.name == "MongoError" && err.code == 11000){
+                //Duplicate key problem
+                if(err.err.indexOf("username") > -1){
+                    next({message: "Sorry, that username is already taken"});
+                }else{
+                    next({message: "Sorry, that email is already taken"});
+                }
+            }else if(false){
+                
+            }else{
+                next(err);
+            }
+        
+         }else{
+            passport.authenticate("local", function(err, user, info){
+                if(err){
+                    console.error("Error authenticating user after creation", err);
+                    next({message: "Sorry, the account was created but there was a problem logging you in: " + err.message});
+                }else if(!user){
+                    console.error("User created but not returned on login", user);
+                    next({message: "Sorry, an unknown error occurred"});
+                }else{
+                    req.logIn(user, function(err){
+                       if(err){
+                           console.error("Error logging in user after creation", err);
+                           next({message: "Sorry, the account was created but there was a problem logging you in."});
+                       }else{
+                           res.send(200, {redirect : "/" + user.username});
+                       }
+                    });
+                }
+            })(req, res, next);
+        }
     });
 
 });
 
 //TODO: Redirect to user's page
-app.post("/login", passport.authenticate("local", {successRedirect:"/", failureRedirect:"/"}), function (req, res) {
-    console.log(req.body);
-//    res.redirect("/");
+app.post("/login", function (req, res, next) {
+    passport.authenticate("local", function(err, user, info){
+        if(err){
+            console.error("Error authenticating user on login", err);
+            next({message: "Sorry, there was a problem logging you in"});
+        }else if(!user){
+            console.error("User not returned on login", user);
+            next({message: "Sorry, incorrect username or password"});
+        }else{
+            req.logIn(user, function(err){
+                if(err){
+                    console.error("Error logging in user after authentication", err);
+                    next({message: "Sorry, there was a problem logging you in."});
+                }else{
+                    res.send(200, {redirect : "/" + user.username});
+                }
+            });
+        }
+    })(req, res, next);
 });
 
 app.get("/logout", function (req, res) {
@@ -193,6 +239,9 @@ app.get("/logout", function (req, res) {
     res.redirect("/");
 });
 
+app.get("/tiles", function(req, res, next){
+   res.send(200, JSON.stringify()) 
+});
 
 app.get("/:username", function (req, res, next) {
     var isOwner = !!(req.user && req.objParams.user.equals(req.user));
@@ -234,6 +283,7 @@ app.put("/:username/tiles/:id", function (req, res) {
     }
     var tile = req.objParams.user.tiles.id(req.params.id);
     if (!tile) next(); // Proceed to 404
+    console.log(req.body);
     tile.icon = req.body.icon;
     tile.details = req.body.details;
     req.objParams.user.save(function (err) {
@@ -257,7 +307,9 @@ app.use(function (err, req, res, next) {
         res.send(404, "Not found");
     } else if (err.status) {
         res.send(err.status, err.message);
-    } else {
+    } else if(err.message){
+        res.send(500, err.message);
+    }else {
         res.send(500, "Server error");
     }
 

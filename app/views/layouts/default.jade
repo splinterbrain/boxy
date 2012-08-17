@@ -4,10 +4,11 @@ html
         block head
             include ../includes/head
     body
+    #pageDimmer
     header
         block header
-            a(href="/")
-                h1 Boxy Version 1.0
+            //a(href="/")
+            //    h1 Boxy Version 1.0
             if req.user
                 #welcomeUser
                     | Welcome back 
@@ -18,36 +19,36 @@ html
             else
                 button#logInSignUpButton.longTextButton.floatRight log in | sign up
         //POPUP TO LOG IN OR SIGN UP
-        #pageDimmer
         section#logInSignUp.popup
             .halfWidthColumn
                 .fancyBlock new user
-                form#joinForm(action="join", method="post")
-                    input#newUsername(type="text")
-                    label(for="newUsername") username:
-                    br
-                    input#email(type="text")
-                    label(for="email") email:
-                    br
-                    input#reEmail(type="text")
-                    label(for="reEmail") re-enter email:
-                    br
-                    input#newPassword(type="password")
-                    label(for="newPassword") password:
-                    br
-                    input#rePassword(type="password")
-                    label(for="rePassword") re-enter password:
-                    br
+                form#joinForm(action="/join", method="post")
+                    .input_wrapper
+                        input#newUsername(type="text", name="username", data-validate-required="true")
+                        label(for="newUsername") username:
+                    .input_wrapper
+                        input#newEmail(type="email", name="email", data-validate-required="true")
+                        label(for="email") email:
+                    .input_wrapper
+                        input#reEmail(type="email", data-validate-match="newEmail")
+                        label(for="reEmail") re-enter email:
+                    .input_wrapper
+                        input#newPassword(type="password", name="password", data-validate-required="true")
+                        label(for="newPassword") password:
+                    .input_wrapper
+                        input#rePassword(type="password", data-validate-match="newPassword")
+                        label(for="rePassword") re-enter password:
                     button#signUp.shortTextButton.floatRight sign up
             .halfWidthColumn
                 .fancyBlock old user
                 .instructions Welcome back, you old dog.
                 br
-                form#loginForm(action="login", method="post")
-                    input#existingUsername(type="text", name="username")
-                    label(for="existingUsername") username:
-                    br
-                    input#existingPassword(type="password", name="password")
-                    label(for="existingPassword") password:
+                form#loginForm(action="/login", method="post")
+                    .input_wrapper
+                        input#existingUsername(type="text", name="username", data-validate-required="true")
+                        label(for="existingUsername") username:
+                    .input_wrapper
+                        input#existingPassword(type="password", name="password")
+                        label(for="existingPassword") password:
                     button#logIn.shortTextButton.floatRight log in
-        block content
+    block content

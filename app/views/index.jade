@@ -1,8 +1,14 @@
 extends layouts/default
 
 block content
-    if req.user
-        h1 Hello #{req.user}, welcome back
-    section(style="background-color:black;width: 280px;margin:10px auto;padding:10px;")
+    section#splash
         h2 Boxy is boxyness, boxified
-        h2 Join today or explore        
+        h2 Join today or explore
+        form#splash_form(action="/join", method="post")
+            .input_wrapper
+                input#join_username(type="text", name="username", placeholder="username", data-validate-required="true")
+            .input_wrapper
+                input#splash_email(type="email", name="email", placeholder="email", data-validate-required="true")
+            .input_wrapper
+                input#splash_password(type="password", name="password", placeholder="password", data-validate-required="true")
+            input.button(type="submit", value="Join!")

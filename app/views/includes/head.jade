@@ -1,6 +1,7 @@
 if !title
     title = "Default title"
 title #{title}
+
 block css
     //Stylesheets
     link(rel="stylesheet", type="text/css", href="/css/reset.css")
@@ -12,7 +13,7 @@ block css
     link(rel="stylesheet", type="text/css", href="//fonts.googleapis.com/css?family=Open+Sans+Condensed:700|Josefin+Sans:400,600")
 block js
     //Javascript
-    if jsvars
+    if typeof(jsvars) !== "undefined"
         //This is a bit kludgey but seems to be the only way to pass variables to the client
         | !{"<script type='text/javascript'>"}
         | window.BOXY = window.BOXY || {};
@@ -23,6 +24,7 @@ block js
     script(type="text/javascript", src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js")
     script(type="text/javascript", src="/js/jquery.masonry.min.js")
     script(type="text/javascript", src="/js/jquery.miniColors.js")
+    script(type="text/javascript", src="/js/mailcheck.min.js")
     script(type="text/javascript", src="/js/underscore-min.js")
     script(type="text/javascript", src="/js/json3.min.js")
     script(type="text/javascript", src="/js/backbone-min.js")
