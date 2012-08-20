@@ -221,30 +221,35 @@ $(function() {
 	});
     
     //Save at 5 second intervals if changes have happened
-    setInterval(function(){
-        for(var i=0;i<BOXY.aCollection.models.length;i++){
-            var model = BOXY.aCollection.at(i); 
-            if(model.isDirty){
-                model.save(null, {success : function(model){
-                    model.isDirty = false;
-                    if(model.isSavingDirty){
-                        model.isDirty = true;
-                        model.isSavingDirty = false;
-                    }
-                }, error : function(model, resp){
-                    console.error("Error saving model");
-                }});               
+    if(BOXY.isOwner){
+        setInterval(function(){
+            for(var i=0;i<BOXY.aCollection.models.length;i++){
+                var model = BOXY.aCollection.at(i);
+                if(model.isDirty){
+                    $("#saveIndicator").addClass("saving");
+                    model.save(null, {success : function(model){
+                        model.isDirty = false;
+                        if(!_.any(BOXY.aCollection.models, function(m){return m.isDirty;})) $("#saveIndicator").removeClass("saving").removeClass("error");
+                        if(model.isSavingDirty){
+                            model.isDirty = true;
+                            model.isSavingDirty = false;
+                        }
+                    }, error : function(model, resp){
+                        console.error("Error saving model");
+                        $("#saveIndicator").addClass("error");
+                    }});
+                }
             }
-        }
-    }, 5000);
+        }, 5000);
+        //Save all dirty models on window unload
+        $(window).on("unload", function(e){
+            for(var i=0;i<BOXY.aCollection.models.length;i++){
+                var model = BOXY.aCollection.at(i);
+                if(model.isDirty || model.isSavingDirty){
+                    model.save();
+                }
+            }
+        });
+    }
     
-    //Save all dirty models on window unload
-    $(window).on("unload", function(e){
-        for(var i=0;i<BOXY.aCollection.models.length;i++){
-            var model = BOXY.aCollection.at(i);
-            if(model.isDirty || model.isSavingDirty){
-                model.save();
-            }
-        }
-    });
 })
