@@ -282,6 +282,10 @@ h3:hover {
     -moz-transition: -moz-transform 1.5s ease;
 }
 
+.box:hover{
+    cursor: pointer;
+}
+
 .box.flipped {
     -webkit-transform-style: preserve-3d;
     -webkit-transform: rotate3d(0, 1, 0, 180deg);

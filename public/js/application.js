@@ -135,13 +135,14 @@ $(function () {
     /*
     //TODO: Reenable this once UI issue is resolved    
     $("#groutColorPicker").val(BOXY.backgroundColor);
-    $(".color-picker").miniColors({
+    */
+    $("#boxColorPicker").miniColors({
         letterCase:'uppercase',        
         change:function (hex, rgb) {
             $("input.color-picker").trigger("change");
         }
     });
-     */
+     
 
 
     /*slider*/

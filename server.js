@@ -53,7 +53,8 @@ var TileSchema = new Schema({
     details:{ type:String },
     width:{type:Number},
     height:{type:Number},
-    color:{type:String}
+    color:{type:String},
+    link: {type:String}
 
 });
 
@@ -310,6 +311,7 @@ app.put("/:username/tiles/:id", function (req, res) {
         tile.width = req.body.width;
         tile.height = req.body.height;
         tile.color = req.body.color;
+        tile.link = req.body.link;
 
         req.objParams.user.save(function (err) {
             if (err) throw err;

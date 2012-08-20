@@ -35,8 +35,12 @@ $(function() {
 			this.model.view=this; //So view can be grabbed later with model.view
 		},
 		'render' : function() {
-			this.$el.html(this.template(this.model.toJSON())); 
-			this.$el.css({
+			this.$el.html(this.template(this.model.toJSON()));
+            if(this.model.get("link") !== ''){
+                this.$el.find(".link > a").html(" <button class='miniButton'><i class='icon-external-link'></i></button> ");
+            }
+
+            this.$el.css({
 				'width' : this.model.get("width") + "px",
 				'height' : this.model.get("height") + "px",
 				'background-color' : this.model.get("color")

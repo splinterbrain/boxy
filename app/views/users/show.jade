@@ -95,6 +95,6 @@ block content
         | <div class="back">
         |     <div class="details"><%= details %></div>
         |     <div class="link">
-        |         <a href= ""></a>
+        |         <a href= "<%= (link.indexOf('http') == 0) ? link : 'http://' + link %>"></a>
         |     </div>
         | </div>
