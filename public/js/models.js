@@ -110,6 +110,7 @@ $(function() {
 
 			$("#container").masonry("reload");
 
+            addedModel.isDirty = true;
 //            addedModel.save();
             
 		},
@@ -181,7 +182,9 @@ $(function() {
 				color : this.$el.find("#boxColorPicker").miniColors("value")
 			});
             
-            this.model.save();
+            this.model.isDirty = true;
+            if(this.model.isSaving) this.model.isSavingDirty = true;
+//            this.model.save();
 		}
 		
 	});
@@ -212,4 +215,32 @@ $(function() {
 		BOXY.aBoxEditor.model = BOXY.aCollection.at(BOXY.aCollection.length-1)
 		BOXY.aBoxEditor.render();
 	});
+    
+    //Save at 5 second intervals if changes have happened
+    setInterval(function(){
+        for(var i=0;i<BOXY.aCollection.models.length;i++){
+            var model = BOXY.aCollection.at(i); 
+            if(model.isDirty){
+                model.save(null, {success : function(model){
+                    model.isDirty = false;
+                    if(model.isSavingDirty){
+                        model.isDirty = true;
+                        model.isSavingDirty = false;
+                    }
+                }, error : function(model, resp){
+                    console.error("Error saving model");
+                }});               
+            }
+        }
+    }, 5000);
+    
+    //Save all dirty models on window unload
+    $(window).on("unload", function(e){
+        for(var i=0;i<BOXY.aCollection.models.length;i++){
+            var model = BOXY.aCollection.at(i);
+            if(model.isDirty || model.isSavingDirty){
+                model.save();
+            }
+        }
+    });
 })

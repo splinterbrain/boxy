@@ -50,7 +50,11 @@ var bcrypt = require("bcrypt");
 
 var TileSchema = new Schema({
     icon:{ type:String },
-    details:{ type:String }
+    details:{ type:String },
+    width:{type:Number},
+    height:{type:Number},
+    color:{type:String}
+
 });
 
 var UserSchema = new Schema({
@@ -173,36 +177,36 @@ app.post("/join", function (req, res, next) {
         password:req.body.password
     });
     user.save(function (err) {
-        if (err){
-            if(err.name == "MongoError" && err.code == 11000){
+        if (err) {
+            if (err.name == "MongoError" && err.code == 11000) {
                 //Duplicate key problem
-                if(err.err.indexOf("username") > -1){
-                    next({message: "Sorry, that username is already taken"});
-                }else{
-                    next({message: "Sorry, that email is already taken"});
+                if (err.err.indexOf("username") > -1) {
+                    next({message:"Sorry, that username is already taken"});
+                } else {
+                    next({message:"Sorry, that email is already taken"});
                 }
-            }else if(false){
-                
-            }else{
+            } else if (false) {
+
+            } else {
                 next(err);
             }
-        
-         }else{
-            passport.authenticate("local", function(err, user, info){
-                if(err){
+
+        } else {
+            passport.authenticate("local", function (err, user, info) {
+                if (err) {
                     console.error("Error authenticating user after creation", err);
-                    next({message: "Sorry, the account was created but there was a problem logging you in: " + err.message});
-                }else if(!user){
+                    next({message:"Sorry, the account was created but there was a problem logging you in: " + err.message});
+                } else if (!user) {
                     console.error("User created but not returned on login", user);
-                    next({message: "Sorry, an unknown error occurred"});
-                }else{
-                    req.logIn(user, function(err){
-                       if(err){
-                           console.error("Error logging in user after creation", err);
-                           next({message: "Sorry, the account was created but there was a problem logging you in."});
-                       }else{
-                           res.send(200, {redirect : "/" + user.username});
-                       }
+                    next({message:"Sorry, an unknown error occurred"});
+                } else {
+                    req.logIn(user, function (err) {
+                        if (err) {
+                            console.error("Error logging in user after creation", err);
+                            next({message:"Sorry, the account was created but there was a problem logging you in."});
+                        } else {
+                            res.send(200, {redirect:"/" + user.username});
+                        }
                     });
                 }
             })(req, res, next);
@@ -213,20 +217,20 @@ app.post("/join", function (req, res, next) {
 
 //TODO: Redirect to user's page
 app.post("/login", function (req, res, next) {
-    passport.authenticate("local", function(err, user, info){
-        if(err){
+    passport.authenticate("local", function (err, user, info) {
+        if (err) {
             console.error("Error authenticating user on login", err);
-            next({message: "Sorry, there was a problem logging you in"});
-        }else if(!user){
+            next({message:"Sorry, there was a problem logging you in"});
+        } else if (!user) {
             console.error("User not returned on login", user);
-            next({message: "Sorry, incorrect username or password"});
-        }else{
-            req.logIn(user, function(err){
-                if(err){
+            next({message:"Sorry, incorrect username or password"});
+        } else {
+            req.logIn(user, function (err) {
+                if (err) {
                     console.error("Error logging in user after authentication", err);
-                    next({message: "Sorry, there was a problem logging you in."});
-                }else{
-                    res.send(200, {redirect : "/" + user.username});
+                    next({message:"Sorry, there was a problem logging you in."});
+                } else {
+                    res.send(200, {redirect:"/" + user.username});
                 }
             });
         }
@@ -239,57 +243,80 @@ app.get("/logout", function (req, res) {
     res.redirect("/");
 });
 
-app.get("/tiles", function(req, res, next){
-   res.send(200, JSON.stringify()) 
+app.get("/tiles", function (req, res, next) {
+    res.send(200, JSON.stringify())
 });
 
 app.get("/:username", function (req, res, next) {
-    var isOwner = !!(req.user && req.objParams.user.equals(req.user));
-    var jsvars = {};
-    jsvars.isOwner = isOwner;
-    res.render("users/show", {req:req, title:req.objParams.user.username, user:req.objParams.user, isOwner:isOwner, jsvars : jsvars});
+    if (!req.objParams.user) {
+        next();
+    } else {
+        var isOwner = !!(req.user && req.objParams.user.equals(req.user));
+        var jsvars = {};
+        jsvars.isOwner = isOwner;
+        res.render("users/show", {req:req, title:req.objParams.user.username, user:req.objParams.user, isOwner:isOwner, jsvars:jsvars});
+    }
 });
 
 
 //Tiles API
 app.get("/:username/tiles", function (req, res) {
-    res.send(200, JSON.stringify(req.objParams.user.tiles));
+    if (!req.objParams.user) {
+        next();
+    } else {
+        res.send(200, JSON.stringify(req.objParams.user.tiles));
+    }
 });
 
 app.post("/:username/tiles", function (req, res) {
-    if (!req.user || !req.user.equals(req.objParams.user)) {
-        if (req.user) {
-            console.log(sprintf("Attempt to post to %s by %s", req.objParams.user._id, req.user._id));
+    if (!req.objParams.user) {
+        next();
+    } else {
+        if (!req.user || !req.user.equals(req.objParams.user)) {
+            if (req.user) {
+                console.log(sprintf("Attempt to post to %s by %s", req.objParams.user._id, req.user._id));
+            }
+            var error = new Error("Forbidden");
+            error.status = 403;
+            throw error;
         }
-        var error = new Error("Forbidden");
-        error.status = 403;
-        throw error;
+        req.objParams.user.tiles.push(req.body);
+        req.objParams.user.save(function (err) {
+            if (err) throw err;
+            res.set("Content-Type", "application/json");
+            res.send(201, JSON.stringify(req.objParams.user.tiles[req.objParams.user.tiles.length - 1]));
+        });
     }
-    req.objParams.user.tiles.push(req.body);
-    req.objParams.user.save(function (err) {
-        if (err) throw err;
-        res.send(201, JSON.stringify(req.objParams.user.tiles[req.objParams.user.tiles.length - 1]));
-    });
 });
 
 app.put("/:username/tiles/:id", function (req, res) {
-    if (!req.user || !req.user.equals(req.objParams.user)) {
-        if (req.user) {
-            console.log(sprintf("Attempt to post to %s by %s", req.objParams.user._id, req.user._id));
+    if (!req.objParams.user) {
+        next();
+    } else {
+
+        if (!req.user || !req.user.equals(req.objParams.user)) {
+            if (req.user) {
+                console.log(sprintf("Attempt to post to %s by %s", req.objParams.user._id, req.user._id));
+            }
+            var error = new Error("Forbidden");
+            error.status = 403;
+            throw error;
         }
-        var error = new Error("Forbidden");
-        error.status = 403;
-        throw error;
+        var tile = req.objParams.user.tiles.id(req.params.id);
+        if (!tile) next(); // Proceed to 404
+//    console.log(req.body);
+        tile.icon = req.body.icon;
+        tile.details = req.body.details;
+        tile.width = req.body.width;
+        tile.height = req.body.height;
+        tile.color = req.body.color;
+
+        req.objParams.user.save(function (err) {
+            if (err) throw err;
+            res.set("Content-Type", "application/json");
+            res.send(200, "[]");
+        });
     }
-    var tile = req.objParams.user.tiles.id(req.params.id);
-    if (!tile) next(); // Proceed to 404
-    console.log(req.body);
-    tile.icon = req.body.icon;
-    tile.details = req.body.details;
-    req.objParams.user.save(function (err) {
-        if (err) throw err;
-        res.send(200);
-    });
 });
 
 
@@ -307,9 +334,9 @@ app.use(function (err, req, res, next) {
         res.send(404, "Not found");
     } else if (err.status) {
         res.send(err.status, err.message);
-    } else if(err.message){
+    } else if (err.message) {
         res.send(500, err.message);
-    }else {
+    } else {
         res.send(500, "Server error");
     }
 

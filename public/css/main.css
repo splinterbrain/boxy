@@ -33,11 +33,27 @@ body {
 
 /*SPLASH*/
 #splash {
-    background-color: black;
     width: 730px;
     margin: 20px auto;
     padding: 20px;
+
+    background-color: rgba(27, 45, 60, 1.0);
+    /*gradient overlay from transparent to black at 0.25 opacity*/
+    background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.25) 100%); /*FF*/
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0, 0, 0, 0)), color-stop(100%, rgba(0, 0, 0, 0.25))); /* Chrome,Safari4+ */
+    background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.25) 100%); /* Chrome10+,Safari5.1+ */
+    background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.25) 100%); /* Opera 11.10+ */
+    background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.25) 100%); /* IE10+ */
+    background-image: linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.25) 100%); /* W3C */
+    /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#40000000',GradientType=0 ); /* IE6-9 */
+
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+    -khtml-box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+
 }
+
 
 #splash > h2 {
     font-size: 28px;
@@ -96,7 +112,7 @@ button:hover, input[type=submit]:hover {
 .longTextButton {
     height: 20px;
     width: 120px;
-    margin: 5px;
+    margin: 0px;
 }
 
 .shortTextButton {
@@ -495,6 +511,10 @@ textarea {
     top: -1px;
 }
 
+#groutColorPicker{
+    display: none;
+}
+
 #groutColorPicker ~ .miniColors-trigger {
     /*Another dev forced me at gunpoint to use this sibling selector*/
     top: 1px;
@@ -610,7 +630,7 @@ header .miniColors-trigger {
 }
 
 header {
-    height: 40px;
+    height: 30px;
     padding: 5px;
     width: 100%;
     display: block;
@@ -631,6 +651,10 @@ header {
     width: 100%;
     display: block;
     float: left;
+}
+
+#addBox{
+    margin:0px;
 }
 
 #toolbar {

@@ -127,11 +127,13 @@ $(function () {
             duration:400
         },
         isAnimated:true,
-        columnWidth:0,
+        columnWidth:70,
         gutterWidth:10
     });
 
     /*miniColors*/
+    /*
+    //TODO: Reenable this once UI issue is resolved    
     $("#groutColorPicker").val(BOXY.backgroundColor);
     $(".color-picker").miniColors({
         letterCase:'uppercase',        
@@ -139,6 +141,7 @@ $(function () {
             $("input.color-picker").trigger("change");
         }
     });
+     */
 
 
     /*slider*/
