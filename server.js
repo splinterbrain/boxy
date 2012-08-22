@@ -322,6 +322,37 @@ app.put("/:username/tiles/:id", function (req, res) {
 });
 
 
+app.delete("/:username/tiles/:id", function (req, res) {
+    if (!req.objParams.user) {
+        next();
+    } else {
+
+        if (!req.user || !req.user.equals(req.objParams.user)) {
+            if (req.user) {
+                console.log(sprintf("Attempt to post to %s by %s", req.objParams.user._id, req.user._id));
+            }
+            var error = new Error("Forbidden");
+            error.status = 403;
+            throw error;
+        }
+        var tile = req.objParams.user.tiles.id(req.params.id);
+        if (!tile) next(); // Proceed to 404
+//    console.log(req.body);
+        
+        tile.remove();
+        
+        req.objParams.user.save(function (err) {
+            if (err) throw err;
+            res.set("Content-Type", "application/json");
+            res.send(200, "[]");
+        });
+    }
+});
+
+
+
+
+
 //If we get here then we haven't found a match and it's a 404
 app.use(function (req, res, next) {
     res.status(404).render("404", {req:req});

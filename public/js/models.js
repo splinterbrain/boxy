@@ -155,7 +155,8 @@ $(function() {
 				$(".front").removeClass("beingEdited");
 			}, this));
 			this.$el.find(".removeButton").on("click", $.proxy(function(){ //Deletes a box model.
-				BOXY.aCollection.remove(this.model);
+//				BOXY.aCollection.remove(this.model);
+                this.model.destroy({wait:true});
 			}, this));
 			$('#editMoodle').draggable({handle: "#handle"});
 		},
