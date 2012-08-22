@@ -134,8 +134,8 @@ app.use(function (req, res, next) {
 app.use(express.cookieParser());
 app.use(express.bodyParser());
 
-var RedisStore = require('connect-redis')(express);
-app.use(express.session({store:new RedisStore(), secret:"secreterthansecret"}));
+var MongoStore = require('connect-mongo')(express);
+app.use(express.session({store:new MongoStore({db: "boxy"}), secret:"secreterthansecret"}));
 
 app.use(passport.initialize());
 app.use(passport.session());
