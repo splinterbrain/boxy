@@ -15,9 +15,11 @@ $(function () {
 
     $('#editMoodle h3').click(function (e) {
         e.preventDefault();
-        $('.moodleSection').removeClass("visible"),
-            $(this).next().addClass("visible");
-    })
+        $('.moodleSection').removeClass("visible");
+        $(this).siblings().removeClass("visible");
+        $(this).next().addClass("visible");
+        $(this).addClass("visible");
+    });
 
     /*background color*/
     BOXY.backgroundColor = "#4c5764";
@@ -133,16 +135,15 @@ $(function () {
 
     /*miniColors*/
     /*
-    //TODO: Reenable this once UI issue is resolved    
-    $("#groutColorPicker").val(BOXY.backgroundColor);
-    */
+     //TODO: Reenable this once UI issue is resolved    
+     $("#groutColorPicker").val(BOXY.backgroundColor);
+     */
     $("#boxColorPicker").miniColors({
-        letterCase:'uppercase',        
+        letterCase:'uppercase',
         change:function (hex, rgb) {
             $("input.color-picker").trigger("change");
         }
     });
-     
 
 
     /*slider*/

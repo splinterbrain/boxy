@@ -42,8 +42,9 @@ block content
             //        span.instructionsCycles through the five most resent uploads to your flickr or instagram.
     
             //PICK TILE SIZE, COLOR, AND ICON
-            h3
+            h3.visible
                 a(href="#") Appearance
+                    .icon &#xf0da
             .moodleSection.visible
                 p.instructions Pick a color for your tile.
                 #picker
@@ -70,8 +71,9 @@ block content
                                 | &#x#{icon.toString(16)};
             
             //WRITE ON THE TILE
-            h3
+            h3                
                 a(href="#") Content
+                    .icon &#xf0da
             .moodleSection
                 span.instructions.withSpacing Pick a title if you're using no icon.
                 input#textOnFront(type="text", placeholder="title")
@@ -89,8 +91,8 @@ block content
 
     //TEMPLATES
     script#boxViewTemplate(type="text/template")
+        | <button class="miniButton editButton floatRight"><i class="icon-wrench"></i></button>
         | <div class="front">
-        |     <button class="miniButton editButton floatRight"><i class="icon-wrench"></i></button>
         |     <div class="title"><%= title %></div>
         |     <div class="tileIcon"><% if(icon != ""){ %>&#x<%= icon %>;<% }%></div>
         | </div>

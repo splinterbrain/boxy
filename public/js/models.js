@@ -58,8 +58,8 @@ $(function() {
             if(BOXY.isOwner){
                 this.$el.find(".editButton").on("click", $.proxy(function(e) {
                     e.stopPropagation(); //So card doesn't flip when edit button is clicked
-                    $(".front").removeClass("beingEdited");//Remove highlighting from whichever box was edited previously
-                    this.$el.find(".front").addClass("beingEdited");//Highlight the box currently targetted by the edit moodle
+                    $(".box").removeClass("beingEdited");//Remove highlighting from whichever box was edited previously
+                    this.$el.addClass("beingEdited");//Highlight the box currently targetted by the edit moodle
                     BOXY.aBoxEditor.$el.css("display", "block"); //Unhides edit moodle
                     BOXY.aBoxEditor.model = this.model; //Makes this box the target of the edit moodle
                     BOXY.aBoxEditor.render(); //Updates edit moodle to reflect this box's parameters
@@ -152,7 +152,7 @@ $(function() {
 			this.$el.find("#boxColorPicker").miniColors("value", "#" + this.model.get("color"));
 			this.$el.find(".closeMoodle").on("click", $.proxy(function() { //Closes (hides) the moodle.
 				this.$el.css("display", "none");
-				$(".front").removeClass("beingEdited");
+				$(".box").removeClass("beingEdited");
 			}, this));
 			this.$el.find(".removeButton").on("click", $.proxy(function(){ //Deletes a box model.
 //				BOXY.aCollection.remove(this.model);
@@ -214,8 +214,8 @@ $(function() {
 	//When a boxes is added, it becomes the target of the edit moodle automatically.
 		BOXY.aCollection.add({
 		});
-		$(".front").removeClass("beingEdited");//Remove highlighting from whichever box was edited previously
-		BOXY.aCollection.at(BOXY.aCollection.length-1).view.$el.find(".front").addClass("beingEdited");
+		$(".box").removeClass("beingEdited");//Remove highlighting from whichever box was edited previously
+		BOXY.aCollection.at(BOXY.aCollection.length-1).view.$el.addClass("beingEdited");
 		BOXY.aBoxEditor.$el.css("display", "block");
 		BOXY.aBoxEditor.model = BOXY.aCollection.at(BOXY.aCollection.length-1)
 		BOXY.aBoxEditor.render();
