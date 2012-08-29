@@ -36,6 +36,9 @@ $(function() {
 		},
 		'render' : function() {
 			this.$el.html(this.template(this.model.toJSON()));
+            //We set details here to allow for content cleaning
+            //The text-html conversion is a little klugey
+            this.$el.find(".details").html($("<div/>").text(this.model.get("details")).html().replace(/\n/g, "<br/>"));
             if(this.model.get("link") !== ''){
                 this.$el.find(".link > a").html(" <button class='miniButton'><i class='icon-external-link'></i></button> ");
             }
@@ -70,8 +73,8 @@ $(function() {
 			return this;
 		},
 		'onChange' : function() { //So view changes with model in real time. 
-			this.$el.find(".title").html(this.model.get("title"));
-			this.$el.find(".details").html(this.model.get("details"));
+			this.$el.find(".title").text(this.model.get("title"));
+            this.$el.find(".details").html($("<div/>").text(this.model.get("details")).html().replace(/\n/g, "<br/>"));
 			
 			if(this.model.get("link") !== ''){
 				this.$el.find(".link > a").attr("href", this.model.get("link"));
