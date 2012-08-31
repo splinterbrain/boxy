@@ -205,7 +205,16 @@ $(function() {
 		el : $("#container")
 	});
     
-    BOXY.aCollection.fetch({silent : false});
+    BOXY.aCollection.fetch({silent : false, success : function(coll, resp){
+        if(BOXY.isOwner && coll.length == 0){
+            //First time, show tooltip
+            $("#tooltipPlus").css("left", $("#addBox").position().left + $("#addBox").width()+30);
+            $("#tooltipPlus").css("top", $("#addBox").position().top + ($("#addBox").height()-25)/2);
+
+            $("#tooltipPlus").addClass("visible");
+            $(".tooltip").addClass("bouncing-left");
+        }
+    }});
 
 	BOXY.aBoxEditor = new BOXY.BoxEditorView({
 		el : $("#editMoodle")
@@ -222,6 +231,8 @@ $(function() {
 		BOXY.aBoxEditor.$el.css("display", "block");
 		BOXY.aBoxEditor.model = BOXY.aCollection.at(BOXY.aCollection.length-1)
 		BOXY.aBoxEditor.render();
+        
+        $("#tooltipPlus").removeClass("visible");
 	});
     
     //Save at 5 second intervals if changes have happened
