@@ -668,11 +668,22 @@ header .miniColors-trigger {
     font-size:13px;
     line-height:1em;
     font-weight:800;
-    border:1px solid rgba(255,255,255,0.5);    
+    border:1px solid rgba(255,255,255,0.5);
+    border-left:0px;
     opacity:0;
     transition: opacity 0.5s ease;
     -webkit-transition: opacity 0.5s ease;
     -moz-transition: opacity 0.5s ease;
+}
+
+.tooltip:before{
+    content:'\f0d9';
+    font-family: 'FontAwesome';    
+    position:absolute;
+    top:10px;
+    left:-13px;
+    font-size:38px;
+    color:rgba(255,255,255, 0.5);
 }
 
 .tooltip.visible{
