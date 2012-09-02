@@ -51,8 +51,8 @@ var bcrypt = require("bcrypt");
 var TileSchema = new Schema({
     icon:{ type:String },
     details:{ type:String },
-    width:{type:Number},
-    height:{type:Number},
+    width:{type:Number, min: 30},
+    height:{type:Number, min: 30},
     color:{type:String},
     link: {type:String}
 
@@ -313,8 +313,8 @@ app.put("/:username/tiles/:id", function (req, res) {
 //    console.log(req.body);
         tile.icon = req.body.icon;
         tile.details = req.body.details;
-        tile.width = req.body.width;
-        tile.height = req.body.height;
+        tile.width = Math.max(req.body.width, TileSchema.tree.width.min);
+        tile.height= Math.max(req.body.height, TileSchema.tree.height.min);
         tile.color = req.body.color;
         tile.link = req.body.link;
 
