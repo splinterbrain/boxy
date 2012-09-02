@@ -332,6 +332,7 @@ input[type=submit]:hover {
 .front {
   -webkit-backface-visibility: hidden;
   -moz-backface-visibility: hidden;
+  -webkit-transform: translatez(1px);
   -moz-transform: translatez(1px);
   height: 100%;
   width: 100%;
@@ -366,7 +367,7 @@ input[type=submit]:hover {
 .back {
   -webkit-backface-visibility: hidden;
   -moz-backface-visibility: hidden;
-  -webkit-transform: rotate3d(0, 1, 0, 180deg);
+  -webkit-transform: translatez(-1px) rotate3d(0, 1, 0, 180deg);
   -moz-transform: translatez(-1px) rotate3d(0, 1, 0, 180deg);
   height: 100%;
   width: 100%;
@@ -728,6 +729,11 @@ header .miniColors-trigger {
   display: block;
   float: left;
   z-index: 0;
+  -webkit-perspective: 1000;
+  -moz-perspective: 1000;
+  overflow: visible !important;
+  /* Masonry sets this to hidden, which interferes with perspective transforms */
+
 }
 header {
   height: 30px;
