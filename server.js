@@ -2,7 +2,7 @@
 //    stdout : false
 //});
 
-var express = require('express'), cons = require('consolidate'), app = express(), connect = require('connect'), path = require('path'), json = require('JSON'), mongodb = require('mongodb'), gzip = require('connect-gzip'), sprintf = require("sprintf").sprintf;
+var express = require('express'), cons = require('consolidate'), app = express(), connect = require('connect'), path = require('path'), json = require('JSON'), mongodb = require('mongodb'), gzip = require('connect-gzip'), sprintf = require("sprintf").sprintf, less = require("less-middleware");
 
 
 var webroot = path.join(__dirname, 'public');
@@ -143,6 +143,11 @@ app.use(passport.session());
 //    console.info(req.user);
 //    next();
 //});
+app.use(less({
+    debug: true,
+    src: webroot,
+    dest: webroot
+}));
 app.use(gzip.staticGzip(webroot));
 
 // /app.use(express.static("public"));
