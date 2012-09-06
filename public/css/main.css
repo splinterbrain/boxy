@@ -324,11 +324,15 @@ input[type=submit]:hover {
 }
 .box:hover {
   cursor: pointer;
+  -webkit-transition: -webkit-transform 0.5s ease;
+  -webkit-transform: translatez(-1px) rotate3d(0, 1, 0, 10deg);
+  -moz-transition: -moz-transform 0.5s ease;
+  -moz-transform: translatez(-1px) rotate3d(0, 1, 0, 10deg);
 }
 .box.flipped {
-  -webkit-transform-style: preserve-3d;
+  -webkit-transition: -webkit-transform 1.5s ease;
   -webkit-transform: translatez(-1px) rotate3d(0, 1, 0, 180deg);
-  -moz-transform-style: preserve-3d;
+  -moz-transition: -moz-transform 1.5s ease;
   -moz-transform: translatez(-1px) rotate3d(0, 1, 0, 180deg);
 }
 .front {
