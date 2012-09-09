@@ -1,4 +1,9 @@
 #apt-get install fontforge python-fontforge
+
+import sys
+print("Building font")
+print(sys.argv)
+
 import fontforge
 
 #http://tex.stackexchange.com/questions/22487/create-a-symbol-font-from-svg-symbols

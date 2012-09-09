@@ -4,7 +4,6 @@
 
 var express = require('express'), cons = require('consolidate'), app = express(), connect = require('connect'), path = require('path'), json = require('JSON'), mongodb = require('mongodb'), gzip = require('connect-gzip'), sprintf = require("sprintf").sprintf, less = require("less-middleware");
 
-
 var webroot = path.join(__dirname, 'public');
 var HTTP_PORT, DB_USER, DB_PASS, DB_HOST, DB_PORT, DB_NAME;
 
@@ -37,6 +36,10 @@ if (process.env.NODEJS_ENV == "production") {
     //Default mongod port
     DB_NAME = "boxy";
 }
+
+var glyphManager = require("./lib/glyphmanager");
+glyphManager.start(path.join(webroot, "css", "boxyfont"));
+
 
 var mongoose = require("mongoose"), Schema = mongoose.Schema;
 mongoose.connection.on("open", function () {
