@@ -7,7 +7,7 @@ print(sys.argv)
 import fontforge
 
 #http://tex.stackexchange.com/questions/22487/create-a-symbol-font-from-svg-symbols
-font = fontforge.font("glyphs.ttf")
+font = fontforge.open("glyphs.ttf")
 
 font.fontname = "Boxy"
 font.fullname = "Boxy"
