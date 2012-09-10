@@ -16,7 +16,8 @@ font.familyname = "Boxy"
 for i in range(2,len(sys.argv)):
     glyphid = int(sys.argv[i])
     print(glyphid)
-    glyph = font.createChar(glyphid)
+    #61440 is \xf000, beginning of private use
+    glyph = font.createChar(61440+glyphid)
 
     glyph.clear()
     glyph.importOutlines("%i.svg" % glyphid)
