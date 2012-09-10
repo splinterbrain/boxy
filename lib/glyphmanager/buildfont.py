@@ -13,8 +13,9 @@ font.fontname = "Boxy"
 font.fullname = "Boxy"
 font.familyname = "Boxy"
 
-for i in range(3,len(sys.argv)):
-    glyphid = sys.argv[i]
+for i in range(2,len(sys.argv)):
+    glyphid = int(sys.argv[i])
+    print(glyphid)
     glyph = font.createChar(glyphid)
 
     glyph.importOutlines("%i.svg" % glyphid)
