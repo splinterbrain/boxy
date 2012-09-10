@@ -13,7 +13,7 @@ font.fontname = "Boxy"
 font.fullname = "Boxy"
 font.familyname = "Boxy"
 
-for i in range(3,sys.argv.length):
+for i in range(3,len(sys.argv)):
     glyphid = sys.argv[i]
     glyph = font.createChar(glyphid)
 
