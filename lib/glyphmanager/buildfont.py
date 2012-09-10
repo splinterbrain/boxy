@@ -13,14 +13,15 @@ font.fontname = "Boxy"
 font.fullname = "Boxy"
 font.familyname = "Boxy"
 
-glyphid = sys.argv[2]
+for i in range(2,sys.argv.length):
+    glyphid = sys.argv[i]
+    glyph = font.createChar(glyphid)
 
-glyph = font.createChar(glyphid)
+    glyph.importOutlines("%i.svg" % glyphid)
+    ymin = glyph.boundingBox()[1]
+    glyph.transform([1,0,0,1,0,-ymin])
 
-glyph.importOutlines("cache/%i.svg" % glyphid)
-ymin = glyph.boundingBox()[1]
-glyph.transform([1,0,0,1,0,-ymin])
+    glyph.left_side_bearing = glyph.right_side_bearing = 0
 
-glyph.left_side_bearing = glyph.right_side_bearing = 0
 
 font.generate("boxy.ttf")
