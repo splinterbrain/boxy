@@ -13,9 +13,11 @@ font.fontname = "Boxy"
 font.fullname = "Boxy"
 font.familyname = "Boxy"
 
-glyph = font.createChar(42)
+glyphid = sys.argv[2]
 
-glyph.importOutlines("noun_project_16.svg")
+glyph = font.createChar(glyphid)
+
+glyph.importOutlines("cache/%i.svg" % glyphid)
 ymin = glyph.boundingBox()[1]
 glyph.transform([1,0,0,1,0,-ymin])
 

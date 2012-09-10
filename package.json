@@ -1,34 +1,34 @@
 {
-    "dependencies":{
-        "nconf":"0.6.x",
-        "connect":"2.4.x",
-        "express":"3.x.x",
-        "mkdirp":"0.3.x",
-        "mongodb":"1.1.x",
-        "mongoose":"3.0.x",
-        "passport":"0.1.x",
-        "redis":"0.7.x",
-        "sprintf":"0.1.x",
-        "consolidate":"0.4.x",
-        "JSON":"1.0.x",
-        "connect-gzip":"0.1.x",
-        "socket.io":"0.9.x",
-        "bcrypt":"0.7.x",
-        "jade":"0.27.x",
-        "passport-local":"0.1.x",
-        "connect-redis":"1.4.x",
-        "connect-mongo":"0.1.x",
-        "less-middleware":"0.1.x",
-        "jsdom":"0.2.x"
-    },
-    "name":"boxy",
-    "scripts":{
-        "start":"node ./server.js"
-
-    },
-    "version":"0.0.0-4",
-    "engines":{
-        "node":"0.8.x"
-    },
-    "subdomain":"boxyme"
+  "dependencies": {
+    "nconf": "0.6.x",
+    "connect": "2.4.x",
+    "express": "3.x.x",
+    "mkdirp": "0.3.x",
+    "mongodb": "1.1.x",
+    "mongoose": "3.0.x",
+    "passport": "0.1.x",
+    "redis": "0.7.x",
+    "sprintf": "0.1.x",
+    "consolidate": "0.4.x",
+    "JSON": "1.0.x",
+    "connect-gzip": "0.1.x",
+    "socket.io": "0.9.x",
+    "bcrypt": "0.7.x",
+    "jade": "0.27.x",
+    "passport-local": "0.1.x",
+    "connect-redis": "1.4.x",
+    "connect-mongo": "0.1.x",
+    "less-middleware": "0.1.x",
+    "jsdom": "0.2.x",
+    "request": "2.11.x"
+  },
+  "name": "boxy",
+  "scripts": {
+    "start": "node ./server.js"
+  },
+  "version": "0.0.0-4",
+  "engines": {
+    "node": "0.8.x"
+  },
+  "subdomain": "boxyme"
 }
