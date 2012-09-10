@@ -18,6 +18,7 @@ for i in range(2,len(sys.argv)):
     print(glyphid)
     glyph = font.createChar(glyphid)
 
+    glyph.clear()
     glyph.importOutlines("%i.svg" % glyphid)
     ymin = glyph.boundingBox()[1]
     glyph.transform([1,0,0,1,0,-ymin])
