@@ -7,13 +7,13 @@ print(sys.argv)
 import fontforge
 
 #http://tex.stackexchange.com/questions/22487/create-a-symbol-font-from-svg-symbols
-font = fontforge.font()
+font = fontforge.font("glyphs.ttf")
 
 font.fontname = "Boxy"
 font.fullname = "Boxy"
 font.familyname = "Boxy"
 
-for i in range(2,sys.argv.length):
+for i in range(3,sys.argv.length):
     glyphid = sys.argv[i]
     glyph = font.createChar(glyphid)
 
@@ -24,4 +24,4 @@ for i in range(2,sys.argv.length):
     glyph.left_side_bearing = glyph.right_side_bearing = 0
 
 
-font.generate("boxy.ttf")
+font.generate("glyphs.ttf")

@@ -38,7 +38,7 @@ if (process.env.NODEJS_ENV == "production") {
 }
 
 var glyphManager = require("./lib/glyphmanager");
-glyphManager.start(path.join(webroot, "css", "boxyfont"));
+glyphManager.start(path.join(webroot, "fonts", "boxyfont"));
 
 
 var mongoose = require("mongoose"), Schema = mongoose.Schema;
