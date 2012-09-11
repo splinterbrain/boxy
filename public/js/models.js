@@ -152,7 +152,7 @@ $(function() {
             $.getJSON("/icons", $.proxy(function(glyphs){
                 var i = glyphs.length;
                 while(i--){
-                    this.$el.find("#iconScroll").append('<div data-icon="' + glyphs[i] + '" class="icon"><div class="tileIcon">&#' + (glyphs[i]+61440) + ';</div></div>');
+                    this.$el.find("#iconScroll").append('<div data-icon="' + glyphs[i] + '" class="icon"><div class="tileIcon">&#' + (parseInt(glyphs[i])+61440) + ';</div></div>');
                 }
                 $('.icon').removeClass("selectedIcon"); //removes highlight from all icons 
                 $('.icon[data-icon=' + this.model.get("icon") + ']').addClass("selectedIcon");//highlights target's icon
