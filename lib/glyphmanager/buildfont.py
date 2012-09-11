@@ -21,12 +21,12 @@ for i in range(2,len(sys.argv)):
 
     glyph.clear()
     glyph.importOutlines("%i.svg" % glyphid)
-    box = glyph.boundingBox()    
-    dx = (glyph.width - (box[2]-box[0]))/2-box[0]
-    dy = (glyph.height - (box[3]-box[1]))/2-box[1]
-    glyph.transform([1,0,0,1,dx,dy])
 
-    glyph.left_side_bearing = glyph.right_side_bearing = 0
+    box = glyph.boundingBox()   
+    dy = -(1000-(box[3]-box[1]))/2
 
+    glyph.transform([1,0,0,1,0,dy])
+
+    glyph.left_side_bearing = glyph.right_side_bearing = (glyph.width-(box[2]-box[0]))/2
 
 font.generate("glyphs.ttf")
