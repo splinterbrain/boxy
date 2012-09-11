@@ -21,8 +21,10 @@ for i in range(2,len(sys.argv)):
 
     glyph.clear()
     glyph.importOutlines("%i.svg" % glyphid)
-    ymin = glyph.boundingBox()[1]
-    glyph.transform([1,0,0,1,0,-ymin])
+    box = glyph.boundingBox()    
+    dx = (glyph.width - (box[2]-box[0]))/2-box[0]
+    dy = (glyph.height - (box[3]-box[1]))/2-box[1]
+    glyph.transform([1,0,0,1,dx,dy])
 
     glyph.left_side_bearing = glyph.right_side_bearing = 0
 
