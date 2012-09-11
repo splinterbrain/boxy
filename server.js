@@ -56,10 +56,10 @@ var bcrypt = require("bcrypt");
 var TileSchema = new Schema({
     icon:{ type:String },
     details:{ type:String },
-    width:{type:Number, min: 30},
-    height:{type:Number, min: 30},
+    width:{type:Number, min:30},
+    height:{type:Number, min:30},
     color:{type:String},
-    link: {type:String}
+    link:{type:String}
 
 });
 
@@ -140,7 +140,7 @@ app.use(express.cookieParser());
 app.use(express.bodyParser());
 
 var MongoStore = require('connect-mongo')(express);
-app.use(express.session({store:new MongoStore({db: "boxy"}), secret:"secreterthansecret"}));
+app.use(express.session({store:new MongoStore({db:"boxy"}), secret:"secreterthansecret"}));
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -149,9 +149,9 @@ app.use(passport.session());
 //    next();
 //});
 app.use(less({
-    debug: true,
-    src: webroot,
-    dest: webroot
+    debug:true,
+    src:webroot,
+    dest:webroot
 }));
 app.use(gzip.staticGzip(webroot));
 
@@ -270,14 +270,17 @@ app.get("/:username", function (req, res, next) {
 });
 
 //Icon list endpoint
-app.get("/icons", function(req, res, next){
-   redisClient.smembers("glyph:available", function(err, glyphs){
-      if(err){
-          next(err);
-      } else{
-       res.send(200, JSON.stringify(glyphs.map(function(g){return g.split(":")[1];})));   
-      }
-   });
+app.get("/icons", function (req, res, next) {
+    redisClient.smembers("glyph:available", function (err, glyphs) {
+        if (err) {
+            next(err);
+        } else {
+            res.type("json");
+            res.send(200, JSON.stringify(glyphs.map(function (g) {
+                return g.split(":")[1];
+            })));
+        }
+    });
 });
 
 //Tiles API
@@ -329,7 +332,7 @@ app.put("/:username/tiles/:id", function (req, res, next) {
         tile.icon = req.body.icon;
         tile.details = req.body.details;
         tile.width = Math.max(req.body.width, TileSchema.tree.width.min);
-        tile.height= Math.max(req.body.height, TileSchema.tree.height.min);
+        tile.height = Math.max(req.body.height, TileSchema.tree.height.min);
         tile.color = req.body.color;
         tile.link = req.body.link;
 
@@ -358,9 +361,9 @@ app.delete("/:username/tiles/:id", function (req, res, next) {
         var tile = req.objParams.user.tiles.id(req.params.id);
         if (!tile) next(); // Proceed to 404
 //    console.log(req.body);
-        
+
         tile.remove();
-        
+
         req.objParams.user.save(function (err) {
             if (err) throw err;
             res.set("Content-Type", "application/json");
@@ -368,9 +371,6 @@ app.delete("/:username/tiles/:id", function (req, res, next) {
         });
     }
 });
-
-
-
 
 
 //If we get here then we haven't found a match and it's a 404

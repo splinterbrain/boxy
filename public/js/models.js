@@ -149,7 +149,7 @@ $(function() {
 			this.$el.find("#textOnFront").val(this.model.get("title"));
 			this.$el.find("#textOnBack").val(this.model.get("details"));
 			this.$el.find("#linkOnBack").val(this.model.get("link"));
-            $.get("/icons", $.proxy(function(glyphs){
+            $.getJSON("/icons", $.proxy(function(glyphs){
                 var i = glyphs.length;
                 while(i--){
                     this.$el.find("#iconScroll").append('<div data-icon="' + glyphs[i] + '" class="icon"><div class="tileIcon">&#' + (glyphs[i]+61440) + ';</div></div>');
