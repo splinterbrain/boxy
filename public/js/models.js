@@ -93,7 +93,7 @@ $(function() {
 				this.$el.find(".link > a").html(" <button class='miniButton floatRight externalLink'><i class='icon-external-link'></i></button> ");
 			};*/
 			
-			this.$el.find(".tileIcon").html(this.model.get("icon") != "" ? "&#x" + this.model.get("icon") + ";" : "");
+			this.$el.find(".tileIcon").html(this.model.get("icon") != "" ? "&#" + (this.model.get("icon")+61440) + ";" : "");
 			this.$el.css({
 				'width' : this.model.get("width") + "px",
 				'height' : this.model.get("height") + "px",
@@ -133,7 +133,8 @@ $(function() {
 			this.$el.find("#textOnBack").on("change keyup", $.proxy(this.onChange, this));
 			this.$el.find("#linkOnBack").on("change keyup", $.proxy(this.onChange, this)); 
 
-			this.$el.find(".icon").on("click", $.proxy(function(e) {
+            
+			this.$el.on("click", ".icon", $.proxy(function(e) {
 				$('.icon').removeClass("selectedIcon"), 
 				$(e.currentTarget).addClass("selectedIcon");
 				this.onChange(e);
@@ -147,9 +148,16 @@ $(function() {
 		'render' : function() { //Edit moodle displays properties of whichever box is its target.
 			this.$el.find("#textOnFront").val(this.model.get("title"));
 			this.$el.find("#textOnBack").val(this.model.get("details"));
-			this.$el.find("#linkOnBack").val(this.model.get("link")); 
-			$('.icon').removeClass("selectedIcon"); //removes highlight from all icons 
-			$('.icon[data-icon=' + this.model.get("icon") + ']').addClass("selectedIcon");//highlights target's icon
+			this.$el.find("#linkOnBack").val(this.model.get("link"));
+            $.get("/icons", $.proxy(function(glyphs){
+                var i = glyphs.length;
+                while(i--){
+                    this.$el.find("#iconScroll").append('<div data-icon="' + glyphs[i] + '" class="icon"><div class="tileIcon">&#' + (glyphs[i]+61440) + ';</div></div>');
+                }
+                $('.icon').removeClass("selectedIcon"); //removes highlight from all icons 
+                $('.icon[data-icon=' + this.model.get("icon") + ']').addClass("selectedIcon");//highlights target's icon
+            }, this));
+
 			this.$el.find("#widthSlider").slider("value", this.model.get("width"));
 			this.$el.find("#heightSlider").slider("value", this.model.get("height"));
 			this.$el.find("#boxColorPicker").miniColors("value", "#" + this.model.get("color"));

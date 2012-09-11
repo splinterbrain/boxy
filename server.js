@@ -275,7 +275,7 @@ app.get("/icons", function(req, res, next){
       if(err){
           next(err);
       } else{
-       res.send(200, JSON.stringify(glyphs));   
+       res.send(200, JSON.stringify(glyphs.map(function(g){return g.split(":")[1];})));   
       }
    });
 });
