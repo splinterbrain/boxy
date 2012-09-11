@@ -40,6 +40,8 @@ if (process.env.NODEJS_ENV == "production") {
 var glyphManager = require("./lib/glyphmanager");
 glyphManager.start(path.join(webroot, "fonts", "boxyfont.ttf"));
 
+var redis = require("redis");
+var redisClient = redis.createClient();
 
 var mongoose = require("mongoose"), Schema = mongoose.Schema;
 mongoose.connection.on("open", function () {
@@ -267,9 +269,19 @@ app.get("/:username", function (req, res, next) {
     }
 });
 
+//Icon list endpoint
+app.get("/icons", function(req, res, next){
+   redisClient.smembers("glyph:available", function(err, glyphs){
+      if(err){
+          next(err);
+      } else{
+       res.send(200, JSON.stringify(glyphs));   
+      }
+   });
+});
 
 //Tiles API
-app.get("/:username/tiles", function (req, res) {
+app.get("/:username/tiles", function (req, res, next) {
     if (!req.objParams.user) {
         next();
     } else {
@@ -277,7 +289,7 @@ app.get("/:username/tiles", function (req, res) {
     }
 });
 
-app.post("/:username/tiles", function (req, res) {
+app.post("/:username/tiles", function (req, res, next) {
     if (!req.objParams.user) {
         next();
     } else {
@@ -298,7 +310,7 @@ app.post("/:username/tiles", function (req, res) {
     }
 });
 
-app.put("/:username/tiles/:id", function (req, res) {
+app.put("/:username/tiles/:id", function (req, res, next) {
     if (!req.objParams.user) {
         next();
     } else {
@@ -330,7 +342,7 @@ app.put("/:username/tiles/:id", function (req, res) {
 });
 
 
-app.delete("/:username/tiles/:id", function (req, res) {
+app.delete("/:username/tiles/:id", function (req, res, next) {
     if (!req.objParams.user) {
         next();
     } else {
