@@ -22,8 +22,15 @@ for i in range(2,len(sys.argv)):
     glyph.clear()
     glyph.importOutlines("%i.svg" % glyphid)
 
-    box = glyph.boundingBox()   
-    dy = -(1000-(box[3]-box[1]))/2
+    #This isn't perfect since the bounding box appears to lie sometimes
+    box = glyph.boundingBox()
+
+    scale = min(750/(box[3]-box[1]), 750/(box[2]-box[0]))
+    glyph.transform([scale,0,0,scale,0,0])
+
+    box = glyph.boundingBox()
+
+    dy = -(500-(box[3]-box[1]))/2
 
     glyph.transform([1,0,0,1,0,dy])
 
