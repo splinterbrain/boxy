@@ -1,3 +1,9 @@
+@font-face {
+  font-family: "BoxyFont";
+  src: url('../fonts/boxyfont.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 html {
   height: 100%;
   width: 100%;
@@ -259,6 +265,7 @@ input[type=submit]:hover {
   -moz-transform-origin: 50% 50%;
   -webkit-transform: rotate3d(0, 0, 1, 0deg);
   -moz-transform: rotate3d(0, 0, 1, 0deg);
+  font-family: "FontAwesome";
 }
 #editMoodle > h3.visible > a > .icon {
   -webkit-transform: rotate3d(0, 0, 1, 90deg);
@@ -296,7 +303,6 @@ input[type=submit]:hover {
   height: 45px;
   width: 45px;
   margin: 6px;
-  font-family: 'FontAwesome';
   background-color: #0e202f;
   display: block;
   float: left;
@@ -426,10 +432,10 @@ input[type=submit]:hover {
   position: absolute;
   top: 50%;
   left: 0;
-  font-size: 50px;
-  line-height: 10px;
+  font-size: 45px;
+  line-height: 0px;
   color: white;
-  font-family: 'FontAwesome';
+  font-family: 'BoxyFont';
   /*text-shadow:3px 3px 0px rgba(0,0,0,0.2);*/
 
 }
